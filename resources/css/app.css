@@ -1,3 +1,4 @@
-body{
-    background-image: url("../image/fondo.png");
-}
+@import "tailwindcss";
+@import "flyonui/variants.css";
+@plugin "flyonui";
+@source "../views";
