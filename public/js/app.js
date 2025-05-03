@@ -23452,6 +23452,26 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
+window.addEventListener('load', function () {
+  // Destroy and reinit variables
+  var togglesPassword = document.querySelectorAll('#toggle-password-to-destroy [data-toggle-password]');
+  var destroyBtn = document.querySelector('#destroy-btn');
+  var reinitBtn = document.querySelector('#reinit-btn');
+  destroyBtn.addEventListener('click', function () {
+    togglesPassword.forEach(function (el) {
+      var _HSTogglePassword$get = HSTogglePassword.getInstance(el, true),
+        element = _HSTogglePassword$get.element;
+      element.destroy();
+    });
+    destroyBtn.setAttribute('disabled', 'disabled');
+    reinitBtn.removeAttribute('disabled');
+  });
+  reinitBtn.addEventListener('click', function () {
+    HSTogglePassword.autoInit();
+    reinitBtn.setAttribute('disabled', 'disabled');
+    destroyBtn.removeAttribute('disabled');
+  });
+});
 
 /***/ }),
 
