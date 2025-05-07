@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('user/login');
 });
+
+/** URL registros y login */
+
+Route::post('/post', [Controller::class, 'authenticate']);
