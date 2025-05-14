@@ -6,3 +6,8 @@
 @plugin "flyonui" {
     themes: light --default, dark --prefersdark, soft;
   }
+
+.enlace-registro{
+  color: darkgrey;
+  font-size: 10px;
+}
