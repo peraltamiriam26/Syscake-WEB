@@ -3,5 +3,5 @@
 <!-- <link href="../resources/css/app.css" rel="stylesheet"> -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-<title>Laravel</title>
+<title>Syscake</title>
         

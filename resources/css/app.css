@@ -7,6 +7,16 @@
     themes: light --default, dark --prefersdark, soft;
   }
 
+body{
+  /* background-color: pink; */
+  background-image: url("/Syscake-WEB/public/images/fondo.webp");
+  /* background-image: url('{{ asset("images/fondo.webp") }}'); */
+  /* background-image: url('https://ak2.picdn.net/shutterstock/videos/9057502/thumb/12.jpg'); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .enlace-registro{
   color: darkgrey;
   font-size: 10px;
