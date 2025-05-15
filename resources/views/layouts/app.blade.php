@@ -3,7 +3,7 @@
     <head>
         @include("includes.head")
     </head>
-    <body>
+    <body style="background-image: url('{{ asset('images/fondo.webp') }}');">
         @include("includes.header")
         <div class="flex items-center justify-center-safe content-center mt-8">
             @yield("content")
