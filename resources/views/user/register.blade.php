@@ -5,7 +5,7 @@
     <h5 class="card-title mb-2.5">Registro</h5>
     <div class="w-90">
       <label class="label-text" for="defaultInput">Nombre</label>
-      <input type="text" placeholder="Nombre" class="input" id="nombreUsuario" />
+      <input type="text" placeholder="Nombre" class="input" id="nombreUsuario" autofocus/>
       <label class="label-text" for="defaultInput">Apellido</label>
       <input type="text" placeholder="Apelido" class="input" id="apellidoUsuario" />
       <label class="label-text" for="defaultInput">Correo electrónico</label>
