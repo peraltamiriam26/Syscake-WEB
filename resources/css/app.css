@@ -8,6 +8,7 @@
   }
 
   body{
+  background-image: url('/Syscake-WEB/public/images/fondo.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

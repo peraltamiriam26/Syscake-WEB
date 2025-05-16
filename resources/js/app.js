@@ -1,3 +1,4 @@
+/*
 require('./bootstrap');
 import '../css/app.css'; 
 import "flyonui/flyonui";
@@ -25,4 +26,4 @@ window.addEventListener('load', () => {
       reinitBtn.setAttribute('disabled', 'disabled')
       destroyBtn.removeAttribute('disabled')
     })
-  })
+  })*/
