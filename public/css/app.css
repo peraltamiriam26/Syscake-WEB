@@ -1174,6 +1174,9 @@
   .invisible {
     visibility: hidden;
   }
+  .visible {
+    visibility: visible;
+  }
   .indicator {
     position: relative;
     display: inline-flex;
@@ -2094,6 +2097,9 @@
       }
       outline: none;
     }
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
   }
   .mt-8 {
     margin-top: calc(var(--spacing) * 8);
@@ -3364,6 +3370,10 @@
     .validate :is(:invalid) ~ * >& {
       color: var(--color-error);
     }
+  }
+  .alert-error {
+    color: var(--color-error-content);
+    --alert-color: var(--color-error);
   }
   .text-base-content {
     color: var(--color-base-content);

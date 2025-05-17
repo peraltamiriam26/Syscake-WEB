@@ -94,7 +94,7 @@ class UsuariosController extends Controller
 	    // Comprobamos que el email y la contraseña han sido introducidos
 	    $request->validate([
 	        'email' => 'required|email',
-	        'password' => 'current_password',
+	        'password' => 'required|current_password',
 	    ]);
 	
 	    // Almacenamos las credenciales de email y contraseña
