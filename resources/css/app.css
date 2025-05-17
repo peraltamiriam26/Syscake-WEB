@@ -7,6 +7,15 @@
     themes: light --default, dark --prefersdark, soft;
   }
 
+body{
+  background-image: url('/images/fondo.png'); 
+  /* url('/Syscake-WEB/public/images/fondo.webp')
+  /Syscake-WEB/public/images/fondo.png  */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .enlace-registro{
   color: darkgrey;
   font-size: 10px;

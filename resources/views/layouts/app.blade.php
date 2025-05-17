@@ -3,13 +3,13 @@
     <head>
         @include("includes.head")
     </head>
-    <body >
+    <body class="flex flex-col min-h-screen">
         @include("includes.header")
-        <div class="flex items-center justify-center-safe content-center mt-8">
+        <div class="flex items-center justify-center-safe content-center flex-grow">
             @yield("content")
         </div>
+        <footer class="footer bg-base-200 absolute -bottom-px sticky start-0 w-full px-6 py-4">
+            @include("includes.footer")
+        </footer>
     </body>
-    <footer>
-        @include("includes.footer")
-    </footer>
 </html>
