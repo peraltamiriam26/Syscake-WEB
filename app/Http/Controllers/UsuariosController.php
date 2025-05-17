@@ -87,12 +87,14 @@ class UsuariosController extends Controller
         //
     }
 
+
+
     public function login(Request $request){
         Log::debug($request);
 	    // Comprobamos que el email y la contraseña han sido introducidos
 	    $request->validate([
-	        'email' => 'required',
-	        'password' => 'required',
+	        'email' => 'required|email',
+	        'password' => 'current_password',
 	    ]);
 	
 	    // Almacenamos las credenciales de email y contraseña
