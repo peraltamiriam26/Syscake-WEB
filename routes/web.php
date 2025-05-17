@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\UsuariosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,10 +14,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
 Route::get('/', function () {
-    return view('user/register');
+    return view('auth/login');
 });
 
-/** URL registros y login */
 
-Route::post('/post', [Controller::class, 'authenticate']);
+Route::post('/login', [UsuariosController::class, 'login'])->name('login');
+
+Route::get('/home', function () {
+    return view('home');
+});

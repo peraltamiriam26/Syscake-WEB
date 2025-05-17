@@ -31,9 +31,7 @@ window.addEventListener('load', () => {
     const destroyBtn = document.querySelector('#destroy-btn')
     const reinitBtn = document.querySelector('#reinit-btn')
 
-    destroyBtn.addEventListener('click', () => {
-      togglesPassword.forEach(el => {
-        const { element } = HSTogglePassword.getInstance(el, true)
+// window.$ = window.jQuery = require('jquery');
 
         element.destroy()
       })
