@@ -92,20 +92,20 @@ class UsuariosController extends Controller
     public function login(Request $request){
         Log::debug($request);
 	    // Comprobamos que el email y la contraseña han sido introducidos
-	    $request->validate([
+	    $credentials = $request->validate([
 	        'email' => 'required|email',
-	        'password' => 'required|current_password',
+	        'password' => 'required',
 	    ]);
-	
-	    // Almacenamos las credenciales de email y contraseña
-	    $credentials = $request->only('email', 'password');
-        // Si el usuario existe lo logamos y lo llevamos a la vista de "logados" con un mensaje
+        Log::debug(Auth::attempt($credentials));
 	    if (Auth::attempt($credentials)) {
-	        return redirect()->intended('logados')
-	            ->withSuccess('Logado Correctamente');
-	    }
-	
-	    // Si el usuario no existe devolvemos al usuario al formulario de login con un mensaje de error
-	    return redirect("/")->withSuccess('Los datos introducidos no son correctos');
+            $request->session()->regenerate();
+            return redirect()->intended('/home'); // Redirige al usuario después del login
+        }
+
+        return back()->withErrors([
+            'email' => 'Las credenciales no coinciden.',
+        ]);
+
+	    // return redirect("/")->withSuccess('Los datos introducidos no son correctos');
     }
 }
