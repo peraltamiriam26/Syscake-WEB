@@ -21,8 +21,12 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+Route::view('/register', 'user/register')->name('register');
+
+
 
 Route::post('/login', [UsuariosController::class, 'login'])->name('login');
+Route::post('/validate-register', [UsuariosController::class, 'register'])->name('validate-register');
 
 Route::get('/home', function () {
     return view('home');

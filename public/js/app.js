@@ -24,29 +24,7 @@ __webpack_require__.r(__webpack_exports__);
 require('./bootstrap');
 import '../css/app.css'; 
 import "flyonui/flyonui";
-
-window.addEventListener('load', () => {
-    // Destroy and reinit variables
-    const togglesPassword = document.querySelectorAll('#toggle-password-to-destroy [data-toggle-password]')
-    const destroyBtn = document.querySelector('#destroy-btn')
-    const reinitBtn = document.querySelector('#reinit-btn')
-
-// window.$ = window.jQuery = require('jquery');
-
-        element.destroy()
-      })
-
-      destroyBtn.setAttribute('disabled', 'disabled')
-      reinitBtn.removeAttribute('disabled')
-    })
-
-    reinitBtn.addEventListener('click', () => {
-      HSTogglePassword.autoInit()
-
-      reinitBtn.setAttribute('disabled', 'disabled')
-      destroyBtn.removeAttribute('disabled')
-    })
-  })*/
+window.$ = window.jQuery = require('jquery');*/
 
 /***/ })
 

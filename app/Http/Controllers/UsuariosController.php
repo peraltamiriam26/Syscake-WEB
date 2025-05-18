@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUsuarioRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
@@ -107,5 +108,27 @@ class UsuariosController extends Controller
 	
 	    // Si el usuario no existe devolvemos al usuario al formulario de login con un mensaje de error
 	    return redirect("/")->withSuccess('Los datos introducidos no son correctos');
+    }
+
+    public function register(Request $request){
+        Log::debug($request);
+        if ($request->password === $request->rpassword) {
+            $usuario = new Usuario();
+
+            $usuario->nombre = $request->nombre;
+            $usuario->apellido = $request->apellido;
+            $usuario->correo = $request->correo;
+            $usuario->password = Hash::make($request->password);
+            
+            $usuario->save();
+
+            // Auth::login($user);
+            Log::debug($usuario);
+            return redirect("/")->withSuccess('Se registro correctamente');
+        }else{
+            Log::debug("no es la misma contraseña");
+            return redirect(route('register'));
+        }
+        
     }
 }

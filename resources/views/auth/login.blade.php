@@ -24,7 +24,7 @@
       <button type="submit" class="btn btn-primary grid grid-flow-col justify-items-center items-center-safe">Ingresar</button>
     </div>
     <div class="text-center p-4">
-      <p class="text-base-content/50">¿Todavía no tenes cuenta? <a href="#"  class="link link-primary no-underline">Registrate aquí</a></p> 
+      <p class="text-base-content/50">¿Todavía no tenes cuenta? <a href="{{route('register')}}"  class="link link-primary no-underline">Registrate aquí</a></p> 
     </div>
   </div>
 </form>
