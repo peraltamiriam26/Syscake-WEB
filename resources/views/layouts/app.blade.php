@@ -3,7 +3,7 @@
     <head>
         @include("includes.head")
     </head>
-    <body>
+    <body class="flex flex-col min-h-screen">
         @include("includes.header")
         <div class="flex items-center justify-center-safe content-center mt-8">
             @yield("content")

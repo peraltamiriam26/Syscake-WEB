@@ -1420,6 +1420,9 @@
       }
     }
   }
+  .min-h-screen {
+    min-height: 100vh;
+  }
   .w-90 {
     width: calc(var(--spacing) * 90);
   }
@@ -1440,6 +1443,9 @@
   }
   .grid-flow-col {
     grid-auto-flow: column;
+  }
+  .flex-col {
+    flex-direction: column;
   }
   .content-center {
     align-content: center;
