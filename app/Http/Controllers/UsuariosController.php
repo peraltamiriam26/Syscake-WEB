@@ -90,22 +90,25 @@ class UsuariosController extends Controller
 
 
     public function login(Request $request){
-        Log::debug($request);
 	    // Comprobamos que el email y la contraseña han sido introducidos
 	    $credentials = $request->validate([
 	        'email' => 'required|email',
 	        'password' => 'required',
 	    ]);
-        Log::debug(Auth::attempt($credentials));
+        
 	    if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/home'); // Redirige al usuario después del login
         }
-
-        return back()->withErrors([
-            'email' => 'Las credenciales no coinciden.',
-        ]);
-
-	    // return redirect("/")->withSuccess('Los datos introducidos no son correctos');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('status', 'Has cerrado sesión correctamente.');
+    }
+
 }

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\UsuariosController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,11 @@ Route::get('/', function () {
 
 
 Route::post('/login', [UsuariosController::class, 'login'])->name('login');
+Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 
 Route::get('/home', function () {
-    return view('home');
-});
+    if (!Auth::check()) {
+        return redirect('/');
+    }
+    return view('index');
+})->name('home');
