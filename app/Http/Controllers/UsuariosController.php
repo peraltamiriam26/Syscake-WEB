@@ -93,10 +93,10 @@ class UsuariosController extends Controller
     public function login(Request $request){
         Log::debug($request);
 	    // Comprobamos que el email y la contraseña han sido introducidos
-	    $request->validate([
-	        'email' => 'required|email',
-	        'password' => 'current_password',
-	    ]);
+	
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'current_password',]);
 	
 	    // Almacenamos las credenciales de email y contraseña
 	    $credentials = $request->only('email', 'password');
@@ -112,23 +112,26 @@ class UsuariosController extends Controller
 
     public function register(Request $request){
         Log::debug($request);
-        if ($request->password === $request->rpassword) {
-            $usuario = new Usuario();
-
-            $usuario->nombre = $request->nombre;
-            $usuario->apellido = $request->apellido;
-            $usuario->correo = $request->correo;
-            $usuario->password = Hash::make($request->password);
-            
-            $usuario->save();
-
-            // Auth::login($user);
-            Log::debug($usuario);
-            return redirect("/")->withSuccess('Se registro correctamente');
-        }else{
-            Log::debug("no es la misma contraseña");
-            return redirect(route('register'));
-        }
+        // Comprobamos que los datos han sido introducidos
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+	        'email' => 'required|email',
+	        'password' => 'required|confirmed',
+	        'password_confirmation' => 'required',
+	    ]);
+        Log::debug("Todo es correcto");
+        $usuario = new Usuario();
+    
+        $usuario->nombre = $request->nombre;
+        $usuario->apellido = $request->apellido;
+        $usuario->correo = $request->email;
+        $usuario->password = Hash::make($request->password);
+        Log::debug($usuario);
+        // $usuario->save();
         
+        // Log::debug("no es la misma contraseña");
+        // return redirect(route('register'));
+        return redirect(route('register'))->withSuccess('Se registro correctamente el usuario');
     }
 }

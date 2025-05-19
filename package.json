@@ -10,7 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@iconify/json": "^2.2.336",
+        "@iconify/json": "^2.2.339",
         "@iconify/tailwind4": "^1.0.6",
         "axios": "^1.9.0",
         "laravel-mix": "^6.0.6",
