@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section("content")
 <form method="POST" action="{{ route('login') }}">
-  @csrf
-  <div class="card  w-100">
+   @csrf
+  <div class="card w-100 shadow-xl/20">
     <div class="card-body flex items-center">
       <h5 class="card-title mb-2.5">Iniciar Sesión</h5>
       <div class="w-90">

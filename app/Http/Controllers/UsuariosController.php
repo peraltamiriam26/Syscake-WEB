@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UsuariosController extends Controller
 {
@@ -93,23 +94,21 @@ class UsuariosController extends Controller
 
 
     public function login(Request $request){
-        Log::debug($request);
 	    // Comprobamos que el email y la contraseña han sido introducidos
-	
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'current_password',]);
-	
-	    // Almacenamos las credenciales de email y contraseña
-	    $credentials = $request->only('email', 'password');
-        // Si el usuario existe lo logamos y lo llevamos a la vista de "logados" con un mensaje
+	    $credentials = $request->validate([
+	        'email' => 'required|email',
+	        'password' => 'required',
+	    ]);
+        
 	    if (Auth::attempt($credentials)) {
-	        return redirect()->intended('logados')
-	            ->withSuccess('Logado Correctamente');
-	    }
-	
-	    // Si el usuario no existe devolvemos al usuario al formulario de login con un mensaje de error
-	    return redirect("/")->withSuccess('Los datos introducidos no son correctos');
+            $request->session()->regenerate();
+            return redirect()->intended('/home'); // Redirige al usuario después del login
+        }
+        else{
+            return back()->withErrors([
+                'password' => 'La contraseña es incorrecta.',
+            ]);
+        }
     }
 
     public function register(Request $request){
@@ -128,13 +127,13 @@ class UsuariosController extends Controller
         //Agregamos los valores necesarios para guardarlo en la bd
         $usuario->nombre = $request->nombre;
         $usuario->apellido = $request->apellido;
-        $usuario->correo = $request->email;
+        $usuario->email = $request->email;
         //Encriptamos la contraseña usando Hash
         $usuario->password = Hash::make($request->password);
         //Usamos la funcion save() que guarda en la base de datos
         $usuario->save();
         //Buscamos al usuario recien creado por su correo.
-        $datos=$usuario->buscarUsuarioCorreo($usuario->correo);
+        $datos=$usuario->buscarUsuarioCorreo($usuario->email);
         //Verificamos el tipo de usuario que eligio
         if ($request->tipoUsuario === 'lector') {
             $lectorsController = new LectorsController();
@@ -145,4 +144,13 @@ class UsuariosController extends Controller
         }
         return redirect("/")->withSuccess('Se registro correctamente el usuario');
     }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('status', 'Has cerrado sesión correctamente.');
+    }
+
 }

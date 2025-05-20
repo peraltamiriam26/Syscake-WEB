@@ -18,7 +18,7 @@ class Usuario extends Model
     protected $fillable = [
         'nombre',
         'apellido',
-        'correo',
+        'email',
         'password',
     ];
 
@@ -41,7 +41,7 @@ class Usuario extends Model
     // ];
 
     function buscarUsuarioCorreo($correo){
-        $datos = DB::table('usuarios')->where('correo', $correo)->first();
+        $datos = DB::table('usuarios')->where('email', $correo)->first();
         return $datos;
     }
 }
