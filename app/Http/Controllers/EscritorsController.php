@@ -7,11 +7,15 @@ use App\Models\Escritor;
 
 class EscritorsController extends Controller
 {
-    public function create($datos)
+    /**
+     * Funcion que crea al escritor y lo guarda en la base de datos
+     * Requiere del id del usuario
+     */
+    public function create($id)
     {
         $escritor = new Escritor();
         $escritor->esEscritor = 1;
-        $escritor->usuario_id = $datos->id;
+        $escritor->usuario_id = $id;
         $escritor->save();
     }
 }

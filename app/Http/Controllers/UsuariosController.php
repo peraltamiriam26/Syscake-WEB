@@ -113,7 +113,7 @@ class UsuariosController extends Controller
     }
 
     public function register(Request $request){
-        Log::debug($request);
+
         // Comprobamos que los datos han sido introducidos
         $request->validate([
             'nombre' => 'required',
@@ -123,21 +123,25 @@ class UsuariosController extends Controller
 	        'password_confirmation' => 'required',
 	    ]);
         Log::debug("Todo es correcto");
+        //Instanciamos la clase Usuario
         $usuario = new Usuario();
-    
+        //Agregamos los valores necesarios para guardarlo en la bd
         $usuario->nombre = $request->nombre;
         $usuario->apellido = $request->apellido;
         $usuario->correo = $request->email;
+        //Encriptamos la contraseña usando Hash
         $usuario->password = Hash::make($request->password);
+        //Usamos la funcion save() que guarda en la base de datos
         $usuario->save();
+        //Buscamos al usuario recien creado por su correo.
         $datos=$usuario->buscarUsuarioCorreo($usuario->correo);
-        Log::debug($datos->id);
+        //Verificamos el tipo de usuario que eligio
         if ($request->tipoUsuario === 'lector') {
             $lectorsController = new LectorsController();
-            $lectorsController->create($datos);
+            $lectorsController->create($datos->id);
         }else{
             $escritorsController = new EscritorsController();
-            $escritorsController->create($datos);
+            $escritorsController->create($datos->id);
         }
         return redirect("/")->withSuccess('Se registro correctamente el usuario');
     }

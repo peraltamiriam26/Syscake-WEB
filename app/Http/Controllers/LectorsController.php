@@ -7,11 +7,14 @@ use App\Models\Lector;
 
 class LectorsController extends Controller
 {
-    public function create($datos)
+    /**
+     * Funcion que crea al lector y lo guarda en la base de datos
+     */
+    public function create($id)
     {
         $lector = new Lector();
         $lector->esLector = 1;
-        $lector->usuario_id = $datos->id;
+        $lector->usuario_id = $id;
         $lector->save();
     }
 }
