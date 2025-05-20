@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Usuario extends Model
 {
@@ -39,4 +40,8 @@ class Usuario extends Model
     //     'email_verified_at' => 'datetime',
     // ];
 
+    function buscarUsuarioCorreo($correo){
+        $datos = DB::table('usuarios')->where('correo', $correo)->first();
+        return $datos;
+    }
 }

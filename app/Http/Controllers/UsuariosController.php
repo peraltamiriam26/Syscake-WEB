@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Http\Controllers\LectorsController;
+use App\Http\Controllers\EscritorsController;
 use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
 use Illuminate\Http\Request;
@@ -127,11 +129,16 @@ class UsuariosController extends Controller
         $usuario->apellido = $request->apellido;
         $usuario->correo = $request->email;
         $usuario->password = Hash::make($request->password);
-        Log::debug($usuario);
-        // $usuario->save();
-        
-        // Log::debug("no es la misma contraseña");
-        // return redirect(route('register'));
-        return redirect(route('register'))->withSuccess('Se registro correctamente el usuario');
+        $usuario->save();
+        $datos=$usuario->buscarUsuarioCorreo($usuario->correo);
+        Log::debug($datos->id);
+        if ($request->tipoUsuario === 'lector') {
+            $lectorsController = new LectorsController();
+            $lectorsController->create($datos);
+        }else{
+            $escritorsController = new EscritorsController();
+            $escritorsController->create($datos);
+        }
+        return redirect("/")->withSuccess('Se registro correctamente el usuario');
     }
 }
