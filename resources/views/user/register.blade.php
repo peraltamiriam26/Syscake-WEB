@@ -35,25 +35,28 @@
             <div class="alert alert-soft alert-error mt-2" role="alert">{{ $message }}</div>
           @enderror
         </div>
-
-        <div class="col items-center justify-items-center">
-          <label>Tipo de usuario</label>
-          <div class="flex items-center">
-            <input type="radio" name="tipoUsuario" value="lector" checked />
-            <label for="lector" style="margin-left: 5px; margin-right: 5px;">Lector</label>
-            <input type="radio" name="tipoUsuario" value="escritor"/>
-            <label for="escritor" style="margin-left: 5px; margin-right; 5px;">Escritor</label>
+        
+        <div class="grid grid-flow-col">
+          <div class="col items-center justify-items-center">
+            <label>Tipo de usuario</label>
+            <div class="flex items-center">
+              <input type="radio" name="tipoUsuario" value="lector" checked />
+              <label for="lector" style="margin-left: 5px; margin-right: 5px;">Lector</label>
+              <input type="radio" name="tipoUsuario" value="escritor"/>
+              <label for="escritor" style="margin-left: 5px; margin-right; 5px;">Escritor</label>
+            </div>
           </div>
-        </div>
-
-        <div class="col items-center justify-items-center">
-
-          <label class="label-text">Correo electrónico</label>
-          <input id="email" name="email" type="text" placeholder="correo@mail.com"  value="{{ old('email') }}" class="input @error('email') is-invalid @enderror" id="emailUsuario" />
-          @error('email')
-            <div class="alert alert-soft alert-error mt-2" role="alert">{{ $message }}</div>
-          @enderror
-
+  
+          <div class="col items-center justify-items-center">
+  
+            <label class="label-text">Correo electrónico</label>
+            <input id="email" name="email" type="text" placeholder="correo@mail.com"  value="{{ old('email') }}" class="input @error('email') is-invalid @enderror" id="emailUsuario" />
+            @error('email')
+              <div class="alert alert-soft alert-error mt-2" role="alert">{{ $message }}</div>
+            @enderror
+  
+          </div>
+        
         </div>
 
         <div class="grid grid-flow-row">
