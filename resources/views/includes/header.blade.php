@@ -1,3 +1,7 @@
+<?php
+  use Illuminate\Support\Facades\Auth;
+?>
+ @if (Auth::check())
 <nav class="navbar rounded-box shadow-base-300/20 shadow-sm pb-6">
   <div class="w-full md:flex md:items-center md:gap-2">
     <div class="flex items-center justify-between">
@@ -29,3 +33,4 @@
     </div>
   </div>
 </nav>
+@endif

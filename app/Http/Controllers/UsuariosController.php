@@ -109,6 +109,7 @@ class UsuariosController extends Controller
                 'password' => 'La contraseña es incorrecta.',
             ]);
         }
+        return back();
     }
 
     public function register(Request $request){
