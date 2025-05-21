@@ -118,8 +118,7 @@ class UsuariosController extends Controller
             'nombre' => 'required',
             'apellido' => 'required',
 	        'email' => 'required|email',
-	        'password' => 'required|confirmed',
-	        'password_confirmation' => 'required',
+	        'password' => 'required|confirmed|min:8',
 	    ]);
         Log::debug("Todo es correcto");
         //Instanciamos la clase Usuario
