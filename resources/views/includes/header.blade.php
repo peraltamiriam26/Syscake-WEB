@@ -2,34 +2,31 @@
   use Illuminate\Support\Facades\Auth;
 ?>
  @if (Auth::check())
-<nav class="navbar rounded-box shadow-base-300/20 shadow-sm pb-6">
+<nav class="navbar w-full shadow-base-300/20 shadow-sm pb-6">
   <div class="w-full md:flex md:items-center md:gap-2">
-    <div class="flex items-center justify-between">
-      <div class="navbar-start items-center justify-between max-md:w-full">
-        <a href="{{ route('home') }}" aria-label="Home">
-          
-        </a>
-        <div class="md:hidden">
-          <button type="button" class="collapse-toggle btn btn-outline btn-secondary btn-sm btn-square" data-collapse="#logo-navbar-collapse" aria-controls="logo-navbar-collapse" aria-label="Toggle navigation" >
-            <span class="icon-[tabler--menu-2] collapse-open:hidden size-4"></span>
-            <span class="icon-[tabler--x] collapse-open:block hidden size-4"></span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div id="logo-navbar-collapse" class="md:navbar-end collapse hidden grow basis-full overflow-hidden transition-[height] duration-300 max-md:w-full" >
-      <ul class="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
-        <!-- <li><a href="#"></a></li> -->
-        <!-- <li><a href="#">About</a></li> -->
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit">
-              Cerrar sesión
-            </button>
-        </form>
+    <div id="navbar-collapse" class="md:navbar-end collapse hidden grow basis-full overflow-hidden transition-[height] duration-300 max-md:w-full" >
+      <li class="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]"> 
+        <button id="dropdown-link" type="button" class="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" >
+          Cuenta
+          <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
+        </button>  
+        <ul class="dropdown-menu dropdown-open:opacity-100 hidden" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-link" >
+          <li><a class="dropdown-item" href="{{route('updateUser')}}">Cambiar datos</a></li>
+          <!-- <li><a class="dropdown-item" href="#">Link 4</a></li>
+          <li><a class="dropdown-item" href="#">Link 5</a></li> -->
+          <hr class="border-base-content/25 -mx-2" />
+          <li class="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
+            <form method="POST" action="{{ route('logout') }}">
+            
+                @csrf
+                <button type="submit">
+                  Cerrar sesión
+                </button>
+            </form>
+          </li>
+        </ul>  
+      </li>
 
-        
-      </ul>
     </div>
   </div>
 </nav>
