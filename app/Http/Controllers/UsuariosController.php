@@ -118,7 +118,7 @@ class UsuariosController extends Controller
         $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
-	        'email' => 'required|email|unique:usuarios,email,',
+	        'email' => 'required|email|unique:usuarios,email,',//unique sirve para buscar el elemento y verificar q es unico, usuarios es la tabla donde buscamos, y email el atributo de la tabla q comparamos
 	        'password' => 'required|confirmed|min:8',
 	    ]);
         Log::debug("Todo es correcto");
