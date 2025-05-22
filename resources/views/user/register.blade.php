@@ -1,23 +1,23 @@
 @extends('layouts.app')
 @section("content")
 <div class="card  w-150">
-  <form method="POST" action="{{ route('validate-register') }}">
-    @csrf
-    <div class="card-body flex items-center">
-      <!-- Flecha y titulo -->
-      <div class="grid grid-flow-col w-120">
-        <div class="">
-          <a href="{{ url('/') }}" class="link link-primary no-underline">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 21 21">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M7.499 6.497L3.5 10.499l4 4.001m9-4h-13" stroke-width="1" />
-            </svg>
-          </a>
-        </div>
-        <div class="">
-          <h5 class="card-title">Registro</h5>
-        </div>
+  <div class="card-body flex items-center">
+    <!-- Flecha y titulo -->
+    <div class="grid grid-flow-col w-120">
+      <div class="w-40 me-2">
+        <a href="{{ url('/') }}" class="link link-primary no-underline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 21 21">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M7.499 6.497L3.5 10.499l4 4.001m9-4h-13" stroke-width="1" />
+          </svg>
+        </a>
       </div>
-      <!-- Comienza formulario -->
+      <div class="w-60 justify-items-left">
+        <h5 class="card-title">Registro</h5>
+      </div>
+    </div>
+    <!-- Comienza formulario -->
+    <form method="POST" action="{{ route('validate-register') }}">
+      @csrf
       <div class="w-120">
         <div class="grid grid-flow-row">
           <div class="grid grid-flow-col justify-items-left">
@@ -82,11 +82,11 @@
           <div class="alert alert-soft alert-error mt-2" role="alert">{{ $message }}</div>
         @enderror
       </div>
-      <div class="pt-2">
-        <input class="btn btn-primary grid grid-flow-col justify-items-center items-center-safe rounded-full" type="submit" value="Registrarse">
+      <div class="grid justify-items-center pt-2">
+        <input class="btn btn-primary grid grid-flow-col w-40 justify-items-center items-center-safe rounded-full" type="submit" value="Registrarse">
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
 
 

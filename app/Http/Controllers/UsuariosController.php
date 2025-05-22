@@ -118,7 +118,7 @@ class UsuariosController extends Controller
         $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
-	        'email' => 'required|email',
+	        'email' => 'required|email|unique:usuarios,email,',
 	        'password' => 'required|confirmed|min:8',
 	    ]);
         Log::debug("Todo es correcto");
