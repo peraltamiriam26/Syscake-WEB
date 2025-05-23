@@ -3419,6 +3419,35 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
+  .btn-outline {
+    --btn-shadow: "";
+    --btn-bg: "";
+    color: var(--btn-color, var(--color-neutral));
+    --btn-border: var(--btn-color, var(--color-neutral));
+    --btn-noise: none;
+    outline-color: var(--btn-color, var(--color-neutral));
+    @media (hover: hover) {
+      &:hover {
+        --btn-bg: var(--btn-color, var(--color-neutral));
+        @supports (color: color-mix(in lab, red, red)) {
+          --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-neutral)) 10%, #0000);
+        }
+      }
+    }
+    &:focus-visible {
+      --btn-bg: var(--btn-color, var(--color-neutral));
+      @supports (color: color-mix(in lab, red, red)) {
+        --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-neutral)) 10%, #0000);
+      }
+      outline-width: 1px;
+    }
+    &.btn-active {
+      --btn-bg: var(--btn-color, var(--color-neutral));
+      @supports (color: color-mix(in lab, red, red)) {
+        --btn-bg: color-mix(in oklab, var(--btn-color, var(--color-neutral)) 10%, #0000);
+      }
+    }
+  }
   .label-text {
     &:has(~ .is-valid) {
       color: var(--color-success);

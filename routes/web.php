@@ -28,6 +28,7 @@ Route::get('/home', function () {
     }
     return view('index');
 })->name('home');
+
 /** INCIO Y CIERRE DE SESIÓN */
 Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 Route::post('/login', [UsuariosController::class, 'login'])->name('login');
@@ -36,6 +37,6 @@ Route::post('/login', [UsuariosController::class, 'login'])->name('login');
 Route::view('/register', 'user/register')->name('register');
 Route::post('/validate-register', [UsuariosController::class, 'register'])->name('validate-register');
 
-Route::get('/update', function () {
-    return view('user.update');
-})->name('updateUser');
+Route::get('/update',  [UsuariosController::class, 'update'] )->name('update-user');
+
+// Route::view('/update', 'user/update')->name('update-user');

@@ -11,7 +11,7 @@
           <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
         </button>  
         <ul class="dropdown-menu dropdown-open:opacity-100 hidden" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-link" >
-          <li><a class="dropdown-item" href="{{route('updateUser')}}">Cambiar datos</a></li>
+          <li><a class="dropdown-item" href="{{route('update-user')}}">Cambiar datos</a></li>
           <!-- <li><a class="dropdown-item" href="#">Link 4</a></li>
           <li><a class="dropdown-item" href="#">Link 5</a></li> -->
           <hr class="border-base-content/25 -mx-2" />

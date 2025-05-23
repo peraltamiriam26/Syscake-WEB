@@ -25,26 +25,6 @@ class UsuariosController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreUsuarioRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreUsuarioRequest $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -65,7 +45,7 @@ class UsuariosController extends Controller
      */
     public function edit(Usuario $usuario)
     {
-        //
+        
     }
 
     /**
@@ -77,7 +57,21 @@ class UsuariosController extends Controller
      */
     public function update(UpdateUsuarioRequest $request, Usuario $usuario)
     {
-        //
+        if ($request->isMethod('post')) {
+            // Lógica para procesar la solicitud POST
+            // Por ejemplo, guardar datos en la base de datos
+            return 'Procesando solicitud POST';
+        }
+
+        $user = Usuario::searchUser(auth()->user()->id);
+        Log::debug($user->reader);
+        return view('user/update',
+            [
+                'user' => $user,
+                'writer' => $user->writer,
+                'reader' => $user->reader
+            ]    
+        );
     }
 
     /**
@@ -144,6 +138,7 @@ class UsuariosController extends Controller
         }
         return redirect("/")->withSuccess('Se registro correctamente el usuario');
     }
+
     public function logout(Request $request)
     {
         Auth::logout();
