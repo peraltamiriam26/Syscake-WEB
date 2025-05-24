@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\LectorsController;
+use App\Http\Controllers\EscritorsController;
 
 class Usuario extends Model
 {
@@ -43,12 +45,43 @@ class Usuario extends Model
     //     'email_verified_at' => 'datetime',
     // ];
 
+    public function saveUser($request, $id = null){
+        if (!isset($id)) {
+            //Instanciamos la clase Usuario
+            $usuario = new Usuario();
+        }else{
+            $usuario = Usuario::searchUser($id);
+        }
+
+        //Agregamos los valores necesarios para guardarlo en la bd
+        $usuario->nombre = $request->nombre;
+        $usuario->apellido = $request->apellido;
+        $usuario->email = $request->email;
+        //Encriptamos la contraseña usando Hash
+        $usuario->password = Hash::make($request->password);
+        //Usamos la funcion save() que guarda en la base de datos
+        if($usuario->save()){
+            //Buscamos al usuario recien creado por su correo.
+            $datos=$usuario->buscarUsuarioCorreo($usuario->email);
+            //Verificamos el tipo de usuario que eligio
+            if ($request->tipoUsuario === 'lector') {
+                $lectorsController = new LectorsController();
+                $flag = $lectorsController->create($datos->id);
+            }else{
+                $escritorsController = new EscritorsController();
+                $flag = $escritorsController->create($datos->id);
+            }
+            return $flag;
+        }
+        return false; 
+    }
+
     function buscarUsuarioCorreo($correo){
         $datos = DB::table('usuarios')->where('email', $correo)->first();
         return $datos;
     }
 
-    static function searchUser($id){
+    public static function searchUser($id){
         $user = Usuario::where('id', $id)
                         ->first();
         return $user;

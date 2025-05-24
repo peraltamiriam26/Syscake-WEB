@@ -38,5 +38,5 @@ Route::view('/register', 'user/register')->name('register');
 Route::post('/validate-register', [UsuariosController::class, 'register'])->name('validate-register');
 
 Route::get('/update',  [UsuariosController::class, 'update'] )->name('update-user');
+Route::post('/update',  [UsuariosController::class, 'update'] )->name('update-user');
 
-// Route::view('/update', 'user/update')->name('update-user');

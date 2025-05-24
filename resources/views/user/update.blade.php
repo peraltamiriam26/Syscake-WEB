@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 
         // Log::debug();
      ?>
-    <form method="POST" action="{{ route('validate-register') }}">
+    <form method="POST" action="{{ route('update-user') }}">
       @csrf
       <div class="w-120">
         <div class="grid grid-flow-row">
@@ -56,7 +56,10 @@ use Illuminate\Support\Facades\Log;
           <div class="grid grid-flow-col justify-items-left">
             <div>
               <label class="label-text">Correo electrónico</label>
-              <input id="email" name="email" type="text" placeholder="correo@mail.com"  value="{{ old('email'), $user->email}}" class="w-60 input @error('email') is-invalid @enderror" id="emailUsuario" />
+              <?php
+                Log::debug($user->email);
+              ?>
+              <input id="email" name="email" type="text" placeholder="correo@mail.com"  value="{{ old('email', $user->email)}}" class="w-60 input @error('email') is-invalid @enderror" id="emailUsuario" />
               @error('email')
                 <div class="alert alert-soft alert-error mt-2 w-80" role="alert">{{ $message }}</div>
               @enderror
@@ -82,9 +85,13 @@ use Illuminate\Support\Facades\Log;
           <div class="alert alert-soft alert-error mt-2" role="alert">{{ $message }}</div>
         @enderror
       </div>
-      <div class="grid justify-items-center pt-2">
-          <button type="submit" class="btn btn-primary btn-outline grid grid-flow-col justify-items-center items-center-safe rounded-full">Cancelar</button>  
-        <button type="submit" class="btn btn-primary grid grid-flow-col justify-items-center items-center-safe rounded-full">Guardar</button>
+      <div class="grid grid-flow-col pt-2">
+        <div class="grid grid-flow-col justify-items-center">
+          <a type="button" class="btn btn-primary btn-outline justify-items-left items-left-safe rounded-full w-50" href="{{'home'}}">Cancelar</a>  
+        </div>
+        <div class="grid grid-flow-col justify-items-center">
+          <button type="submit" class="btn btn-primary justify-items-right items-right-safe rounded-full w-50">Guardar</button>
+        </div>
       </div>
     </form>
   </div>

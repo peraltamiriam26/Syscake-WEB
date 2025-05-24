@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
-use App\Http\Controllers\LectorsController;
-use App\Http\Controllers\EscritorsController;
-use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UsuariosController extends Controller
 {
@@ -57,14 +53,25 @@ class UsuariosController extends Controller
      */
     public function update(UpdateUsuarioRequest $request, Usuario $usuario)
     {
+        $id = auth()->user()->id;
+        $user = Usuario::searchUser($id);
         if ($request->isMethod('post')) {
-            // Lógica para procesar la solicitud POST
-            // Por ejemplo, guardar datos en la base de datos
-            return 'Procesando solicitud POST';
+            $request->validate([
+                'nombre' => ['required'],
+                'apellido' => ['required'],
+                'email' => ['required', 'email', Rule::unique('usuarios')->ignore($id)],
+                'password' => ['nullable', 'confirmed', 'min:8'],
+            ]);
+            if ($user->saveUser($request, $id)){
+                // session()->flash('tipo', 'success');
+                // session()->flash('mensaje', '¡El usuario se modifico con éxito!');
+                return redirect()->intended('/home');
+            }
+            session()->flash('tipo', 'danger');
+            session()->flash('mensaje', 'Hubo un error al querer modificar el usuario.');
+            // return redirect("/");
         }
 
-        $user = Usuario::searchUser(auth()->user()->id);
-        Log::debug($user->reader);
         return view('user/update',
             [
                 'user' => $user,
@@ -115,28 +122,16 @@ class UsuariosController extends Controller
 	        'email' => 'required|email|unique:usuarios,email,',//unique sirve para buscar el elemento y verificar q es unico, usuarios es la tabla donde buscamos, y email el atributo de la tabla q comparamos
 	        'password' => 'required|confirmed|min:8',
 	    ]);
-        Log::debug("Todo es correcto");
-        //Instanciamos la clase Usuario
-        $usuario = new Usuario();
-        //Agregamos los valores necesarios para guardarlo en la bd
-        $usuario->nombre = $request->nombre;
-        $usuario->apellido = $request->apellido;
-        $usuario->email = $request->email;
-        //Encriptamos la contraseña usando Hash
-        $usuario->password = Hash::make($request->password);
-        //Usamos la funcion save() que guarda en la base de datos
-        $usuario->save();
-        //Buscamos al usuario recien creado por su correo.
-        $datos=$usuario->buscarUsuarioCorreo($usuario->email);
-        //Verificamos el tipo de usuario que eligio
-        if ($request->tipoUsuario === 'lector') {
-            $lectorsController = new LectorsController();
-            $lectorsController->create($datos->id);
-        }else{
-            $escritorsController = new EscritorsController();
-            $escritorsController->create($datos->id);
+        $user = new Usuario();
+        if ($user->saveUser($request)) {
+            session()->flash('tipo', 'success');
+            session()->flash('mensaje', '¡El usuario se creo con éxito!');
+            return redirect("/");
         }
-        return redirect("/")->withSuccess('Se registro correctamente el usuario');
+        // session()->flash('tipo', 'danger');
+        // session()->flash('mensaje', 'Hubo un error al querer crear al usuario.');
+        return redirect("/");
+        
     }
 
     public function logout(Request $request)

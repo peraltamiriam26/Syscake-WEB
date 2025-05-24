@@ -15,6 +15,6 @@ class LectorsController extends Controller
         $lector = new Lector();
         $lector->esLector = 1;
         $lector->usuario_id = $id;
-        $lector->save();
+        return $lector->save();
     }
 }
