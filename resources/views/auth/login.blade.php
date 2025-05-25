@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section("content")
-
 <div class="row">
   <div class="col-12 grid grid-flow-col justify-items-center pb-8">
     <h1 class="titulo text-2xl">SYSCAKE</h1>

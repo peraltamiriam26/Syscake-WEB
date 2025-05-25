@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUsuarioRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Validation\Rule;
 
 class UsuariosController extends Controller
@@ -55,6 +56,7 @@ class UsuariosController extends Controller
     {
         $id = auth()->user()->id;
         $user = Usuario::searchUser($id);
+
         if ($request->isMethod('post')) {
             $request->validate([
                 'nombre' => ['required'],
@@ -65,12 +67,19 @@ class UsuariosController extends Controller
             if ($user->saveUser($request, $id)){
                 // session()->flash('tipo', 'success');
                 // session()->flash('mensaje', '¡El usuario se modifico con éxito!');
-                return redirect()->intended('/home');
+                // return redirect()->intended('/home');
+                return redirect()->route('home')->with('alerta', [
+                                                                    'titulo' => '¡Acción exitosa!',
+                                                                    'mensaje' => 'Tu cuenta fue modificada.',
+                                                                    'tipo' => 'success' // Tipos: success, error, warning, info
+                                                                ]);
+
             }
             session()->flash('tipo', 'danger');
             session()->flash('mensaje', 'Hubo un error al querer modificar el usuario.');
             // return redirect("/");
         }
+
 
         return view('user/update',
             [
@@ -89,7 +98,8 @@ class UsuariosController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        //
+        $user = new Usuario();
+        return $user->bajaUsuario(auth()->user()->id);
     }
 
 

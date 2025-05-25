@@ -8,10 +8,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\LectorsController;
 use App\Http\Controllers\EscritorsController;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class Usuario extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $table = 'usuarios'; // Nombre de la tabla en la base de datos
     protected $primaryKey = 'id';  // Nombre de la clave primaria
 
@@ -27,23 +30,6 @@ class Usuario extends Model
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    // protected $hidden = [
-    //     'id',
-    // ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    // ];
 
     public function saveUser($request, $id = null){
         if (!isset($id)) {
@@ -52,7 +38,6 @@ class Usuario extends Model
         }else{
             $usuario = Usuario::searchUser($id);
         }
-
         //Agregamos los valores necesarios para guardarlo en la bd
         $usuario->nombre = $request->nombre;
         $usuario->apellido = $request->apellido;
@@ -101,5 +86,26 @@ class Usuario extends Model
     public function reader()
     {
         return $this->hasOne(Lector::class, 'usuario_id');
+    }
+
+
+    public function bajaUsuario($id){
+        try {
+            DB::beginTransaction();
+            $user = $this::searchUser($id);
+            if (isset($user->writer)) {
+                $writer = $user->writer;
+                 DB::commit(); // Confirmar cambios
+                return $user->delete() && $writer->delete();
+            }
+            DB::commit(); // Confirmar cambios
+            $reader = $user->reader;
+
+            return $user->delete() && $reader->delete();            
+        } catch (\Exception $e) {
+            DB::rollBack(); // Revertir cambios si ocurre un error
+            return false;
+        }
+
     }
 }

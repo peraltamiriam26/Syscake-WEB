@@ -36,6 +36,8 @@ Route::post('/login', [UsuariosController::class, 'login'])->name('login');
 /** ABM DE USUARIOS */
 Route::view('/register', 'user/register')->name('register');
 Route::post('/validate-register', [UsuariosController::class, 'register'])->name('validate-register');
+Route::get('/close-account', [UsuariosController::class, 'destroy'])->name('close-account');
+Route::get('/delete-account', [UsuariosController::class, 'destroy'])->name('delete-account');
 
 Route::get('/update',  [UsuariosController::class, 'update'] )->name('update-user');
 Route::post('/update',  [UsuariosController::class, 'update'] )->name('update-user');

@@ -9,12 +9,6 @@
       </div>
     </div>
     <!-- Comienza formulario -->
-     <?php
-
-use Illuminate\Support\Facades\Log;
-
-        // Log::debug();
-     ?>
     <form method="POST" action="{{ route('update-user') }}">
       @csrf
       <div class="w-120">
@@ -56,9 +50,6 @@ use Illuminate\Support\Facades\Log;
           <div class="grid grid-flow-col justify-items-left">
             <div>
               <label class="label-text">Correo electrónico</label>
-              <?php
-                Log::debug($user->email);
-              ?>
               <input id="email" name="email" type="text" placeholder="correo@mail.com"  value="{{ old('email', $user->email)}}" class="w-60 input @error('email') is-invalid @enderror" id="emailUsuario" />
               @error('email')
                 <div class="alert alert-soft alert-error mt-2 w-80" role="alert">{{ $message }}</div>
@@ -94,8 +85,9 @@ use Illuminate\Support\Facades\Log;
         </div>
       </div>
     </form>
+    <div class="grid grid-flow-col pt-2 justify-items-center">
+      <a id="linkCloseAccount"  onclick="alertDelete();" class="link link-primary" href="#">Dar de baja</a>
+    </div>
   </div>
 </div>
-
-
 @stop
