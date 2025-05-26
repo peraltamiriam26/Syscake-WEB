@@ -27,9 +27,9 @@ class Usuario extends Model
      *
      * @var array<int, string>
      */
-    // protected $hidden = [
-    //     'id',
-    // ];
+    protected $hidden = [
+        'id',
+    ];
 
     /**
      * The attributes that should be cast.

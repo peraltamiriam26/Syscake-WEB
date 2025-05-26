@@ -3675,6 +3675,11 @@
       display: flex;
     }
   }
+  .md\:w-1\/6 {
+    @media (width >= 48rem) {
+      width: calc(1/6 * 100%);
+    }
+  }
   .md\:items-center {
     @media (width >= 48rem) {
       align-items: center;

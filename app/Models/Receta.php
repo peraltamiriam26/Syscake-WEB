@@ -6,13 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Lector extends Model
+class Receta extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
-        'esLector',
-        'usuario_id',
+        'nombre',
+        'archivo_id',
+        'tipoReceta_id',
+        'escritor_usuario_id',
+        'es_anonimo',
+    ];
+    
+    protected $hidden = [
+        'id',
     ];
 
 }
