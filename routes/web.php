@@ -39,3 +39,6 @@ Route::post('/validate-register', [UsuariosController::class, 'register'])->name
 Route::get('/update', function () {
     return view('user.update');
 })->name('updateUser');
+
+/** ABM DE RECETAS */
+Route::view('/receta', 'recipe/createRecipe')->name('createRecipe');
