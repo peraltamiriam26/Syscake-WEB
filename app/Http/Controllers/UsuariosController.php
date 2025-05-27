@@ -56,7 +56,7 @@ class UsuariosController extends Controller
     {
         $id = auth()->user()->id;
         $user = Usuario::searchUser($id);
-
+        $modelUser = new Usuario();
         if ($request->isMethod('post')) {
             $request->validate([
                 'nombre' => ['required'],
@@ -64,19 +64,12 @@ class UsuariosController extends Controller
                 'email' => ['required', 'email', Rule::unique('usuarios')->ignore($id)],
                 'password' => ['nullable', 'confirmed', 'min:8'],
             ]);
-            if ($user->saveUser($request, $id)){
-                // session()->flash('tipo', 'success');
-                // session()->flash('mensaje', '¡El usuario se modifico con éxito!');
-                // return redirect()->intended('/home');
-                return redirect()->route('home')->with('alerta', [
-                                                                    'titulo' => '¡Acción exitosa!',
-                                                                    'mensaje' => 'Tu cuenta fue modificada.',
-                                                                    'tipo' => 'success' // Tipos: success, error, warning, info
-                                                                ]);
+            if ($modelUser->saveUser($request, $id) == 1){
+                return redirect()->route('home')->with([
+                                                        'toast' => 'Tu cuenta fue modificada con éxito',
+                                                        'icon' => 'success' // Puedes cambiarlo a 'error', 'warning', 'info', etc.
+                                                    ]);
             }
-            session()->flash('tipo', 'danger');
-            session()->flash('mensaje', 'Hubo un error al querer modificar el usuario.');
-            // return redirect("/");
         }
 
 

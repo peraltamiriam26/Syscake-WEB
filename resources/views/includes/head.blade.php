@@ -8,6 +8,20 @@
 
 @include('sweetalert::alert')
 <script type="text/javascript" src="js/mensajesAlerta.js"></script>
+@if(session('toast'))
+    <script>
+        Swal.fire({
+            toast: true,
+            position: 'center',
+            icon: "{{ session('icon', 'info') }}", // sino se envia icon te muestra el icono de info
+            title: "{{ session('toast') }}",
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+@endif
+
+
 <!-- <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script> -->
 <title>Syscake</title>
         

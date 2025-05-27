@@ -52,16 +52,16 @@ class Usuario extends Model
                 //Encriptamos la contraseña usando Hash
                 $usuario->password = Hash::make($request->password);
             }
-
             //Usamos la funcion save() que guarda en la base de datos
             if($usuario->save()){
                 //Verificamos el tipo de usuario que eligio
-                $flag = $usuario->verifyUserType($usuario->id, $request->tipoUsuario, $newUser);               
-                DB::commit();
-                return $flag;
+                if($usuario->verifyUserType($usuario->id, $request->tipoUsuario, $newUser)){                    
+                    DB::commit();
+                    return true;
+                }
             }
-            Log::debug("false");
-            Log::debug($usuario);
+
+
             DB::rollBack(); // Revertir cambios si ocurre un error
             return false;
         } catch (Exception $e) {
@@ -142,11 +142,13 @@ class Usuario extends Model
                     }else{
                         return true;
                     }
-                }             
+                }
+                /** retorno verdadero porque no se realizo ningun cambio */
+                return true;
             }else{
                 /** debería crear un lector o escritor */
                 $flag = $this->saveReaderWriter($newType, $user_id);
-            }   
+            } 
         }        
         return $flag;
     }
