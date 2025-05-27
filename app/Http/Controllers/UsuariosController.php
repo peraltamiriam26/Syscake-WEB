@@ -73,7 +73,6 @@ class UsuariosController extends Controller
                                                                     'mensaje' => 'Tu cuenta fue modificada.',
                                                                     'tipo' => 'success' // Tipos: success, error, warning, info
                                                                 ]);
-
             }
             session()->flash('tipo', 'danger');
             session()->flash('mensaje', 'Hubo un error al querer modificar el usuario.');
@@ -111,11 +110,11 @@ class UsuariosController extends Controller
 	        'password' => 'required',
 	    ]);
         
-	    if (Auth::attempt($credentials)) {
+	    if($res = Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/home'); // Redirige al usuario después del login
-        }
-        else{
+        }else{
+            Log::debug($res);
             return back()->withErrors([
                 'password' => 'La contraseña es incorrecta.',
             ]);
@@ -134,13 +133,20 @@ class UsuariosController extends Controller
 	    ]);
         $user = new Usuario();
         if ($user->saveUser($request)) {
-            session()->flash('tipo', 'success');
-            session()->flash('mensaje', '¡El usuario se creo con éxito!');
-            return redirect("/");
+            // session()->flash('tipo', 'success');
+            // session()->flash('mensaje', '¡El usuario se creo con éxito!');
+            return redirect("/")->with('alerta', [
+                                                    'titulo' => '¡Acción exitosa!',
+                                                    'mensaje' => 'Tu cuenta fue creada con éxito.',
+                                                    'tipo' => 'success' // Tipos: success, error, warning, info
+                                                ]);
         }
-        // session()->flash('tipo', 'danger');
-        // session()->flash('mensaje', 'Hubo un error al querer crear al usuario.');
-        return redirect("/");
+
+        return redirect("/")->with('alerta', [
+                                                'titulo' => '¡Ocurrio un error!',
+                                                'mensaje' => 'Tu cuenta no ha podido ser creada.',
+                                                'tipo' => 'error' // Tipos: success, error, warning, info
+                                            ]);;
         
     }
 

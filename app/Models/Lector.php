@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lector extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $fillable = [
         'esLector',
@@ -27,5 +25,16 @@ class Lector extends Model
         $reader = Lector::where('usuario_id', $id)
                         ->first();
         return $reader;
+    }
+
+    /**
+     * Funcion que crea al lector y lo guarda en la base de datos
+     */
+    public function create($id)
+    {
+        $lector = new Lector();
+        $lector->esLector = 1;
+        $lector->usuario_id = $id;
+        return $lector->save();
     }
 }
