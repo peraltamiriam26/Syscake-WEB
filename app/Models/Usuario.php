@@ -37,10 +37,10 @@ class Usuario extends Model
         if (!isset($id)) {
             //Instanciamos la clase Usuario
             $usuario = new Usuario();
-            $newUser = true;
+            $newUser = 1;
         }else{
             $usuario = Usuario::searchUser($id);
-            $newUser = false;
+            $newUser = 0;
         }
         try {
             DB::beginTransaction();
@@ -58,7 +58,6 @@ class Usuario extends Model
                 //Verificamos el tipo de usuario que eligio
                 $flag = $usuario->verifyUserType($usuario->id, $request->tipoUsuario, $newUser);               
                 DB::commit();
-                Log::debug($flag);
                 return $flag;
             }
             Log::debug("false");
@@ -120,19 +119,13 @@ class Usuario extends Model
     }
 
     public function verifyUserType($user_id, $newType, $newUser){
-        
-        if ($newUser) { // Se crea un usuario nuevo, entonces no hace falta comprobar nada
-            if ($newType === 'lector') {
-                $reader = new Lector();
-                $flag = $reader->create($user_id);             
-            }else{
-                $writer = new Escritor();
-                $flag = $writer->create($user_id);
-            }
+        $flag = false;
+        if ($newUser == 1) { // Se crea un usuario nuevo, entonces no hace falta comprobar nada
+            $flag = $this->saveReaderWriter($newType, $user_id);
         }else{
             $oldType = Usuario::verifyRoleType($user_id);
             $flag = false;
-            if ($oldType != false) {
+            if (!is_int($oldType)) {
                 if ($newType == 'lector' && $oldType->esEscritor) {
                     /** delete writer and add reader */
                     if ($oldType->delete()) {
@@ -149,11 +142,12 @@ class Usuario extends Model
                     }else{
                         return true;
                     }
-                }
-            }
-        }
-
-        
+                }             
+            }else{
+                /** debería crear un lector o escritor */
+                $flag = $this->saveReaderWriter($newType, $user_id);
+            }   
+        }        
         return $flag;
     }
 
@@ -164,8 +158,21 @@ class Usuario extends Model
             if (isset($writer)) {
                 return $writer;
             }
-            return false;
+            return 0;
         }
-        return $reader;
+        $flag = (isset($reader) || !empty($reader)) ? $reader : false;
+        return $flag;
+    }
+
+    public function saveReaderWriter($newType, $user_id){
+        $flag = false;
+        if ($newType === 'lector') {
+            $reader = new Lector();
+            $flag = $reader->create($user_id);             
+        }else{
+            $writer = new Escritor();
+            $flag = $writer->create($user_id);
+        }
+        return $flag;
     }
 }
