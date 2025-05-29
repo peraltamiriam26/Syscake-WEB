@@ -2,7 +2,6 @@
 @section("content")
 <div class="card  w-150">
   <div class="card-body flex items-center">
-    <!-- Flecha y titulo -->
     <div class="grid grid-flow-col w-120">
       <div class="w-60 justify-items-left">
         <h5 class="card-title">Modificar datos</h5>

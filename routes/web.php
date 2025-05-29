@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\IngredienteController;
 use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -42,3 +43,6 @@ Route::get('/delete-account', [UsuariosController::class, 'destroy'])->name('del
 Route::get('/update',  [UsuariosController::class, 'update'] )->name('update-user');
 Route::post('/update',  [UsuariosController::class, 'update'] )->name('update-user');
 
+/** INGREDIENTES */
+Route::get('/create', [IngredienteController::class, 'create'])->name('create-ingredient');
+Route::post('/store', [IngredienteController::class, 'store'])->name('store-ingredient');
