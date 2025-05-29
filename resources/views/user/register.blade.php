@@ -43,7 +43,7 @@
               <input type="radio" name="tipoUsuario" value="lector" checked />
               <label for="lector" style="margin-left: 5px; margin-right: 5px;">Lector</label>
               <input type="radio" name="tipoUsuario" value="escritor"/>
-              <label for="escritor" style="margin-left: 5px; margin-right; 5px;">Escritor</label>
+              <label for="escritor" style="margin-left: 5px; margin-right: 5px;">Escritor</label>
             </div>
           </div>
   
