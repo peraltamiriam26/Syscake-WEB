@@ -38,7 +38,7 @@ class IngredienteController extends Controller
     {
         // Validación de entrada
         $request->validate([
-            'nombre' => 'required|unique:ingredientes, nombre|string|max:255',
+            'nombre' => 'required|unique:ingredientes,nombre,|string|max:255',
         ]);
 
         // Creación del ingrediente
