@@ -22,6 +22,11 @@
                   Crear
                 </a>
               </li>
+              <li>
+                <a class="dropdown-item"  href="{{route('index-ingredients')}}">
+                  Ver listado
+                </a>
+              </li>
             </ul>
           </li>
         </ul>

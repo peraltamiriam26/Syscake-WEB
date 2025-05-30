@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\IngredienteController;
 use App\Http\Controllers\UsuariosController;
+use App\Models\Ingrediente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -46,3 +47,5 @@ Route::post('/update',  [UsuariosController::class, 'update'] )->name('update-us
 /** INGREDIENTES */
 Route::get('/create', [IngredienteController::class, 'create'])->name('create-ingredient');
 Route::post('/store', [IngredienteController::class, 'store'])->name('store-ingredient');
+Route::get('/index-ingredients', [IngredienteController::class, 'index'])->name('index-ingredients');
+Route::get('/delete-ingredient', [IngredienteController::class, 'destroy'])->name('delete-ingredient');

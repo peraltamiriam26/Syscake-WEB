@@ -105,7 +105,7 @@ class Usuario extends Model
             $user = $this::searchUser($id);
             if (isset($user->writer)) {
                 $writer = $user->writer;
-                 DB::commit(); // Confirmar cambios
+                DB::commit(); // Confirmar cambios
                 return $user->delete() && $writer->delete();
             }
             DB::commit(); // Confirmar cambios

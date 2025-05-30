@@ -1,6 +1,8 @@
-function alertDelete(){
+function alertDelete(url, title){
+    console.log(url);
+    
     Swal.fire({
-                title: "¿Deseas dar baja tu cuenta?",
+                title: title,
                 // text: "You won't be able to revert this!",
                 icon: "warning",
                 showCancelButton: true,
@@ -11,7 +13,7 @@ function alertDelete(){
     }).then((result) => {
                 if (result.isConfirmed) {
                    $.ajax({
-                        url: '/delete-account', // Ruta en tu Laravel
+                        url: url, // Ruta en tu Laravel
                         type: 'GET',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -19,28 +21,30 @@ function alertDelete(){
                         contentType: 'application/json',
                         data: {},
                         success: function(response) {
-                            if (response) {
+                            if (response.flag) {
                                 Swal.fire({
                                         position: "center",
                                         icon: "success",
-                                        title: "Su cuenta ha sido dada de baja.",
+                                        title: response.mensaje,
                                         showConfirmButton: false,
                                         timer: 3000
                                 });
                                 setTimeout(() => {
-                                    window.location.href = "/";
+                                    window.location.href = response.ruta;
                                 }, 3000);                                
                             }else{
                                 Swal.fire({
                                         position: "center",
                                         icon: "error",
-                                        title: "Ocurrió un error, no se ha podido dar de baja su cuenta.",
+                                        title: response.mensaje,
                                         showConfirmButton: false,
                                         timer: 3000
                                 });
                             }
                         },
                         error: function(xhr, status, err) {
+                            console.log(err);
+                            
                             Swal.fire({
                                         position: "center",
                                         icon: "error",

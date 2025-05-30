@@ -90,8 +90,12 @@ class UsuariosController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        $user = new Usuario();
-        return $user->bajaUsuario(auth()->user()->id);
+        $user = new Usuario(); 
+        if( $user->bajaUsuario(auth()->user()->id)){
+            return ['flag' => true, 'mensaje' => "Su cuenta ha sido dada de baja.", 'ruta' => '/'];
+        }
+        return ['flag' => false, 'mensaje' => "Ocurrió un error, no se ha podido dar de baja su cuenta."];
+
     }
 
 
@@ -107,7 +111,6 @@ class UsuariosController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/home'); // Redirige al usuario después del login
         }else{
-            Log::debug($res);
             return back()->withErrors([
                 'password' => 'La contraseña es incorrecta.',
             ]);

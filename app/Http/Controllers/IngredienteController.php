@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ingrediente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class IngredienteController extends Controller
@@ -15,7 +16,9 @@ class IngredienteController extends Controller
      */
     public function index()
     {
-        //
+        $modelIngredient = new Ingrediente();
+        $ingredients = $modelIngredient->search();
+        return view('ingredient/index', ['ingredients' => $ingredients]);
     }
 
     /**
@@ -45,7 +48,7 @@ class IngredienteController extends Controller
         $savedIngredient = Ingrediente::create($request->nombre);
         if ($savedIngredient) {
             Alert::toast('Se creo el ingrediente con éxito.', 'success');
-            return redirect()->route('home');
+            return redirect()->route('index-ingredients');
         }
 
         return redirect()->route('create-ingredient');
@@ -91,8 +94,14 @@ class IngredienteController extends Controller
      * @param  \App\Models\Ingrediente  $ingrediente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ingrediente $ingrediente)
+    public function destroy(Request $ingrediente)
     {
-        //
+        $model = new Ingrediente();
+        Log::debug($ingrediente['id']);
+        if ($model->deleteIngredient($ingrediente['id'])){
+            return ['flag' => true, 'mensaje' => 'Se elimino el ingrediente.', 'ruta' => 'index-ingredients'];
+        }else{
+            return ['flag' => false, 'mensaje' => 'No se pudo eliminar el ingrediente.'];
+        }
     }
 }

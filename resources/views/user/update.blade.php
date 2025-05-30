@@ -85,7 +85,7 @@
       </div>
     </form>
     <div class="grid grid-flow-col pt-2 justify-items-center">
-      <a id="linkCloseAccount"  onclick="alertDelete();" class="link link-primary" href="#">Dar de baja</a>
+      <a id="linkCloseAccount"  onclick="alertDelete('/delete-account', '¿Deseas dar baja tu cuenta?');" class="link link-primary" href="#">Dar de baja</a>
     </div>
   </div>
 </div>
