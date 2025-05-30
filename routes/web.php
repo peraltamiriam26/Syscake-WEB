@@ -46,6 +46,7 @@ Route::post('/update',  [UsuariosController::class, 'update'] )->name('update-us
 
 /** INGREDIENTES */
 Route::get('/create', [IngredienteController::class, 'create'])->name('create-ingredient');
+Route::get('/edit/{id}', [IngredienteController::class, 'edit'])->name('edit-ingredient');
 Route::post('/store', [IngredienteController::class, 'store'])->name('store-ingredient');
 Route::get('/index-ingredients', [IngredienteController::class, 'index'])->name('index-ingredients');
 Route::get('/delete-ingredient', [IngredienteController::class, 'destroy'])->name('delete-ingredient');

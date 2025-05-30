@@ -19,13 +19,39 @@ class Ingrediente extends Model
     ];
 
     public static function create($nombre){
-        $ingredient = new Ingrediente();
-        $ingredient->nombre = $nombre;
-        return $ingredient->save();
+        try {
+            DB::beginTransaction();
+            $ingredient = new Ingrediente();
+            $ingredient->nombre = $nombre;
+            if($ingredient->save()){
+                DB::commit();
+                return true;
+            }
+        } catch (Exception $th) {
+            DB::rollBack();
+        }
+        DB::rollBack();
+        return false;
+    }
+
+    public static function modify($request_ingredient){
+        try {
+            DB::beginTransaction();
+            $ingredient = Ingrediente::findModel($request_ingredient->id);
+            $ingredient->nombre = $request_ingredient->nombre;
+            if ($ingredient->save()) {
+                DB::commit();
+                return true;
+            }
+        } catch (Exception $th) {
+            DB::rollBack();
+        }
+        DB::rollBack();
+        return false;
     }
 
     public function search(){
-        return Ingrediente::paginate(15);
+        return Ingrediente::paginate(5);
     }
 
     public function deleteIngredient($id){
@@ -42,6 +68,10 @@ class Ingrediente extends Model
             DB::rollBack(); // Revertir cambios si ocurre un error
             return false;
         }
+    }
 
+    public static function findModel($id){
+        $ingredient = Ingrediente::where('id', $id)->first();
+        return $ingredient;
     }
 }

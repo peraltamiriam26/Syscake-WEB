@@ -28,7 +28,7 @@ class IngredienteController extends Controller
      */
     public function create()
     {
-        return view('ingredient/form');
+        return view('ingredient/form', ['ingredient' => new Ingrediente()]);
     }
 
     /**
@@ -44,8 +44,13 @@ class IngredienteController extends Controller
             'nombre' => 'required|unique:ingredientes,nombre,|string|max:255',
         ]);
 
+        /** verificar si el ingrediente ya no existe */
+        if (isset($request->id)) {
+            $savedIngredient = Ingrediente::modify($request);
+        }else{
+            $savedIngredient = Ingrediente::create($request->nombre);
+        }
         // Creación del ingrediente
-        $savedIngredient = Ingrediente::create($request->nombre);
         if ($savedIngredient) {
             Alert::toast('Se creo el ingrediente con éxito.', 'success');
             return redirect()->route('index-ingredients');
@@ -71,21 +76,10 @@ class IngredienteController extends Controller
      * @param  \App\Models\Ingrediente  $ingrediente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ingrediente $ingrediente)
+    public function edit($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ingrediente  $ingrediente
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Ingrediente $ingrediente)
-    {
-        //
+        $ingredient = Ingrediente::findModel($id);
+        return view('ingredient/form', ['ingredient' => $ingredient]);
     }
 
     /**
