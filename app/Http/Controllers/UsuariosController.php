@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
-use App\Http\Controllers\LectorsController;
-use App\Http\Controllers\EscritorsController;
-use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Validation\Rule;
 
 class UsuariosController extends Controller
 {
@@ -25,26 +22,6 @@ class UsuariosController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreUsuarioRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreUsuarioRequest $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -65,7 +42,7 @@ class UsuariosController extends Controller
      */
     public function edit(Usuario $usuario)
     {
-        //
+        
     }
 
     /**
@@ -77,7 +54,32 @@ class UsuariosController extends Controller
      */
     public function update(UpdateUsuarioRequest $request, Usuario $usuario)
     {
-        //
+        $id = auth()->user()->id;
+        $user = Usuario::searchUser($id);
+        $modelUser = new Usuario();
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'nombre' => ['required'],
+                'apellido' => ['required'],
+                'email' => ['required', 'email', Rule::unique('usuarios')->ignore($id)],
+                'password' => ['nullable', 'confirmed', 'min:8'],
+            ]);
+            if ($modelUser->saveUser($request, $id) == 1){
+                return redirect()->route('home')->with([
+                                                        'toast' => 'Tu cuenta fue modificada con éxito',
+                                                        'icon' => 'success' // Puedes cambiarlo a 'error', 'warning', 'info', etc.
+                                                    ]);
+            }
+        }
+
+
+        return view('user/update',
+            [
+                'user' => $user,
+                'writer' => $user->writer,
+                'reader' => $user->reader
+            ]    
+        );
     }
 
     /**
@@ -88,7 +90,12 @@ class UsuariosController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        //
+        $user = new Usuario(); 
+        if( $user->bajaUsuario(auth()->user()->id)){
+            return ['flag' => true, 'mensaje' => "Su cuenta ha sido dada de baja.", 'ruta' => '/'];
+        }
+        return ['flag' => false, 'mensaje' => "Ocurrió un error, no se ha podido dar de baja su cuenta."];
+
     }
 
 
@@ -100,11 +107,10 @@ class UsuariosController extends Controller
 	        'password' => 'required',
 	    ]);
         
-	    if (Auth::attempt($credentials)) {
+	    if($res = Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/home'); // Redirige al usuario después del login
-        }
-        else{
+        }else{
             return back()->withErrors([
                 'password' => 'La contraseña es incorrecta.',
             ]);
@@ -121,29 +127,25 @@ class UsuariosController extends Controller
 	        'email' => 'required|email|unique:usuarios,email,',//unique sirve para buscar el elemento y verificar q es unico, usuarios es la tabla donde buscamos, y email el atributo de la tabla q comparamos
 	        'password' => 'required|confirmed|min:8',
 	    ]);
-        Log::debug("Todo es correcto");
-        //Instanciamos la clase Usuario
-        $usuario = new Usuario();
-        //Agregamos los valores necesarios para guardarlo en la bd
-        $usuario->nombre = $request->nombre;
-        $usuario->apellido = $request->apellido;
-        $usuario->email = $request->email;
-        //Encriptamos la contraseña usando Hash
-        $usuario->password = Hash::make($request->password);
-        //Usamos la funcion save() que guarda en la base de datos
-        $usuario->save();
-        //Buscamos al usuario recien creado por su correo.
-        $datos=$usuario->buscarUsuarioCorreo($usuario->email);
-        //Verificamos el tipo de usuario que eligio
-        if ($request->tipoUsuario === 'lector') {
-            $lectorsController = new LectorsController();
-            $lectorsController->create($datos->id);
-        }else{
-            $escritorsController = new EscritorsController();
-            $escritorsController->create($datos->id);
+        $user = new Usuario();
+        if ($user->saveUser($request)) {
+            // session()->flash('tipo', 'success');
+            // session()->flash('mensaje', '¡El usuario se creo con éxito!');
+            return redirect("/")->with('alerta', [
+                                                    'titulo' => '¡Acción exitosa!',
+                                                    'mensaje' => 'Tu cuenta fue creada con éxito.',
+                                                    'tipo' => 'success' // Tipos: success, error, warning, info
+                                                ]);
         }
-        return redirect("/")->withSuccess('Se registro correctamente el usuario');
+
+        return redirect("/")->with('alerta', [
+                                                'titulo' => '¡Ocurrio un error!',
+                                                'mensaje' => 'Tu cuenta no ha podido ser creada.',
+                                                'tipo' => 'error' // Tipos: success, error, warning, info
+                                            ]);;
+        
     }
+
     public function logout(Request $request)
     {
         Auth::logout();

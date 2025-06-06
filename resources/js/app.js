@@ -2,4 +2,8 @@
 require('./bootstrap');
 import '../css/app.css'; 
 import "flyonui/flyonui";
-// window.$ = window.jQuery = require('jquery');
+// import "iconify-icon";
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+import flatpickr from "flatpickr";
+import { Spanish } from "flatpickr/dist/l10n/es.js";

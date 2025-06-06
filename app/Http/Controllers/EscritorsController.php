@@ -16,6 +16,6 @@ class EscritorsController extends Controller
         $escritor = new Escritor();
         $escritor->esEscritor = 1;
         $escritor->usuario_id = $id;
-        $escritor->save();
+        return $escritor->save();
     }
 }

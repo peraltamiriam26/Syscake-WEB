@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\IngredienteController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UsuariosController;
+use App\Models\Ingrediente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -28,6 +31,8 @@ Route::get('/home', function () {
     }
     return view('index');
 })->name('home');
+
+/** agregar la condicion para que no deje ingresar al sistema si el usuario no esta logueado */
 /** INCIO Y CIERRE DE SESIÓN */
 Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 Route::post('/login', [UsuariosController::class, 'login'])->name('login');
@@ -35,10 +40,26 @@ Route::post('/login', [UsuariosController::class, 'login'])->name('login');
 /** ABM DE USUARIOS */
 Route::view('/register', 'user/register')->name('register');
 Route::post('/validate-register', [UsuariosController::class, 'register'])->name('validate-register');
+Route::get('/close-account', [UsuariosController::class, 'destroy'])->name('close-account');
+Route::get('/delete-account', [UsuariosController::class, 'destroy'])->name('delete-account');
 
-Route::get('/update', function () {
-    return view('user.update');
-})->name('updateUser');
+Route::get('/update',  [UsuariosController::class, 'update'] )->name('update-user');
+Route::post('/update',  [UsuariosController::class, 'update'] )->name('update-user');
+
+/** INGREDIENTES */
+Route::get('/create-ingredient', [IngredienteController::class, 'create'])->name('create-ingredient');
+Route::get('/edit/{id}', [IngredienteController::class, 'edit'])->name('edit-ingredient');
+Route::post('/store', [IngredienteController::class, 'store'])->name('store-ingredient');
+Route::get('/index-ingredients', [IngredienteController::class, 'index'])->name('index-ingredients');
+Route::get('/delete-ingredient', [IngredienteController::class, 'destroy'])->name('delete-ingredient');
+
+
+/** PLAN */
+Route::get('/create', [PlanController::class, 'create'])->name('create-plan');
+Route::get('/index-plan', [PlanController::class, 'index'])->name('index-plan');
+Route::post('/store', [PlanController::class, 'store'])->name('store-plan');
+Route::get('/add-recipe', [PlanController::class, 'addRecipe'])->name('add-recipe');
+Route::get('/search-recipe', [PlanController::class, 'searchRecipe'])->name('search-recipe');
 
 /** ABM DE RECETAS */
 Route::view('/receta', 'recipe/createRecipe')->name('createRecipe');
