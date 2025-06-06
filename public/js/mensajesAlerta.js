@@ -1,6 +1,4 @@
-function alertDelete(url, title){
-    console.log(url);
-    
+function alertDelete(url, title){    
     Swal.fire({
                 title: title,
                 // text: "You won't be able to revert this!",

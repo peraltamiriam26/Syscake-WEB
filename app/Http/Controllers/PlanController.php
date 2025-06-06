@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plan;
+use App\Models\Recetas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PlanController extends Controller
 {
@@ -23,7 +26,7 @@ class PlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('plan/form', ['plan' => new Plan()]);
     }
 
     /**
@@ -34,7 +37,7 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Log::debug($request);
     }
 
     /**
@@ -80,5 +83,21 @@ class PlanController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addRecipe(){
+        return view('plan/modalAddRecipe')->render();
+
+    }
+
+    public function searchRecipe(Request $request){
+            $query = $request->input('q');
+
+        $recipes = Recetas::where('nombre', 'LIKE', "%{$query}%")
+                        ->select('id', 'nombre as name')
+                        ->get();
+
+        return response()->json($recipes);
+
     }
 }

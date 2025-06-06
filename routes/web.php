@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\IngredienteController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UsuariosController;
 use App\Models\Ingrediente;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,7 @@ Route::get('/home', function () {
     return view('index');
 })->name('home');
 
+/** agregar la condicion para que no deje ingresar al sistema si el usuario no esta logueado */
 /** INCIO Y CIERRE DE SESIÓN */
 Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 Route::post('/login', [UsuariosController::class, 'login'])->name('login');
@@ -45,8 +47,17 @@ Route::get('/update',  [UsuariosController::class, 'update'] )->name('update-use
 Route::post('/update',  [UsuariosController::class, 'update'] )->name('update-user');
 
 /** INGREDIENTES */
-Route::get('/create', [IngredienteController::class, 'create'])->name('create-ingredient');
+Route::get('/create-ingredient', [IngredienteController::class, 'create'])->name('create-ingredient');
 Route::get('/edit/{id}', [IngredienteController::class, 'edit'])->name('edit-ingredient');
 Route::post('/store', [IngredienteController::class, 'store'])->name('store-ingredient');
 Route::get('/index-ingredients', [IngredienteController::class, 'index'])->name('index-ingredients');
 Route::get('/delete-ingredient', [IngredienteController::class, 'destroy'])->name('delete-ingredient');
+
+
+/** PLAN */
+Route::get('/create', [PlanController::class, 'create'])->name('create-plan');
+Route::get('/index-plan', [PlanController::class, 'index'])->name('index-plan');
+Route::post('/store', [PlanController::class, 'store'])->name('store-plan');
+Route::get('/add-recipe', [PlanController::class, 'addRecipe'])->name('add-recipe');
+Route::get('/search-recipe', [PlanController::class, 'searchRecipe'])->name('search-recipe');
+
