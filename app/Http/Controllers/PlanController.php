@@ -6,6 +6,8 @@ use App\Models\Plan;
 use App\Models\Recetas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PlanController extends Controller
 {
@@ -37,7 +39,18 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        Log::debug($request);
+        // dd($request->all()); // Muestra los datos enviados antes de validar
+        $request->validate([
+	        'fecha' => 'required|unique:plans,fecha',
+	    ]);
+        
+        $plan = new Plan();
+        if ($plan->savePlan($request)) {
+            Alert::toast('success', "Se guardo correctamente.");
+            return redirect()->route('index-plan');
+        }
+        
+        return redirect()->route('create-plan');
     }
 
     /**

@@ -19,7 +19,7 @@
                         @if (isset($plan->id))
                             <input type="text" name="id" value="{{ old('id', $plan->id) }}" class="input"  id="id" hidden/>
                         @endif
-                        <input type="text" class="input max-w-sm" placeholder="Seleccione la fecha de su plan" id="flatpickr-date" />
+                        <input type="text" name="fecha" class="input max-w-sm" placeholder="Seleccione la fecha de su plan" id="flatpickr-date" />
                     @error('nombre')
                         <div class="alert alert-soft alert-error mt-2" role="alert">{{ $message }}</div>
                     @enderror
@@ -30,17 +30,19 @@
                 <h4>Seleccione las recetas</h4>
                 <div class="grid grid-flow-col justify-items-left">
                     <div class="me-2">
-                        <select class="select-recipes" name="recipes[]" multiple="multiple">
-                        </select>
-                       <ul class="list-inside list-disc marker:text-purple-500">
-                            
-                            <li class="mb-2">Desayuno </li>
-                                    
-                          
-                            
-                            <li class="mb-2">Almuerzo</li>
-                            <li class="mb-2">Merienda</li>
-                            <li class="mb-2">Cena</li>
+                       <ul class="list-inside list-disc marker:text-purple-500">                            
+                            <li class="mb-2">Desayuno <br>
+                                <select class="select-recipes-breakfast select" name="recipesBreakfast[]" multiple="multiple"></select>
+                            </li>
+                            <li class="mb-2">Almuerzo <br>
+                                <select class="select-recipes-lunch select" name="recipesLunch[]" multiple="multiple"></select>
+                            </li>
+                            <li class="mb-2">Merienda <br> 
+                                <select class="select-recipes-snack select" name="recipesSnak[]" multiple="multiple"></select>
+                            </li>
+                            <li class="mb-2">Cena <br> 
+                                <select class="select-recipes-dinner select" name="recipesDinner[]" multiple="multiple"></select>
+                            </li>
                         </ul>
                     @error('nombre')
                         <div class="alert alert-soft alert-error mt-2" role="alert">{{ $message }}</div>
