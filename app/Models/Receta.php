@@ -22,4 +22,13 @@ class Receta extends Model
         'id',
     ];
 
+    public static function findModel($recipe_id){
+        $recipe = Receta::where('id', $recipe_id)->first();
+        return $recipe;
+    }
+
+    public function planes(){
+        return $this->belongsToMany(Plan::class, 'plan_has_recetas', 'receta_id', 'plan_id');
+    }
+
 }

@@ -5,9 +5,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\IngredienteController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UsuariosController;
-use App\Models\Ingrediente;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +23,7 @@ use Illuminate\Support\Facades\Log;
 Route::get('/', function () {
     return view('auth/login');
 });
-Route::get('/home', function () {
-    if (!Auth::check()) {
-        return redirect('/');
-    }
-    return view('index');
-})->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 /** agregar la condicion para que no deje ingresar al sistema si el usuario no esta logueado */
 /** INCIO Y CIERRE DE SESIÓN */

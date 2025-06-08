@@ -61,7 +61,7 @@
       </li>
       <li class="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]"> 
         <button id="dropdown-link" type="button" class="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" >
-          Cuenta
+          <span class="icon-[tabler--user] size-6 bg-primary text-primary-content"></span>
           <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
         </button>  
         <ul class="dropdown-menu dropdown-open:opacity-100 hidden" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-link" >

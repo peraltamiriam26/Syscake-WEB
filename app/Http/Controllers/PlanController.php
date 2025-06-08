@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use App\Models\Receta;
 use App\Models\Recetas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -47,7 +48,7 @@ class PlanController extends Controller
         $plan = new Plan();
         if ($plan->savePlan($request)) {
             Alert::toast('success', "Se guardo correctamente.");
-            return redirect()->route('index-plan');
+            return redirect()->route('home');
         }
         
         return redirect()->route('create-plan');
@@ -106,7 +107,7 @@ class PlanController extends Controller
     public function searchRecipe(Request $request){
             $query = $request->input('q');
 
-        $recipes = Recetas::where('nombre', 'LIKE', "%{$query}%")
+        $recipes = Receta::where('nombre', 'LIKE', "%{$query}%")
                         ->select('id', 'nombre as name')
                         ->get()
                          ->map(function ($recipe) {

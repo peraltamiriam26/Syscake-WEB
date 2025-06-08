@@ -2426,6 +2426,9 @@
   .col-12 {
     grid-column: 12;
   }
+  .col-span-12 {
+    grid-column: span 12 / span 12;
+  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -2774,6 +2777,44 @@
     white-space: nowrap;
     color: var(--color-base-100);
   }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(0.25rem * 1.5);
+    border-radius: var(--radius-selector);
+    text-align: center;
+    vertical-align: middle;
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    border: var(--border) solid var(--badge-border);
+    padding-inline: calc(0.25rem * 3 - var(--border));
+    width: -moz-fit-content;
+    width: fit-content;
+    color: var(--badge-fg);
+    background-size: auto, calc(var(--noise) * 100%);
+    background-image: none, var(--fx-noise);
+    background-color: var(--badge-bg);
+    --badge-border: var(--badge-color, var(--color-neutral));
+    --badge-bg: var(--badge-color, var(--color-neutral));
+    --badge-fg: var(--color-neutral-content);
+    --size: calc(var(--size-selector, 0.25rem) * 6);
+    height: var(--size);
+    &.badge-outline {
+      --badge-fg: var(--badge-color, var(--color-neutral));
+      --badge-bg: transparent;
+      background-image: none;
+    }
+    &.badge-soft {
+      --badge-border: none;
+      --badge-fg: var(--badge-color, var(--color-neutral));
+      --badge-bg: var(--badge-color, var(--color-neutral));
+      @supports (color: color-mix(in lab, red, red)) {
+        --badge-bg: color-mix(in oklab, var(--badge-color, var(--color-neutral)) 10%, var(--color-base-100));
+      }
+      background-image: none;
+    }
+  }
   .progress {
     display: flex;
     height: calc(0.25rem * 1.5);
@@ -2833,6 +2874,19 @@
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3'/%3E%3C/svg%3E");
+  }
+  .icon-\[tabler--user\] {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 7a4 4 0 1 0 8 0a4 4 0 0 0-8 0M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2'/%3E%3C/svg%3E");
   }
   .icon-\[tabler--x\] {
     display: inline-block;
@@ -3237,6 +3291,10 @@
     width: calc(var(--spacing) * 5);
     height: calc(var(--spacing) * 5);
   }
+  .size-6 {
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
+  }
   .size-8 {
     width: calc(var(--spacing) * 8);
     height: calc(var(--spacing) * 8);
@@ -3406,6 +3464,9 @@
   .grid-flow-row {
     grid-auto-flow: row;
   }
+  .grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
   .flex-col {
     flex-direction: column;
   }
@@ -3441,6 +3502,9 @@
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
+  }
+  .gap-12 {
+    gap: calc(var(--spacing) * 12);
   }
   .gap-x-2 {
     -moz-column-gap: calc(var(--spacing) * 2);
@@ -4084,6 +4148,12 @@
   .bg-info {
     background-color: var(--color-info);
   }
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-primary-content {
+    background-color: var(--color-primary-content);
+  }
   .bg-white {
     background-color: var(--color-white);
   }
@@ -4323,6 +4393,9 @@
   .text-primary {
     color: var(--color-primary);
   }
+  .text-primary-content {
+    color: var(--color-primary-content);
+  }
   .capitalize {
     text-transform: capitalize;
   }
@@ -4338,9 +4411,6 @@
   }
   .no-underline {
     text-decoration-line: none;
-  }
-  .underline {
-    text-decoration-line: underline;
   }
   .opacity-0 {
     opacity: 0%;
@@ -4426,6 +4496,10 @@
   .ease-in-out {
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
+  }
+  .badge-primary {
+    --badge-color: var(--color-primary);
+    --badge-fg: var(--color-primary-content);
   }
   .btn-primary {
     --btn-color: var(--color-primary);
@@ -5273,7 +5347,7 @@ span.flatpickr-weekday, .flatpickr-weekwrapper .flatpickr-weekday {
   display: none;
 }
 body {
-  background-image: url('/Syscake-WEB/public/images/fondo.png');
+  background-image: url('/images/fondo.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

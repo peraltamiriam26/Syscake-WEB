@@ -42,7 +42,6 @@ class Plan extends Model
                 throw new Exception("Error al guardar el plan");
             }
         } catch (Exception $e) {
-            Log::debug($e);
             DB::rollBack();
             return false;
         }
@@ -52,5 +51,19 @@ class Plan extends Model
         $plan = Plan::where('id', $id)->where('usuario_id', $user_id)->first();
         return $plan;
     }
+
+    public static function searchAllPlanUser(){
+        $user_id = auth()->user()->id;
+        /** debo buscar los planes con las recetas */
+        $plans = Plan::select('plans.id', 'plans.fecha', 'phr.receta_id', 'phr.tipoComida_id')
+            ->join('plan_has_recetas as phr', 'plans.id', '=', 'phr.plan_id')
+            ->where('plans.usuario_id', $user_id)
+            ->get();
+        return $plans;
+    }
     
+    public function recetas(){
+        return $this->belongsToMany(Receta::class, 'plan_has_recetas', 'plan_id', 'receta_id');
+    }
+
 }
