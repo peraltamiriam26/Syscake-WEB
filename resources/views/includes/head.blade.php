@@ -14,6 +14,7 @@
 <script src="/js/modal.js"></script>
 <script src="/js/plan.js"></script>
 <script src="/js/select2.min.js"></script>
+<script src="/js/select2es.js"></script>
 
 @include('sweetalert::alert')
 <script type="text/javascript" src="js/mensajesAlerta.js"></script>
