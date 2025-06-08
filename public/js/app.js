@@ -23449,17 +23449,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/app.css */ "./resources/css/app.css");
 /* harmony import */ var flyonui_flyonui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flyonui/flyonui */ "./node_modules/flyonui/flyonui.js");
 /* harmony import */ var flyonui_flyonui__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flyonui_flyonui__WEBPACK_IMPORTED_MODULE_1__);
-Object(function webpackMissingModule() { var e = new Error("Cannot find module 'jquery'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module 'flatpickr'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module 'flatpickr/dist/l10n/es.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 // import "iconify-icon";
-
-window.$ = window.jQuery = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'jquery'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-
-
+// import $ from 'jquery';
+// window.$ = window.jQuery = $;
+// import flatpickr from "flatpickr";
+// import { Spanish } from "flatpickr/dist/l10n/es.js";
 
 /***/ }),
 
