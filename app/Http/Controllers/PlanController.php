@@ -95,9 +95,13 @@ class PlanController extends Controller
 
         $recipes = Recetas::where('nombre', 'LIKE', "%{$query}%")
                         ->select('id', 'nombre as name')
-                        ->get();
-
-        return response()->json($recipes);
-
+                        ->get()
+                         ->map(function ($recipe) {
+                          return [
+                              'id' => $recipe->id,
+                              'text' => strtoupper($recipe->name) // Ejemplo: convertir el nombre a mayúsculas
+                          ];
+                      });
+        return response()->json(['recipes' => $recipes]);
     }
 }

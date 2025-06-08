@@ -3,12 +3,17 @@ $(document).ready(function() {
   ajax: {
     url: 'search-recipe',
     dataType: 'json',
-    processResults: function (data) {
+    processResults: function (data) {      
       // Transforms the top-level key of the response object from 'items' to 'results'
       return {
-        results: data.items
+        results: data.recipes
       };
     }
-  }
+  },
+  language: "es",
+  minimumInputLength: 3, // Solo busca después de 3 caracteres
+  placeholder: "Seleccione una opción",
+  allowClear: true
+
 });
 });
