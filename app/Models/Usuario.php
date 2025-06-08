@@ -32,6 +32,14 @@ class Usuario extends Model
         'password',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'id',
+    ];
 
     public function saveUser($request, $id = null){
         if (!isset($id)) {

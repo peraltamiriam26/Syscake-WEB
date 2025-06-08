@@ -9,8 +9,8 @@
 @import "flyonui/src/vendor/flatpickr.css";
 
   body{
-  /* background-image: url('/Syscake-WEB/public/images/fondo.png'); */
-  background-image: url('/images/fondo.png'); 
+  background-image: url('/Syscake-WEB/public/images/fondo.png');
+  /* background-image: url('/images/fondo.png');  */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -61,3 +61,5 @@ Route::post('/store', [PlanController::class, 'store'])->name('store-plan');
 Route::get('/add-recipe', [PlanController::class, 'addRecipe'])->name('add-recipe');
 Route::get('/search-recipe', [PlanController::class, 'searchRecipe'])->name('search-recipe');
 
+/** ABM DE RECETAS */
+Route::view('/receta', 'recipe/createRecipe')->name('createRecipe');
