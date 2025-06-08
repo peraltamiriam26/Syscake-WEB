@@ -17,8 +17,6 @@ class Usuario extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $table = 'usuarios'; // Nombre de la tabla en la base de datos
-    protected $primaryKey = 'id';  // Nombre de la clave primaria
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +24,7 @@ class Usuario extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'nombre',
         'apellido',
         'email',
@@ -68,8 +67,6 @@ class Usuario extends Model
                     return true;
                 }
             }
-
-
             DB::rollBack(); // Revertir cambios si ocurre un error
             return false;
         } catch (Exception $e) {

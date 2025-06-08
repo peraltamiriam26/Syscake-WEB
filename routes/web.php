@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\IngredienteController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\RecetasController;
 use App\Models\Ingrediente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -62,4 +63,4 @@ Route::get('/add-recipe', [PlanController::class, 'addRecipe'])->name('add-recip
 Route::get('/search-recipe', [PlanController::class, 'searchRecipe'])->name('search-recipe');
 
 /** ABM DE RECETAS */
-Route::view('/receta', 'recipe/createRecipe')->name('createRecipe');
+Route::get('/receta', [RecetasController::class, 'create'])->name('create-recipe');

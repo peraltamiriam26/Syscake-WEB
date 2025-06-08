@@ -67,7 +67,9 @@ class IngredienteController extends Controller
      */
     public function show(Ingrediente $ingrediente)
     {
-        //
+        $modelIngredient = new Ingrediente();
+        $ingredients = $modelIngredient->search();
+        return $ingredients;
     }
 
     /**
