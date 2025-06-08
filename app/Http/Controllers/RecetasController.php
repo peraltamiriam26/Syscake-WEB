@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Receta;
+use App\Http\Controllers\IngredienteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -16,6 +17,8 @@ class RecetasController extends Controller
      */
     public function create()
     {
-        return view('recipe/createRecipe', ['recipe' => new Receta()]);
+        $controllerIngrediente = new IngredienteController();
+        $ingredients = $controllerIngrediente->search();
+        return view('recipe/createRecipe', ['recipe' => new Receta(), 'ingredients' => $ingredients]);
     }
 }

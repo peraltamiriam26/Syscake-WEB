@@ -53,16 +53,22 @@
                       <div class="grid grid-flow-row">
                         <div class="grid grid-flow-col justify-items-left">
                           <div class="me-2">
-                            <label class="label-text">Ingrediente</label>
-                            <input type="text" name="ing" placeholder="Nombre Ingrediente" id="ingName" autofocus/>
+                            <!-- <div class="select-floating max-w-sm"> -->
+                              <select class="select select-xs" id="selectFloatingExtraSmall" aria-label="floating label">
+                                @foreach  ($ingredients as $ingredient)
+                                <option value="{{ $ingredient->id }}">{{ $ingredient->nombre }}</option>
+                                @endforeach
+                              </select>
+                              <!-- <label class="select-floating-label" for="selectFloatingExtraSmall">Pick your favorite Movie</label> -->
+                            <!-- </div> -->
                           </div>
                           <div>
                             <label class="label-text">Unidad</label>
-                            <input type="text" name="unidad" placeholder="Tipo Unidad" id="tipoUnidad"/>
+                            <input type="text" name="unidad" placeholder="Kg, Gm, Ltrs" id="tipoUnidad"/>
                           </div>
                           <div>
                             <label class="label-text">Cantidad</label>
-                            <input type="text" name="cant" placeholder="Cantidad" id="cantidad"/>
+                            <input type="number" class="grow" min="1" name="cantidad" placeholder="1, 2, 3, ..." id="cantidad"/>
                           </div>
                         </div>
                       </div>
@@ -114,7 +120,7 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <!-- <div class="grid grid-flow-row">
+                      <div class="grid grid-flow-row">
                         <div class="grid grid-flow-col justify-items-left">
                           <div class="me-2">
                             <label class="label-text">Ingrediente</label>
@@ -129,7 +135,7 @@
                             <input type="text" name="cant" placeholder="Cantidad" id="cantidad"/>
                           </div>
                         </div>
-                      </div> -->
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-soft btn-secondary" data-overlay="#paso-modal">Cancelar</button>

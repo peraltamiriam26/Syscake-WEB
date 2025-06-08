@@ -65,7 +65,7 @@ class IngredienteController extends Controller
      * @param  \App\Models\Ingrediente  $ingrediente
      * @return \Illuminate\Http\Response
      */
-    public function show(Ingrediente $ingrediente)
+    public function search()
     {
         $modelIngredient = new Ingrediente();
         $ingredients = $modelIngredient->search();
