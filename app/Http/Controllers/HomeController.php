@@ -28,10 +28,15 @@ class HomeController extends Controller
             $plansOrder[$daysOfWeek][$plan->tipoComida_id][] = $plan;
         }
 
+        $startWeek =  Carbon::now()->startOfWeek(Carbon::SUNDAY);
+        $endWeek =  Carbon::now()->endOfWeek(Carbon::SATURDAY);
+
         return view('index', [
                                 'plansOrder' => $plansOrder,
                                 'days' => $days,
-                                'typesFood' => $typesFood
+                                'typesFood' => $typesFood,
+                                'startWeek' => $startWeek,
+                                'endWeek' => $endWeek
                             ]
                     );
     }

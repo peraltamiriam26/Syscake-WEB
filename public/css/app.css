@@ -2429,6 +2429,12 @@
   .col-span-12 {
     grid-column: span 12 / span 12;
   }
+  .float-left {
+    float: left;
+  }
+  .float-right {
+    float: right;
+  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -2776,44 +2782,6 @@
     line-height: var(--tw-leading, var(--text-xs--line-height));
     white-space: nowrap;
     color: var(--color-base-100);
-  }
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: calc(0.25rem * 1.5);
-    border-radius: var(--radius-selector);
-    text-align: center;
-    vertical-align: middle;
-    font-size: var(--text-sm);
-    line-height: var(--tw-leading, var(--text-sm--line-height));
-    border: var(--border) solid var(--badge-border);
-    padding-inline: calc(0.25rem * 3 - var(--border));
-    width: -moz-fit-content;
-    width: fit-content;
-    color: var(--badge-fg);
-    background-size: auto, calc(var(--noise) * 100%);
-    background-image: none, var(--fx-noise);
-    background-color: var(--badge-bg);
-    --badge-border: var(--badge-color, var(--color-neutral));
-    --badge-bg: var(--badge-color, var(--color-neutral));
-    --badge-fg: var(--color-neutral-content);
-    --size: calc(var(--size-selector, 0.25rem) * 6);
-    height: var(--size);
-    &.badge-outline {
-      --badge-fg: var(--badge-color, var(--color-neutral));
-      --badge-bg: transparent;
-      background-image: none;
-    }
-    &.badge-soft {
-      --badge-border: none;
-      --badge-fg: var(--badge-color, var(--color-neutral));
-      --badge-bg: var(--badge-color, var(--color-neutral));
-      @supports (color: color-mix(in lab, red, red)) {
-        --badge-bg: color-mix(in oklab, var(--badge-color, var(--color-neutral)) 10%, var(--color-base-100));
-      }
-      background-image: none;
-    }
   }
   .progress {
     display: flex;
@@ -4235,6 +4203,12 @@
     --btn-p: 0.75rem;
     --size: calc(var(--size-field, 0.25rem) * 7.5);
   }
+  .btn-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    --btn-p: 0.5rem;
+    --size: calc(var(--size-field, 0.25rem) * 6);
+  }
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -4496,10 +4470,6 @@
   .ease-in-out {
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
-  }
-  .badge-primary {
-    --badge-color: var(--color-primary);
-    --badge-fg: var(--color-primary-content);
   }
   .btn-primary {
     --btn-color: var(--color-primary);

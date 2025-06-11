@@ -3,11 +3,13 @@
 <?php
 use App\Models\Receta;
 ?>
-<div class="grid grid-cols-12 gap-12">
-    <h1 class="text-3xl font-bold col-span-12">Bienvenido {{ auth()->user()->nombre }}</h1>
-    <div class="col-span-12">
-        <div class="card">
-           <div class="border-base-content/25 w-full overflow-x-auto">
+
+<div class=" ">
+    <h1 class="text-3xl font-bold col-span-12">Bienvenido {{ auth()->user()->nombre }}</h1><br><br>
+    <div class="card p-4 grid grid-cols-12 gap-12">
+        <div class="col-span-12">
+            <p>Semana del <b>{{$startWeek->format('d-m-Y')}}</b> al <b>{{$endWeek->format('d-m-Y')}}</b></p>
+            <div class="border-base-content/25 w-full  rounded-lg overflow-x-auto border">
                 <table class="table">
                     <thead>
                         <tr class="bg-primary-content">
@@ -26,7 +28,7 @@ use App\Models\Receta;
                                         @if (!empty($plansOrder[$dayIndex][$typeIndex])) 
                                             @foreach ($plansOrder[$dayIndex][$typeIndex] as $plan)
 
-                                                <span class="badge badge-soft badge-primary" value="{{$plan->receta_id}}">{{ Receta::findModel($plan->receta_id)->nombre }}</span> <br>
+                                                <button class="btn btn-soft btn-primary btn-xs" value="{{$plan->receta_id}}"> {{ Receta::findModel($plan->receta_id)->nombre }}</button> <br>
                                                 
                                             @endforeach
                                         @endif
@@ -35,8 +37,12 @@ use App\Models\Receta;
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
-            </div>
+                </table>            
+            </div> 
+        </div>
+        <div class="col-span-12">
+            <button class="btn btn-primary float-left">Semana anterior</button>
+            <button class="btn btn-primary float-right">Semana siguiente</button>
         </div>
     </div>
 </div>
