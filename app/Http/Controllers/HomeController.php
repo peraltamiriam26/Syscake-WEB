@@ -21,7 +21,7 @@ class HomeController extends Controller
         $typesFood = ['Desayuno', 'Almuerzo', 'Merienda', 'Cena'];
 
         // Organizar datos por día y tipo de comida
-        $planesOrdenados = [];
+        $plansOrder = [];
 
         foreach ($plans as $plan) {
             $daysOfWeek = Carbon::parse($plan->fecha)->dayOfWeek; // 0 = Domingo, 6 = Sábado

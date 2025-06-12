@@ -73,7 +73,7 @@ class PlanController extends Controller
      */
     public function edit($id)
     {
-        //
+        return response()->json(true);
     }
 
     /**
