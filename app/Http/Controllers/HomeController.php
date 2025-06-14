@@ -15,7 +15,7 @@ class HomeController extends Controller
         if (!Auth::check()) {
             return redirect('/');
         }
-
+        /** filtrar por la semana actual */
         $plans = Plan::searchAllPlanUser();
         $days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
         $typesFood = ['Desayuno', 'Almuerzo', 'Merienda', 'Cena'];

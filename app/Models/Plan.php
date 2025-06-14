@@ -19,6 +19,10 @@ class Plan extends Model
         'usuario_id'
     ];
 
+    public function getFechaFormateadaAttribute(){
+        return Carbon::parse($this->fecha)->format('d-m-Y');
+    }
+
     public function savePlan($request){
         $user_id = auth()->user()->id;
         DB::beginTransaction();
@@ -61,9 +65,32 @@ class Plan extends Model
             ->get();
         return $plans;
     }
+
+    public static function searchAllPlanUserPaginate(){
+        $user_id = auth()->user()->id;
+        /** debo buscar los planes con las recetas */
+        $plans = Plan::where('plans.usuario_id', $user_id)
+            ->paginate(5);
+        return $plans;
+    }
     
     public function recetas(){
         return $this->belongsToMany(Receta::class, 'plan_has_recetas', 'plan_id', 'receta_id');
     }
 
+    public function deletePlan($id){
+        try {
+            DB::beginTransaction();
+            $plan = Plan::where('id', $id)->first();
+            if( $plan->delete()){
+                DB::commit();
+                return true;
+            }
+            DB::rollBack();
+            return false;
+        } catch (Exception $e) {
+            DB::rollBack();
+            return false;
+        }
+    }
 }

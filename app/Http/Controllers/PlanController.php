@@ -19,7 +19,8 @@ class PlanController extends Controller
      */
     public function index()
     {
-        //
+        $plans = Plan::searchAllPlanUserPaginate();
+        return view('plan/index', ['plans' => $plans]);
     }
 
     /**
@@ -71,9 +72,15 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $id_recipe)
     {
-        return response()->json(true);
+        $user_id = auth()->user()->id;
+        $recipe = Receta::findModel($id_recipe);
+        $plan = Plan::findModel($id, $user_id);
+        return view('plan/edit', [
+            'recipe' => $recipe,
+            'plan' => $plan
+        ]);
     }
 
     /**
@@ -94,9 +101,14 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $plan)
     {
-        //
+         $model = new Plan();
+        if ($model->deletePlan($plan['id'])){
+            return ['flag' => true, 'mensaje' => 'Se elimino el plan.', 'ruta' => 'index-plan'];
+        }else{
+            return ['flag' => false, 'mensaje' => 'No se pudo eliminar el plan.'];
+        }
     }
 
     public function addRecipe(){
@@ -105,7 +117,7 @@ class PlanController extends Controller
     }
 
     public function searchRecipe(Request $request){
-            $query = $request->input('q');
+        $query = $request->input('q');
 
         $recipes = Receta::where('nombre', 'LIKE', "%{$query}%")
                         ->select('id', 'nombre as name')

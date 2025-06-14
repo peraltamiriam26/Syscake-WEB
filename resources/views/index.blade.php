@@ -27,7 +27,7 @@ use App\Models\Receta;
                                     <td>
                                         @if (!empty($plansOrder[$dayIndex][$typeIndex])) 
                                             @foreach ($plansOrder[$dayIndex][$typeIndex] as $plan)
-                                                <button class="btn btn-soft btn-primary btn-xs" onclick="openModalPlan('edit-plan', 'GET');" value="{{$plan->receta_id}}"> {{ Receta::findModel($plan->receta_id)->nombre }}</button> <br>
+                                                <button class="btn btn-soft btn-primary btn-xs" onclick="openModal('edit-plan/{{$plan->id}}/{{$plan->receta_id}}', 'GET');" value="{{$plan->receta_id}}"  aria-haspopup="dialog" aria-expanded="false" aria-controls="form-modal" data-overlay="#form-modal"> {{ Receta::findModel($plan->receta_id)->nombre }}</button> <br>
                                             @endforeach
                                         @endif
                                     </td>
@@ -46,11 +46,11 @@ use App\Models\Receta;
 </div>
     
 <!-- MODAL -->
- <div id="basic-modal" class="overlay modal overlay-open:opacity-100 hidden overlay-open:duration-300" role="dialog" tabindex="-1">
+ <div id="form-modal" class="overlay modal overlay-open:opacity-100 hidden overlay-open:duration-300" role="dialog" tabindex="-1">
   <div class="modal-dialog overlay-open:opacity-100 overlay-open:duration-300">
-    <div id="contentModal">
-
+    <div id="modalContent" class="modal-content">
     </div>
   </div>
  </div>
+
 @stop
