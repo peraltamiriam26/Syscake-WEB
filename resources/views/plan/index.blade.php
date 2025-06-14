@@ -23,7 +23,7 @@
                         <tr>
                             <td>{{ $plan->fecha_formateada }}</td>
                             <td>
-                                <a class="btn btn-circle btn-text btn-sm" aria-label="Action button" href="{{route('update-plan', ['id' => $plan->id])}}">
+                                <a class="btn btn-circle btn-text btn-sm" aria-label="Action button" href="{{route('edit-plan', ['id' => $plan->id])}}">
                                     <span class="icon-[tabler--pencil] size-5 bg-info"></span>
                                 </a>
                                 <a id="btnDelete"  aria-label="Action button" onclick="alertDelete('delete-plan?id={{$plan->id}}', '¿Desea eliminar el plan del día {{$plan->fecha}}?');" class="btn btn-circle btn-text btn-sm" href="#">

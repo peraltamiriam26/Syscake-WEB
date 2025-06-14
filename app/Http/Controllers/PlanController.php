@@ -72,13 +72,12 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, $id_recipe)
+    public function edit($id)
     {
         $user_id = auth()->user()->id;
-        $recipe = Receta::findModel($id_recipe);
         $plan = Plan::findModel($id, $user_id);
-        return view('plan/edit', [
-            'recipe' => $recipe,
+        /** Debo buscar todas las recetas que tiene el plan según el tipo de comida */
+        return view('plan/update', [
             'plan' => $plan
         ]);
     }
@@ -92,7 +91,7 @@ class PlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -129,5 +128,15 @@ class PlanController extends Controller
                           ];
                       });
         return response()->json(['recipes' => $recipes]);
+    }
+
+    public function viewModal($id, $id_recipe){
+        $user_id = auth()->user()->id;
+        $recipe = Receta::findModel($id_recipe);
+        $plan = Plan::findModel($id, $user_id);
+        return view('plan/edit', [
+            'recipe' => $recipe,
+            'plan' => $plan
+        ]);
     }
 }

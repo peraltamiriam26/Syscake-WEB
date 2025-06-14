@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   /** BREAKFAST */
     $('.select-recipes-breakfast').select2({
       ajax: {

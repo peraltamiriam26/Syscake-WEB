@@ -53,9 +53,11 @@ Route::get('/index-plan', [PlanController::class, 'index'])->name('index-plan');
 Route::post('/store', [PlanController::class, 'store'])->name('store-plan');
 Route::get('/add-recipe', [PlanController::class, 'addRecipe'])->name('add-recipe');
 Route::get('/search-recipe', [PlanController::class, 'searchRecipe'])->name('search-recipe');
-Route::get('/edit-plan/{id}/{id_recipe}', [PlanController::class, 'edit'])->name('edit-plan');
+Route::get('/edit-plan/{id}', [PlanController::class, 'edit'])->name('edit-plan');
 Route::get('/update-plan/{id}', [PlanController::class, 'update'])->name('update-plan');
 Route::get('/delete-plan/{id}', [PlanController::class, 'delete'])->name('delete-plan');
+Route::get('/view-modal/{id}/{id_recipe}', [PlanController::class, 'viewModal'])->name('view-modal');
+
 
 
 

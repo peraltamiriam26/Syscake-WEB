@@ -12,9 +12,7 @@ function openModal(url, method) {
             $("#form-modal").removeClass("hidden"); // Muestra el modal
 
         },
-        error: function(xhr, status, err) {
-            console.log(err);
-            
+        error: function(xhr, status, err) {            
             Swal.fire({
                         position: "center",
                         icon: "error",

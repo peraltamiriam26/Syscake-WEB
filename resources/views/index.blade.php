@@ -27,7 +27,7 @@ use App\Models\Receta;
                                     <td>
                                         @if (!empty($plansOrder[$dayIndex][$typeIndex])) 
                                             @foreach ($plansOrder[$dayIndex][$typeIndex] as $plan)
-                                                <button class="btn btn-soft btn-primary btn-xs" onclick="openModal('edit-plan/{{$plan->id}}/{{$plan->receta_id}}', 'GET');" value="{{$plan->receta_id}}"  aria-haspopup="dialog" aria-expanded="false" aria-controls="form-modal" data-overlay="#form-modal"> {{ Receta::findModel($plan->receta_id)->nombre }}</button> <br>
+                                                <button class="btn btn-soft btn-primary btn-xs" onclick="openModal('view-modal/{{$plan->id}}/{{$plan->receta_id}}', 'GET');" value="{{$plan->receta_id}}"  aria-haspopup="dialog" aria-expanded="false" aria-controls="form-modal" data-overlay="#form-modal"> {{ Receta::findModel($plan->receta_id)->nombre }}</button> <br>
                                             @endforeach
                                         @endif
                                     </td>
