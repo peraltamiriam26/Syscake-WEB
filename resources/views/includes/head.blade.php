@@ -1,5 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+@livewireStyles
+
 <link rel="stylesheet" href="css/sweetalert2.min.css">
 <!-- <link href="../resources/css/app.css" rel="stylesheet"> -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
@@ -7,17 +9,17 @@
 <link rel="stylesheet" href="css/select2.min.css">
 
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-<script src="/js/sweetalert2.all.min.js"></script>
-<script src="/js/flatpickr.min.js"></script>
-<script src="/js/flatpickr-es.min.js"></script>
-<script src="/js/calendar.js"></script>
-<script src="/js/modal.js"></script>
-<script src="/js/plan.js"></script>
-<script src="/js/select2.min.js"></script>
-<script src="/js/select2es.js"></script>
+<script type="text/javascript" src="{{asset('/js/sweetalert2.all.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/flatpickr.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/flatpickr-es.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/calendar.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/modal.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/plan.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/select2.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/select2es.js')}}"></script>
 
 @include('sweetalert::alert')
-<script type="text/javascript" src="js/mensajesAlerta.js"></script>
+<script type="text/javascript" src="{{asset('js/mensajesAlerta.js')}}"></script>
 @if(session('toast'))
     <script>
         Swal.fire({

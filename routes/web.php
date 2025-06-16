@@ -63,4 +63,7 @@ Route::get('/add-recipe', [PlanController::class, 'addRecipe'])->name('add-recip
 Route::get('/search-recipe', [PlanController::class, 'searchRecipe'])->name('search-recipe');
 
 /** ABM DE RECETAS */
-Route::get('/receta', [RecetasController::class, 'create'])->name('create-recipe');
+// Route::get('/receta', [RecetasController::class, 'create'])->name('create-recipe');
+Route::get('/receta', function () {
+    return view('/recipe/create');
+})->name('create-recipe');
