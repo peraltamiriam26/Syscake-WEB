@@ -3,7 +3,7 @@ $(document).ready(function() {
   /** BREAKFAST */
     $('.select-recipes-breakfast').select2({
       ajax: {
-        url: 'search-recipe',
+        url: '/search-recipe',
         dataType: 'json',
         processResults: function (data) {      
           // Transforms the top-level key of the response object from 'items' to 'results'
@@ -21,7 +21,7 @@ $(document).ready(function() {
     /** LUNCH */
     $('.select-recipes-lunch').select2({
       ajax: {
-        url: 'search-recipe',
+        url: '/search-recipe',
         dataType: 'json',
         processResults: function (data) {      
           // Transforms the top-level key of the response object from 'items' to 'results'
@@ -39,7 +39,7 @@ $(document).ready(function() {
     /** SNACK */
     $('.select-recipes-snack').select2({
       ajax: {
-        url: 'search-recipe',
+        url: '/search-recipe',
         dataType: 'json',
         processResults: function (data) {      
           // Transforms the top-level key of the response object from 'items' to 'results'
@@ -57,7 +57,7 @@ $(document).ready(function() {
     /** DINNER */
     $('.select-recipes-dinner').select2({
       ajax: {
-        url: 'search-recipe',
+        url: '/search-recipe',
         dataType: 'json',
         processResults: function (data) {      
           // Transforms the top-level key of the response object from 'items' to 'results'

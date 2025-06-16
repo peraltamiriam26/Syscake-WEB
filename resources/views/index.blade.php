@@ -27,7 +27,9 @@ use App\Models\Receta;
                                     <td>
                                         @if (!empty($plansOrder[$dayIndex][$typeIndex])) 
                                             @foreach ($plansOrder[$dayIndex][$typeIndex] as $plan)
-                                                <button class="btn btn-soft btn-primary btn-xs" onclick="openModal('view-modal/{{$plan->id}}/{{$plan->receta_id}}', 'GET');" value="{{$plan->receta_id}}"  aria-haspopup="dialog" aria-expanded="false" aria-controls="form-modal" data-overlay="#form-modal"> {{ Receta::findModel($plan->receta_id)->nombre }}</button> <br>
+                                                <button class="btn btn-soft btn-primary btn-xs" onclick="openModal('view-modal/{{$plan->id}}/{{$plan->receta_id}}', 'GET');" value="{{$plan->receta_id}}"  aria-haspopup="dialog" aria-expanded="false" aria-controls="form-modal" data-overlay="#form-modal"> 
+                                                    {{ Receta::findModel($plan->receta_id)->nombre }}
+                                                </button> <br>
                                             @endforeach
                                         @endif
                                     </td>
@@ -39,8 +41,8 @@ use App\Models\Receta;
             </div> 
         </div>
         <div class="col-span-12">
-            <button class="btn btn-primary float-left">Semana anterior</button>
-            <button class="btn btn-primary float-right">Semana siguiente</button>
+            <button class="btn btn-primary float-left" value="{{ $startWeek }}">Semana anterior</button>
+            <button class="btn btn-primary float-right" value="{{ $endWeek }}">Semana siguiente</button>
         </div>
     </div>
 </div>

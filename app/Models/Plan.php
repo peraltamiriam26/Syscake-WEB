@@ -56,13 +56,15 @@ class Plan extends Model
         return $plan;
     }
 
-    public static function searchAllPlanUser(){
+    public static function searchAllPlanUser($startWeek, $endWeek){
         $user_id = auth()->user()->id;
         /** debo buscar los planes con las recetas */
-        $plans = Plan::select('plans.id', 'plans.fecha', 'phr.receta_id', 'phr.tipoComida_id')
+        $plans = Plan::select('plans.id', 'plans.fecha as fecha', 'phr.receta_id', 'phr.tipoComida_id')
             ->join('plan_has_recetas as phr', 'plans.id', '=', 'phr.plan_id')
+            ->whereBetween('plans.fecha', [$startWeek, $endWeek])
             ->where('plans.usuario_id', $user_id)
-            ->get();
+            ->get()
+            ->groupBy(fn($plan) => Carbon::parse($plan->fecha)->format('Y-m-d'));
         return $plans;
     }
 

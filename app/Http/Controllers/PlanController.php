@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use App\Models\PlanHasReceta;
 use App\Models\Receta;
-use App\Models\Recetas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PlanController extends Controller
@@ -41,17 +41,22 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all()); // Muestra los datos enviados antes de validar
-        $request->validate([
-	        'fecha' => 'required|unique:plans,fecha',
-	    ]);
+        if (!isset($request->id)) {
+            $request->validate([
+                'fecha' => 'required|unique:plans,fecha',
+            ]);
+        }else{
+            $request->validate([
+                'fecha' => ['required', Rule::unique('plans')->ignore($request->id)],
+            ]);
+        }
         
         $plan = new Plan();
-        if ($plan->savePlan($request)) {
+        if ($save = $plan->savePlan($request)) {
             Alert::toast('success', "Se guardo correctamente.");
             return redirect()->route('home');
         }
-        
+        Log::debug($save);
         return redirect()->route('create-plan');
     }
 
@@ -77,8 +82,19 @@ class PlanController extends Controller
         $user_id = auth()->user()->id;
         $plan = Plan::findModel($id, $user_id);
         /** Debo buscar todas las recetas que tiene el plan según el tipo de comida */
+        $plan_recipes_breakfast = PlanHasReceta::searchRecipesId($id, PlanHasReceta::BREAKFAST);
+        $plan_recipes_lunch = PlanHasReceta::searchRecipesId($id, PlanHasReceta::LUNCH);
+        $plan_recipes_snack = PlanHasReceta::searchRecipesId($id, PlanHasReceta::SNACK);
+        $plan_recipes_dinner = PlanHasReceta::searchRecipesId($id, PlanHasReceta::DINNER);
+        $selectedRecipes = PlanHasReceta::where('plan_id', $id)->pluck('receta_id')->toArray();
+
         return view('plan/update', [
-            'plan' => $plan
+            'plan' => $plan,
+            'plan_recipes_breakfast' => $plan_recipes_breakfast,
+            'plan_recipes_lunch' => $plan_recipes_lunch,
+            'plan_recipes_snack' => $plan_recipes_snack,
+            'plan_recipes_dinner' => $plan_recipes_dinner,
+            'selectedRecipes' => $selectedRecipes
         ]);
     }
 

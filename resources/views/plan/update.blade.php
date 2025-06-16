@@ -32,16 +32,43 @@
                     <div class="me-2">
                        <ul class="list-inside list-disc marker:text-purple-500">                            
                             <li class="mb-2">Desayuno <br>
-                                <select class="select-recipes-breakfast select" name="recipesBreakfast[]" multiple="multiple"></select>
+                                <select class="select-recipes-breakfast select" name="recipesBreakfast[]" multiple="multiple">
+                                    @foreach($plan_recipes_breakfast as $recipe)
+                                        <option value="{{ $recipe->receta_id }}" {{ in_array($recipe->receta_id, $selectedRecipes) ? 'selected="selected"' : '' }}>
+                                            {{ $recipe->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </li>
                             <li class="mb-2">Almuerzo <br>
-                                <select class="select-recipes-lunch select" name="recipesLunch[]" multiple="multiple"></select>
+                                <select class="select-recipes-lunch select" name="recipesLunch[]" multiple="multiple">
+                                    @foreach($plan_recipes_lunch as $recipe)
+                                        <option value="{{ $recipe->receta_id }}" {{ in_array($recipe->receta_id, $selectedRecipes) ? 'selected="selected"' : '' }}>
+                                            {{ $recipe->nombre }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
                             </li>
                             <li class="mb-2">Merienda <br> 
-                                <select class="select-recipes-snack select" name="recipesSnak[]" multiple="multiple"></select>
+                                <select class="select-recipes-snack select" name="recipesSnak[]" multiple="multiple">
+                                    @foreach($plan_recipes_snack as $recipe)
+                                        <option value="{{ $recipe->receta_id }}" {{ in_array($recipe->receta_id, $selectedRecipes) ? 'selected="selected"' : '' }}>
+                                            {{ $recipe->nombre }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
                             </li>
                             <li class="mb-2">Cena <br> 
-                                <select class="select-recipes-dinner select" name="recipesDinner[]" multiple="multiple"></select>
+                                <select class="select-recipes-dinner select" name="recipesDinner[]" multiple="multiple">
+                                    @foreach($plan_recipes_dinner as $recipe)
+                                        <option value="{{ $recipe->receta_id }}" {{ in_array($recipe->receta_id, $selectedRecipes) ? 'selected="selected"' : '' }}>
+                                            {{ $recipe->nombre }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
                             </li>
                         </ul>
                     @error('nombre')
