@@ -1266,6 +1266,28 @@
       }
     }
   }
+  .select-floating-label {
+    position: absolute;
+    inset-inline-start: calc(0.25rem * 0);
+    top: calc(0.25rem * 0);
+    margin-inline-start: calc(0.25rem * 3);
+    width: -moz-fit-content;
+    width: fit-content;
+    overflow: hidden;
+    background-color: var(--color-base-100);
+    padding-inline: calc(0.25rem * 1);
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+    text-overflow: ellipsis;
+    color: var(--color-base-content);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+    }
+    scale: 0.75;
+    translate: -12.5% calc(-50% - 0.125em);
+  }
   .switch {
     border: var(--border) solid #0000;
     color: var(--color-base-100);
@@ -1719,6 +1741,98 @@
     }
     input:checked ~ .swap-on, input:indeterminate ~ .swap-indeterminate {
       opacity: 100%;
+    }
+  }
+  .select-floating {
+    .select:has(> &) select {
+      &::-moz-placeholder {
+        color: transparent;
+      }
+      &::placeholder {
+        color: transparent;
+      }
+      &:focus {
+        &::-moz-placeholder {
+          color: var(--color-base-content);
+          @supports (color: color-mix(in lab, red, red)) {
+            color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+          }
+        }
+        &::placeholder {
+          color: var(--color-base-content);
+          @supports (color: color-mix(in lab, red, red)) {
+            color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+          }
+        }
+      }
+    }
+    position: relative;
+    display: block;
+    width: 100%;
+    .select {
+      &::-moz-placeholder {
+        color: transparent;
+      }
+      &::placeholder {
+        color: transparent;
+      }
+      &:focus {
+        &::-moz-placeholder {
+          color: var(--color-base-content);
+          @supports (color: color-mix(in lab, red, red)) {
+            color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+          }
+        }
+        &::placeholder {
+          color: var(--color-base-content);
+          @supports (color: color-mix(in lab, red, red)) {
+            color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+          }
+        }
+      }
+      &:has(> select[disabled]), &:is(:disabled, [disabled]) {
+        border-style: var(--tw-border-style);
+        border-width: 1px;
+        background-color: transparent;
+        opacity: 50%;
+        & ~ .select-floating-label {
+          color: var(--color-base-content);
+          @supports (color: color-mix(in lab, red, red)) {
+            color: color-mix(in oklab, var(--color-base-content) 30%, transparent);
+          }
+        }
+      }
+    }
+    &:focus-within, &:has(.select:focus) {
+      .select-floating-label {
+        --input-color: var(--color-primary);
+        color: var(--input-color);
+      }
+    }
+    &:has(.select-xs) .select-floating-label {
+      margin-inline-start: calc(0.25rem * 2.5);
+      font-size: var(--text-sm);
+      line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+    &:has(.select-sm) .select-floating-label {
+      margin-inline-start: calc(0.25rem * 2.5);
+      font-size: var(--text-sm);
+      line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+    &:has(.select-md) .select-floating-label {
+      margin-inline-start: calc(0.25rem * 3);
+      font-size: var(--text-base);
+      line-height: var(--tw-leading, var(--text-base--line-height));
+    }
+    &:has(.select-lg) .select-floating-label {
+      margin-inline-start: calc(0.25rem * 4);
+      font-size: var(--text-lg);
+      line-height: var(--tw-leading, var(--text-lg--line-height));
+    }
+    &:has(.select-xl) .select-floating-label {
+      margin-inline-start: calc(0.25rem * 4.5);
+      font-size: var(--text-xl);
+      line-height: var(--tw-leading, var(--text-xl--line-height));
     }
   }
   .checkbox {
@@ -2663,6 +2777,18 @@
         border-inline-end: var(--border) solid color-mix(in oklab, var(--color-base-content) 40%, #0000) !important;
       }
       outline: none !important;
+    }
+  }
+  .select-xs {
+    --size: calc(var(--size-field, 0.25rem) * 6);
+    padding-inline-start: calc(0.25rem * 2.5);
+    padding-inline-end: calc(0.25rem * 8);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    select {
+      margin-inline-end: calc(0.25rem * -8);
+      padding-inline-start: calc(0.25rem * 2.5);
+      padding-inline-end: calc(0.25rem * 8);
     }
   }
   .me-2 {
@@ -4293,6 +4419,68 @@
     }
     .validate :is(:invalid) ~ * >& {
       color: var(--color-error);
+    }
+  }
+  .select-floating {
+    &:has(.is-valid) {
+      .select-floating-label {
+        color: var(--color-success);
+      }
+      &:not(:has(select:-moz-placeholder)) {
+        .select-floating-label {
+          color: var(--color-success);
+        }
+      }
+      &:focus-within, &:not(:has(select:placeholder-shown)), &:has(.select:focus) {
+        .select-floating-label {
+          color: var(--color-success);
+        }
+      }
+    }
+    .validate &:has(:valid) {
+      .select-floating-label {
+        color: var(--color-success);
+      }
+      &:not(:has(select:-moz-placeholder)) {
+        .select-floating-label {
+          color: var(--color-success);
+        }
+      }
+      &:focus-within, &:not(:has(select:placeholder-shown)), &:has(.select:focus) {
+        .select-floating-label {
+          color: var(--color-success);
+        }
+      }
+    }
+    &:has(.is-invalid) {
+      .select-floating-label {
+        color: var(--color-error);
+      }
+      &:not(:has(select:-moz-placeholder)) {
+        .select-floating-label {
+          color: var(--color-error);
+        }
+      }
+      &:focus-within, &:not(:has(select:placeholder-shown)), &:has(.select:focus) {
+        .select-floating-label {
+          color: var(--color-error);
+        }
+      }
+    }
+    .validate &:has(:invalid) {
+      .select-floating-label {
+        color: var(--color-error);
+      }
+      &:not(:has(select:-moz-placeholder)) {
+        .select-floating-label {
+          color: var(--color-error);
+        }
+      }
+      &:focus-within, &:not(:has(select:placeholder-shown)), &:has(.select:focus) {
+        .select-floating-label {
+          color: var(--color-error);
+        }
+      }
     }
   }
   .alert-error {

@@ -54,7 +54,8 @@
                         <div class="grid grid-flow-col justify-items-left">
                           <div class="me-2">
                             <!-- <div class="select-floating max-w-sm"> -->
-                              <select class="select select-xs" id="selectFloatingExtraSmall" aria-label="floating label">
+                              <label class="label-text">Ingrediente</label>
+                              <select class="select select-xs" id="ingredientSelecter" aria-label="floating label">
                                 @foreach  ($ingredients as $ingredient)
                                 <option value="{{ $ingredient->id }}">{{ $ingredient->nombre }}</option>
                                 @endforeach
@@ -63,8 +64,12 @@
                             <!-- </div> -->
                           </div>
                           <div>
-                            <label class="label-text">Unidad</label>
-                            <input type="text" name="unidad" placeholder="Kg, Gm, Ltrs" id="tipoUnidad"/>
+                              <label class="label-text">Tipo Unidad</label>
+                              <select class="select select-xs" id="tipoUnidadSelecter" aria-label="floating label">
+                                @foreach  ($tipoUnidads as $tipoUnidad)
+                                <option value="{{ $tipoUnidad->id }}">{{ $tipoUnidad->nombre }}</option>
+                                @endforeach
+                              </select>
                           </div>
                           <div>
                             <label class="label-text">Cantidad</label>
@@ -92,16 +97,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="border border-gray-300">Harina</td>
-                    <td class="border border-gray-300">Gramos</td>
-                    <td class="border border-gray-300">200</td>
-                    <td class="border border-gray-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-	                      <path fill="currentColor" d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6zM8 9h8v10H8zm7.5-5l-1-1h-5l-1 1H5v2h14V4z" />
-                      </svg>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
               </div>
