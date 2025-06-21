@@ -5,7 +5,7 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
  <link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}">
 <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
-
+@livewireStyles
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/sweetalert2.all.min.js')}}"></script>
 <script type="text/javascript" src="/js/flatpickr.min.js"></script>

@@ -57,7 +57,7 @@ Route::get('/edit-plan/{id}', [PlanController::class, 'edit'])->name('edit-plan'
 Route::get('/update-plan/{id}', [PlanController::class, 'update'])->name('update-plan');
 Route::get('/delete-plan/{id}', [PlanController::class, 'delete'])->name('delete-plan');
 Route::get('/view-modal/{id}/{id_recipe}', [PlanController::class, 'viewModal'])->name('view-modal');
-
+Route::get('/update-week/{startWeek}/{endWeek}', [PlanController::class, 'updateWeek']);
 
 
 

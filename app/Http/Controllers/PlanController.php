@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 
 class PlanController extends Controller
 {
@@ -96,18 +97,6 @@ class PlanController extends Controller
             'plan_recipes_dinner' => $plan_recipes_dinner,
             'selectedRecipes' => $selectedRecipes
         ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-
     }
 
     /**
