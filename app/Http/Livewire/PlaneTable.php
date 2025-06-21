@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Plan;
+use App\Models\PlanHasReceta;
+use App\Models\Receta;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
@@ -60,14 +62,15 @@ class PlaneTable extends Component
             }
         }        
 
+        $recipesToday = PlanHasReceta::searchRecipesPlanDayUser($today);
         return view('plan.plane-table', [
                                 'plansOrder' => $plansOrder,
                                 'days' => $days,
                                 'typesFood' => $typesFood,
                                 'startWeek' => $this->startWeek,
                                 'endWeek' => $this->endWeek,
-                                'today' => $today,
-                                'nameToday' => $nameToday
+                                'nameToday' => $nameToday,
+                                'recipes' => $recipesToday
                             ]
                     );
     }

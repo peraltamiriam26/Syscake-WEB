@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -66,5 +67,17 @@ class PlanHasReceta extends Model
         $delete = PlanHasReceta::where('plan_id', $plan_id)
                                 ->delete();
         return $delete == $registers;
+    }
+
+    /** Busca las recetas del plan del día actual */
+    public static function searchRecipesPlanDayUser($today){
+        $user_id = auth()->user()->id;
+        $plans = Plan::select('r.id', 'r.nombre as nombre', 'r.archivo_id')
+            ->join('plan_has_recetas as phr', 'plans.id', '=', 'phr.plan_id')
+            ->join('recetas as r', 'phr.receta_id', '=', 'r.id')
+            ->where('plans.fecha', $today->format('Y-m-d'))
+            ->where('plans.usuario_id', $user_id)
+            ->get();
+        return $plans;
     }
 }

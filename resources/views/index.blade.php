@@ -1,10 +1,8 @@
 @extends('layouts.app')
 @section("content")
-<div class=" ">
-    <h1 class="text-3xl font-bold col-span-12">Bienvenido {{ auth()->user()->nombre }}</h1><br><br>
-    <div class="card">
-                @livewire('plane-table')           
-    </div>
+<div>
+    <h1 class="text-3xl font-bold col-span-12 pt-2 pb-2">Bienvenido {{ auth()->user()->nombre }}</h1>    
+      @livewire('plane-table')           
 </div>
     
 <!-- MODAL -->
