@@ -8,7 +8,7 @@
                 <select wire:model="ingrediente_id" id="ingrediente" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <option value="">Seleccione un ingrediente</option>
                     @foreach($availableIngredients as $ingredient)
-                        <option value="{{ $ingredient['id'] }}">{{ $ingredient['name'] }}</option>
+                        <option value="{{ $ingredient['id'] }}">{{ $ingredient['nombre'] }}</option>
                     @endforeach
                 </select>
                 @error('ingrediente_id') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -25,14 +25,14 @@
                 <select wire:model="unidad_id" id="unidad" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <option value="">Seleccione una unidad</option>
                     @foreach($unitTypes as $unit)
-                        <option value="{{ $unit['id'] }}">{{ $unit['name'] }}</option>
+                        <option value="{{ $unit['id'] }}">{{ $unit['nombre'] }}</option>
                     @endforeach
                 </select>
                 @error('unidad_id') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
             </div>
 
             <div class="flex justify-end mt-6">
-                <button type="button" wire:click="closeModal" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 focus:outline-none focus:shadow-outline">
+                <button type="button" wire:click="closeIngredientModal" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 focus:outline-none focus:shadow-outline">
                     Cancelar
                 </button>
                 <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

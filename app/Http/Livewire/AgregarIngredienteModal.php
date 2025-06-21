@@ -45,7 +45,7 @@ class AgregarIngredienteModal extends Component
         $this->reset(['ingrediente_id', 'cantidad', 'unidad_id']);
     }
 
-    public function closeModal()
+    public function closeIngredientModal()
     {
         $this->emitUp('closeIngredientModal');
     }

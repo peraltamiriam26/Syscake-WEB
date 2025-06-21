@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use App\Models\Ingrediente;
+use App\Models\Tipounidad;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Illuminate\Support\Collection; // Make sure to import Collection
 
@@ -9,39 +11,97 @@ class RecetaForm extends Component
 {
     public $ingredientes = [];
     public $showIngredientModal = false;
+    public $showPasoModal = false;
+    // Make sure these are arrays of associative arrays with 'id' and 'nombre'
+    public $availableIngredients = [];
+    public $unitTypes = [];
+    public $pasos = []; // Nueva propiedad para almacenar los pasos
+    public $nombre;
+    public $tipoReceta;
+    public $anonimo = false;
 
-    // Make sure these are arrays of associative arrays with 'id' and 'name'
-    public $availableIngredients = [
-        ['id' => 1, 'name' => 'Harina'],
-        ['id' => 2, 'name' => 'Azúcar'],
-        ['id' => 3, 'name' => 'Huevos'],
-        ['id' => 4, 'name' => 'Leche'],
-        ['id' => 5, 'name' => 'Sal'],
-    ];
-
-    public $unitTypes = [
-        ['id' => 1, 'name' => 'Gramos (gr)'],
-        ['id' => 2, 'name' => 'Kilogramos (kg)'],
-        ['id' => 3, 'name' => 'Mililitros (ml)'],
-        ['id' => 4, 'name' => 'Litros (l)'],
-        ['id' => 5, 'name' => 'Unidades (u)'],
-        ['id' => 6, 'name' => 'Cucharadas (cda)'],
-        ['id' => 7, 'name' => 'Cucharaditas (cdita)'],
-    ];
+    // Propiedades para controlar el detalle de cada paso
+    public $expandedPasoIndex = null;
 
     protected $listeners = [
+        'pasoAdded' => 'addPaso',
+        'closePasoModal' => 'closePasoModal',
         'ingredientAdded' => 'addIngredient',
-        'closeIngredientModal' => 'closeModal',
+        'closeIngredientModal' => 'closeIngredientModal',
     ];
+
+     public function mount()
+    {
+        // Carga los ingredientes disponibles aquí
+        // Suponiendo que fullSearch() devuelve una colección o array de ingredientes
+        $this->availableIngredients = Ingrediente::fullSearch()->toArray(); // O ->all() si devuelve una colección Eloquent
+        $this->unitTypes = Tipounidad::fullSearch()->toArray(); // O ->all() si devuelve una colección Eloquent
+    }
+
+    public function addPaso($pasoData)
+    {
+        $this->pasos[] = [
+            'descripcion' => $pasoData['descripcion'],
+            'imagen_path' => $pasoData['imagen_path'],
+            'expanded' => false, // Para controlar el despliegue del detalle
+        ];
+        // Opcional: ordenar los pasos o asignar un número de paso
+    }
+
+        public function removePaso($index)
+    {
+        // Verifica si el índice es válido
+        if (isset($this->pasos[$index])) {
+            $paso = $this->pasos[$index];
+
+            // Elimina la imagen del almacenamiento si existe
+            if (!empty($paso['imagen_path'])) {
+                // Asegúrate de que la ruta sea correcta para Storage::delete()
+                // Si guardaste con str_replace('public/', '', $imagenPath), entonces necesitas prefijar con 'public/' aquí
+                $fullPath = 'public/' . $paso['imagen_path'];
+                if (Storage::exists($fullPath)) {
+                    Storage::delete($fullPath);
+                }
+            }
+
+            // Elimina el paso del array
+            unset($this->pasos[$index]);
+
+            // Reindexa el array para evitar problemas con los índices futuros
+            $this->pasos = array_values($this->pasos);
+        }
+    }
+
+    public function togglePasoDetails($index)
+    {
+        // Si ya está expandido, lo contrae. Si no, lo expande.
+        $this->pasos[$index]['expanded'] = !$this->pasos[$index]['expanded'];
+
+        // Opcional: Si solo quieres que un paso esté expandido a la vez
+        // if ($this->expandedPasoIndex === $index) {
+        //     $this->expandedPasoIndex = null;
+        // } else {
+        //     $this->expandedPasoIndex = $index;
+        // }
+    }
 
     public function openIngredientModal()
     {
         $this->showIngredientModal = true;
     }
 
-    public function closeModal()
+    public function closeIngredientModal()
     {
         $this->showIngredientModal = false;
+    }
+    public function openPasoModal()
+    {
+        $this->showPasoModal = true;
+    }
+
+    public function closePasoModal()
+    {
+        $this->showPasoModal = false;
     }
 
     public function addIngredient($ingredientData)
@@ -53,8 +113,8 @@ class RecetaForm extends Component
         $selectedIngredient = collect($this->availableIngredients)->firstWhere('id', $ingredientData['ingrediente_id']);
         $selectedUnitType = collect($this->unitTypes)->firstWhere('id', $ingredientData['unidad_id']);
 
-        $ingredientName = $selectedIngredient['name'] ?? 'Desconocido';
-        $unitTypeName = $selectedUnitType['name'] ?? 'Desconocido';
+        $ingredientName = $selectedIngredient['nombre'] ?? 'Desconocido';
+        $unitTypeName = $selectedUnitType['nombre'] ?? 'Desconocido';
 
         // Add null checks for robustness if $selectedIngredient or $selectedUnitType could be null
         // For example, if 'id' from dropdown is not found in your lists.
@@ -70,7 +130,7 @@ class RecetaForm extends Component
             'cantidad' => $ingredientData['cantidad'],
         ];
 
-        $this->closeModal();
+        $this->closeIngredientModal();
     }
 
     public function removeIngredient($index)

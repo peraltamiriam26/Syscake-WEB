@@ -2,28 +2,27 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Exception;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class Tipounidad extends Model
+class Instruccion extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
-        'id',
-        'nombre',
+        'receta_id',
+        'orden',
+        'descripcion',
+        'imagen_path',
     ];
 
-    public function search(){
-        return Tipounidad::paginate(5);
+    public function receta()
+    {
+        return $this->belongsTo(Receta::class);
     }
-    public static function fullSearch(){
-        return Tipounidad::all();
-    }
-
 }

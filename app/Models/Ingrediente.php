@@ -54,6 +54,9 @@ class Ingrediente extends Model
     public function search(){
         return Ingrediente::paginate(5);
     }
+    public static function fullSearch(){
+        return Ingrediente::all();
+    }
 
     public function deleteIngredient($id){
         try {
