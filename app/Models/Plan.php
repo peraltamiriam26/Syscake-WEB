@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Plan extends Model
 {
@@ -76,7 +77,7 @@ class Plan extends Model
         return $plans;
     }
     
-    public function recetas(){
+    public function recipes(){
         return $this->belongsToMany(Receta::class, 'plan_has_recetas', 'plan_id', 'receta_id');
     }
 
@@ -84,7 +85,11 @@ class Plan extends Model
         try {
             DB::beginTransaction();
             $plan = Plan::where('id', $id)->first();
-            if( $plan->delete()){
+            // eliminar las recetas del plan
+            $plan->recipes()->detach();
+            $existsRecipes = $plan->recipes()->where('plan_id', $id)->exists();
+
+            if(!$existsRecipes && $plan->delete()){
                 DB::commit();
                 return true;
             }
@@ -92,6 +97,7 @@ class Plan extends Model
             return false;
         } catch (Exception $e) {
             DB::rollBack();
+            Log::debug($e);
             return false;
         }
     }

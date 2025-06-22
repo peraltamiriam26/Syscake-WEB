@@ -4458,9 +4458,6 @@
   .text-primary-content {
     color: var(--color-primary-content);
   }
-  .text-warning {
-    color: var(--color-warning);
-  }
   .capitalize {
     text-transform: capitalize;
   }
