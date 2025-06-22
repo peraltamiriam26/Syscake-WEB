@@ -57,7 +57,6 @@ class PlanController extends Controller
             Alert::toast('success', "Se guardo correctamente.");
             return redirect()->route('home');
         }
-        Log::debug($save);
         return redirect()->route('create-plan');
     }
 
@@ -139,7 +138,7 @@ class PlanController extends Controller
         $user_id = auth()->user()->id;
         $recipe = Receta::findModel($id_recipe);
         $plan = Plan::findModel($id, $user_id);
-        return view('plan/edit', [
+        return view('plan/modal-recipe', [
             'recipe' => $recipe,
             'plan' => $plan
         ]);

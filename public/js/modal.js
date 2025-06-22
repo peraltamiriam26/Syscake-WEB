@@ -7,7 +7,7 @@ function openModal(url, method) {
         },
         contentType: 'application/json',
         data: {},
-        success: function(response) {            
+        success: function(response) {                 
             $("#modalContent").html(response); // Inserta el formulario en el modal
             $("#form-modal").removeClass("hidden"); // Muestra el modal
 
@@ -23,3 +23,4 @@ function openModal(url, method) {
         }
     });
 };
+

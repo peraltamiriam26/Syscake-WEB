@@ -71,6 +71,7 @@ class Plan extends Model
         $user_id = auth()->user()->id;
         /** debo buscar los planes con las recetas */
         $plans = Plan::where('plans.usuario_id', $user_id)
+            ->orderBy('fecha', 'desc')
             ->paginate(5);
         return $plans;
     }
@@ -93,5 +94,13 @@ class Plan extends Model
             DB::rollBack();
             return false;
         }
+    }
+
+    public static function existPlan($date){
+        $user_id = auth()->user()->id;
+        $plan = Plan::where('usuario_id', $user_id)
+                    ->where('fecha', $date)
+                    ->first();
+        return isset($plan->id) ? $plan->id : false;
     }
 }
