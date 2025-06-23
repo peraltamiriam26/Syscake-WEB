@@ -325,7 +325,7 @@ protected function rules()
             Log::info('Transacción completada exitosamente');
 
             session()->flash('message', '¡Receta guardada exitosamente!');
-            return redirect()->route('recetas.index');
+            return redirect()->route('recipe.index');
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             DB::rollBack();
