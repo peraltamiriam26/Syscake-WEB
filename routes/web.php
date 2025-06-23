@@ -7,6 +7,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TipoComidaController;
+use App\Http\Controllers\TipoUnidadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,4 +70,11 @@ Route::get('/index-type-food', [TipoComidaController::class, 'index'])->name('in
 Route::post('/store-type-food', [TipoComidaController::class, 'store'])->name('store-type-food');
 Route::get('/delete-type-food/{id}', [TipoComidaController::class, 'destroy'])->name('delete-type-food');
 Route::get('/edit-type-food/{id}', [TipoComidaController::class, 'edit'])->name('edit-type-food');
+
+/** ABM DE TIPO DE UNIDAD */
+Route::get('/create-type-unity', [TipoUnidadController::class, 'create'])->name('create-type-unity');
+Route::get('/index-type-unity', [TipoUnidadController::class, 'index'])->name('index-type-unity');
+Route::post('/store-type-unity', [TipoUnidadController::class, 'store'])->name('store-type-unity');
+Route::get('/delete-type-unity/{id}', [TipoUnidadController::class, 'destroy'])->name('delete-type-unity');
+Route::get('/edit-type-unity/{id}', [TipoUnidadController::class, 'edit'])->name('edit-type-unity');
 
