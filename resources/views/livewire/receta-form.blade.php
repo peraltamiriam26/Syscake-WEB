@@ -5,7 +5,7 @@
                 <div class="card-body col-span-12">
                     <!-- TITULO -->
                     <div class="col-span-12 pb-2">
-                        <h5 class="card-title float-left">Crear Plan</h5>
+                        <h5 class="card-title float-left">Crear receta</h5>
                     </div>
                     <div class="grid grid grid-flow-row">
                         <div class="grid grid-flow-col justify-items-left">
@@ -43,7 +43,7 @@
             <div class="grid grid-cols-12 gap-12">
                 <div class="card-body col-span-12">
                     <div class="col-span-12 pb-2">
-                        <h2 class="text-xl font-bold mb-4">Subir imagen</h2>
+                        <h6 class=" card-title mb-4">Subir imagen</h6>
                     </div>
                     <div class="grid grid grid-flow-row">
                         <!-- <label for="imagenPrincipal" class="block text-gray-700 text-sm font-bold mb-2">Subir imagen:</label> -->
@@ -75,19 +75,18 @@
             <div class="card col-span-6">
                 <div class="card-body col-span-6">
                     <div class="col-span-6 mb-2">
-                        <h2 card="card-title float-left">INGREDIENTES
-                            <button wire:click="openIngredientModal" class="btn btn-success float-right rounded-full"> 
-                                <span class="icon-[tabler--plus] size-5"> </span>Agregar 
-                            </button>
-                        </h2>
+                        <h6 class="card-title float-left"> Ingredientes </h6>
+                        <button wire:click="openIngredientModal" class="btn btn-success float-right rounded-full"> 
+                            <span class="icon-[tabler--plus] size-5"> </span>Agregar 
+                        </button>
                     </div>
                     <div class="col-span-6">
                         <table class=" table">
                             <thead>
                                 <tr>
                                     <th class="border border-gray-300">Ingrediente</th>
-                                    <th class="border border-gray-300">Unidad</th>
                                     <th class="border border-gray-300">Cantidad</th>
+                                    <th class="border border-gray-300">Unidad</th>
                                     <th class="border border-gray-300">Borrar</th>
                                 </tr>
                             </thead>
@@ -118,11 +117,10 @@
             <div class="card col-span-6">
                 <div class="card-body col-span-6">
                     <div class="col-span-6 mb-2">
-                        <h1 card="card-title float-left">PASOS
-                            <button wire:click="openPasoModal" class="btn btn-success float-right rounded-full">
-                                <span class="icon-[tabler--plus] size-5"> </span>Agregar
-                            </button>
-                        </h1>
+                        <h1 class="card-title float-left"> Pasos </h1>
+                        <button wire:click="openPasoModal" class="btn btn-success float-right rounded-full">
+                            <span class="icon-[tabler--plus] size-5"> </span>Agregar
+                        </button>
                     </div>
                     <div class="col-span-6 mb-2">
                         <table class="table">
