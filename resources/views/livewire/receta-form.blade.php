@@ -76,7 +76,7 @@
                 <div class="card-body col-span-6">
                     <div class="col-span-6 mb-2">
                         <h6 class="card-title float-left"> Ingredientes </h6>
-                        <button wire:click="openIngredientModal" class="btn btn-success float-right rounded-full"> 
+                        <button type="button" wire:click="openIngredientModal" class="btn btn-success float-right rounded-full"> 
                             <span class="icon-[tabler--plus] size-5"> </span>Agregar 
                         </button>
                     </div>
@@ -97,7 +97,7 @@
                                     <td class="py-2 px-4 border-b">{{ $ingrediente['cantidad'] }}</td>
                                     <td class="py-2 px-4 border-b">{{ $ingrediente['unidad_nombre'] }}</td>
                                     <td class="py-2 px-4 border-b">
-                                        <button wire:click="removeIngredient({{ $index }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">Eliminar</button>
+                                        <button type="button" wire:click="removeIngredient({{ $index }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">Eliminar</button>
                                     </td>
                                 </tr>
                                 @empty
@@ -118,7 +118,7 @@
                 <div class="card-body col-span-6">
                     <div class="col-span-6 mb-2">
                         <h1 class="card-title float-left"> Pasos </h1>
-                        <button wire:click="openPasoModal" class="btn btn-success float-right rounded-full">
+                        <button type="button" wire:click="openPasoModal" class="btn btn-success float-right rounded-full">
                             <span class="icon-[tabler--plus] size-5"> </span>Agregar
                         </button>
                     </div>
@@ -145,7 +145,7 @@
                                             @endif
                                         </td>
                                         <td class="py-2 px-4 border-b">
-                                            <button wire:click.stop="removePaso({{ $index }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">Eliminar</button>
+                                            <button type="button" wire:click.stop="removePaso({{ $index }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">Eliminar</button>
                                         </td>
                                     </tr>
                                     @if ($paso['expanded'])
