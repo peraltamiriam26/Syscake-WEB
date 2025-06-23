@@ -32,9 +32,9 @@
                         <a class="btn btn-circle btn-text btn-sm" aria-label="Action button" href="{{ route('recetas.edit', $recipe->id) }}">
                             <span class="icon-[tabler--pencil] size-5 bg-info"></span>
                         </a>
-                        <!-- <a id="btnDelete"  aria-label="Action button" onclick="alertDelete('delete-type-food/{{$recipe->id}}', '¿Desea eliminar el ingrediente {{$recipe->nombre}}?');" class="btn btn-circle btn-text btn-sm" href="#">
+                        <a id="btnDelete"  aria-label="Action button" onclick="alertDelete('delete-recipe?id={{$recipe->id}}', '¿Desea eliminar el ingrediente {{$recipe->nombre}}?');" class="btn btn-circle btn-text btn-sm" href="#">
                             <span class="icon-[tabler--trash] size-5 bg-error"></span>
-                        </a> -->
+                        </a>
                     </td>
                 </tr>
                 @empty

@@ -4652,18 +4652,6 @@
     --tw-ordinal: ordinal;
     font-variant-numeric: var(--tw-ordinal,) var(--tw-slashed-zero,) var(--tw-numeric-figure,) var(--tw-numeric-spacing,) var(--tw-numeric-fraction,);
   }
-  .link-hover {
-    .link:where(&) {
-      text-decoration-line: none;
-      @media (hover:hover) {
-        &:hover {
-          @media (hover: hover) {
-            text-decoration-line: underline;
-          }
-        }
-      }
-    }
-  }
   .no-underline {
     text-decoration-line: none;
   }
@@ -6004,22 +5992,6 @@ body {
 @keyframes progress-bar-stripes {
   0% {
     background-position-x: 0.75rem;
-  }
-}
-@keyframes radio {
-  0% {
-    padding: 5px;
-  }
-  50% {
-    padding: 3px;
-  }
-}
-@keyframes radio-inset {
-  0% {
-    padding: 1px;
-  }
-  50% {
-    padding: 4px;
   }
 }
 @property --tw-translate-x {
