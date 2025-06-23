@@ -10,6 +10,8 @@ use App\Models\Ingrediente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Gate; // Agrega esta línea para usar Gate en Livewire si es necesario
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TipoComidaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +27,7 @@ use Illuminate\Support\Facades\Gate; // Agrega esta línea para usar Gate en Liv
 Route::get('/', function () {
     return view('auth/login');
 });
-
-// Agregué el middleware 'auth' aquí para asegurar que solo usuarios logueados accedan a /home
-// Y el middleware 'web' ya está aplicado por defecto a todas las rutas en web.php
-Route::get('/home', function () {
-    return view('index');
-})->name('home')->middleware('auth'); // Usar el middleware 'auth' de Laravel
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 /** INCIO Y CIERRE DE SESIÓN */
 // Estas rutas no suelen llevar middleware 'auth' ya que son para loguearse/desloguearse
@@ -67,11 +64,23 @@ Route::middleware(['auth'])->group(function () {
 
     /** PLAN */
     // Similar a ingredientes, si la creación de planes tiene restricciones, aplica 'can'.
-    Route::get('/create', [PlanController::class, 'create'])->name('create-plan');
+    Route::get('/create-plan', [PlanController::class, 'create'])->name('create-plan');
     Route::get('/index-plan', [PlanController::class, 'index'])->name('index-plan');
-    Route::post('/store', [PlanController::class, 'store'])->name('store-plan');
+    Route::post('/store-plan', [PlanController::class, 'store'])->name('store-plan');
     Route::get('/add-recipe', [PlanController::class, 'addRecipe'])->name('add-recipe');
     Route::get('/search-recipe', [PlanController::class, 'searchRecipe'])->name('search-recipe');
+    Route::get('/edit-plan/{id}', [PlanController::class, 'edit'])->name('edit-plan');
+    Route::get('/update-plan/{id}', [PlanController::class, 'update'])->name('update-plan');
+    Route::get('/delete-plan/{id}', [PlanController::class, 'destroy'])->name('delete-plan');
+    Route::get('/view-modal/{id}/{id_recipe}', [PlanController::class, 'viewModal'])->name('view-modal');
+    Route::get('/update-week/{startWeek}/{endWeek}', [PlanController::class, 'updateWeek']);
+
+    /** ABM DE TIPO DE COMIDA */
+    Route::get('/create-type-food', [TipoComidaController::class, 'create'])->name('create-type-food');
+    Route::get('/index-type-food', [TipoComidaController::class, 'index'])->name('index-type-food');
+    Route::post('/store-type-food', [TipoComidaController::class, 'store'])->name('store-type-food');
+    Route::get('/delete-type-food/{id}', [TipoComidaController::class, 'destroy'])->name('delete-type-food');
+    Route::get('/edit-type-food/{id}', [TipoComidaController::class, 'edit'])->name('edit-type-food');
 
     /** ABM DE RECETAS */
 

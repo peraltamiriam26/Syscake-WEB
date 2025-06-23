@@ -1,90 +1,111 @@
 <?php
   use Illuminate\Support\Facades\Auth;
 ?>
- @if (Auth::check())
-<nav class="navbar w-full shadow-base-300/20 shadow-sm pb-6">
-  <div class="w-full md:w-1/6 md:items-center md:gap-2">
-    <div id="navbar-collapse" class="md:navbar-end collapse hidden grow basis-full overflow-hidden transition-[height] duration-300 max-md:w-full" >
-      <li class="me-2 dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]"> 
-        <a href="{{url('/home')}}">
-          Home   
-        </a>
-      </li>
-      <li class="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]"> 
-        <button id="dropdown-link" type="button" class="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" >
-          Recetas
-          <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
-        </button>  
-        <ul class="dropdown-menu dropdown-open:opacity-100 hidden" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-link" >
-          <li><a class="dropdown-item" href="{{route('recipe.index')}}">Ver listado</a></li>
-          @can('create-receta')
-            <li><a class="dropdown-item" href="{{route('recetas.create')}}">Crear receta</a></li> {{-- Actualizado aquí --}}
-          @endcan
-        </ul>  
-      </li>
-    </div>
-  </div>
-  <div class="w-full md:flex md:items-center md:gap-2">
-    <div id="navbar-collapse" class="md:navbar-end collapse hidden grow basis-full overflow-hidden transition-[height] duration-300 max-md:w-full" >
-      <li class="pe-2 dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]"> 
-        <button id="dropdown-link" type="button" class="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" >
-          Planner
-          <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
-        </button>  
-        <ul class="dropdown-menu dropdown-open:opacity-100 hidden" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-link" >
-          <li><a class="dropdown-item" href="{{route('create-plan')}}">Crear</a></li>
-          <li><a class="dropdown-item" href="{{route('index-plan')}}">Ver listado</a></li>
-        </ul>  
-      </li>
-      <li class="pe-2 dropdown relative inline-flex [--auto-close:inside] [--offset:9] [--placement:bottom-end]">
-        <button id="dropdown-end" type="button" class="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content max-md:px-2" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-          Administración
-          <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
-        </button>
-        <ul class="dropdown-menu dropdown-open:opacity-100 hidden w-48" role="menu" aria-orientation="vertical" aria-labelledby="nested-dropdown">
-          <li class="dropdown relative [--auto-close:inside] [--offset:10] [--placement:right-start]">
-            <button id="nested-dropdown-2" class="dropdown-toggle dropdown-item dropdown-open:bg-base-content/10 dropdown-open:text-base-content justify-between" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-              Ingredientes
-              <span class="icon-[tabler--chevron-right] size-4 rtl:rotate-180"></span>
-            </button>
-            <ul class="dropdown-menu dropdown-open:opacity-100 hidden w-48" role="menu" aria-orientation="vertical" aria-labelledby="nested-dropdown-2">
-              <li>
-                <a class="dropdown-item" href="{{route('create-ingredient')}}">
-                  Crear
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item"  href="{{route('index-ingredients')}}">
-                  Ver listado
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li class="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]"> 
-        <button id="dropdown-link" type="button" class="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" >
-          Cuenta
-          <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
-        </button>  
-        <ul class="dropdown-menu dropdown-open:opacity-100 hidden" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-link" >
-          <li><a class="dropdown-item" href="{{route('update-user')}}">Cambiar datos</a></li>
-          <!-- <li><a class="dropdown-item" href="#">Link 4</a></li>
-          <li><a class="dropdown-item" href="#">Link 5</a></li> -->
-          <hr class="border-base-content/25 -mx-2" />
-          <li class="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
-            <form method="POST" action="{{ route('logout') }}">
-            
-                @csrf
-                <button type="submit">
-                  Cerrar sesión
-                </button>
-            </form>
-          </li>
-        </ul>  
-      </li>
-
-    </div>
-  </div>
-</nav>
+@if (Auth::check())
+    <nav class="navbar flex w-full gap-2 shadow-base-300/20 shadow-sm">
+        <div class="w-full md:flex md:items-center md:gap-2">
+            <div class="flex items-center justify-between">
+                <div class="navbar-start items-center justify-between w-full">
+                    <div>
+                        <a class="dropdown-item" href="{{url('/home')}}">
+                            Home   
+                        </a>
+                    </div>
+                    <div id="multilevel-navbar-collapse-start" class="md:navbar-start collapse hidden grow basis-full gap-2 overflow-hidden transition-[height] duration-300 max-md:w-full">
+                        <div class="dropdown relative inline-flex [--auto-close:inside] [--offset:8] md:[--placement:bottom-end] [--placement:bottom] max-md:mt-2">
+                            <button id="nested-dropdown" type="button" class="dropdown-toggle btn btn-text text-base-content/80 dropdown-open:bg-base-content/10 dropdown-open:text-base-content max-md:px-2" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" >
+                                Recetas
+                                <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
+                            </button>  
+                            <div class="dropdown-menu dropdown-open:opacity-100 hidden" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-collapse">
+                                <div>
+                                  @can('create-receta')
+                                    <a class="dropdown-item" href="{{route('recetas.create')}}">Crear receta</a>
+                                  @endcan
+                                </div>
+                                <div>
+                                  <a class="dropdown-item" href="{{route('recipe.index')}}">Ver listado</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown relative inline-flex [--auto-close:inside] [--offset:8] md:[--placement:bottom-end] [--placement:bottom] max-md:mt-2">
+                            <button id="nested-dropdown" type="button" class="dropdown-toggle btn btn-text text-base-content/80 dropdown-open:bg-base-content/10 dropdown-open:text-base-content max-md:px-2" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" >
+                                Planner
+                                <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
+                            </button>  
+                            <div class="dropdown-menu dropdown-open:opacity-100 hidden" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-collapse">
+                                <div>
+                                    <a class="dropdown-item" href="{{route('create-plan')}}">Crear</a>
+                                </div>
+                                <div>
+                                    <a class="dropdown-item" href="{{route('index-plan')}}">Ver listado</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown relative inline-flex [--auto-close:inside] [--offset:8] md:[--placement:bottom-end] [--placement:bottom] max-md:mt-2">
+                            <button id="nested-dropdown" type="button" class="dropdown-toggle btn btn-text text-base-content/80 dropdown-open:bg-base-content/10 dropdown-open:text-base-content max-md:px-2" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" >
+                                Administración
+                                <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
+                            </button>
+                            <div class="dropdown-menu dropdown-open:opacity-100 hidden min-w-60" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-collapse">
+                                <div>
+                                    <button id="nested-collapse" class="collapse-toggle dropdown-item collapse-open:text-base-content collapse-open:bg-base-content/10 justify-between" data-collapse="#nested-collapse-content">
+                                        <span class="flex items-center gap-x-3.5"> Ingredientes </span>
+                                        <span class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4"></span>
+                                    </button>
+                                    <div class="collapse hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="nested-collapse" id="nested-collapse-content">
+                                        <ul class="py-3 ps-3">
+                                            <li>
+                                                <a class="dropdown-item" href="{{route('create-ingredient')}}"> Crear </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item"  href="{{route('index-ingredients')}}"> Ver listado </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button id="nested-collapse-typeFood" class="collapse-toggle dropdown-item collapse-open:text-base-content collapse-open:bg-base-content/10 justify-between" data-collapse="#nested-collapse-content-typeFood">
+                                        <span class="flex items-center gap-x-3.5"> Tipos de comida </span>
+                                        <span class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4"></span>
+                                    </button>
+                                    <div class="collapse hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="nested-collapse-typeFood" id="nested-collapse-content-typeFood">
+                                        <ul class="py-3 ps-3">
+                                            <li>
+                                                <a class="dropdown-item" href="{{route('create-type-food')}}"> Crear </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item"  href="{{route('index-type-food')}}"> Ver listado </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="multilevel-navbar-collapse" class="md:navbar-end collapse hidden grow basis-full gap-2 overflow-hidden transition-[height] duration-300 max-md:w-full">
+                <div class="dropdown relative inline-flex [--auto-close:inside] [--offset:8] md:[--placement:bottom-end] [--placement:bottom] max-md:mt-2">
+                    <button id="nested-dropdown" type="button" class="dropdown-toggle btn btn-text text-base-content/80 dropdown-open:bg-base-content/10 dropdown-open:text-base-content max-md:px-2" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                        <span class="icon-[tabler--user] size-6 bg-primary text-primary-content"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-open:opacity-100 hidden" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-collapse">
+                        <div>
+                            <a class="dropdown-item" href="{{route('update-user')}}">Cambiar datos</a>
+                        </div>
+                        <div>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item w-full text-start btn btn-text btn-error">
+                                    <span class="icon-[tabler--logout]"></span>
+                                    Cerrar sesión
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 @endif

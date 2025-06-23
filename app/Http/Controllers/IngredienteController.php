@@ -93,7 +93,6 @@ class IngredienteController extends Controller
     public function destroy(Request $ingrediente)
     {
         $model = new Ingrediente();
-        Log::debug($ingrediente['id']);
         if ($model->deleteIngredient($ingrediente['id'])){
             return ['flag' => true, 'mensaje' => 'Se elimino el ingrediente.', 'ruta' => 'index-ingredients'];
         }else{

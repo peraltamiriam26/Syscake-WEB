@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section("content")
-    <h1 class="text-3xl font-bold underline">
-        Hello world!
-    </h1>
-    <button class="btn btn-primary">Primary</button>
+<div>
+    <h1 class="text-3xl font-bold col-span-12 pt-2 pb-2">Bienvenido {{ auth()->user()->nombre }}</h1>    
+      @livewire('plane-table')           
+</div>
+    
+
 @stop

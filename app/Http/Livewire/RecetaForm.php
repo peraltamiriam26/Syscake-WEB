@@ -267,7 +267,7 @@ protected function rules()
                 Log::info('No se subió nueva imagen principal o no es un TemporaryUploadedFile válido.');
             }
 
-            $tipoRecetaObj = Tiporeceta::where('nombre', $this->tipoReceta)->first();
+            $tipoRecetaObj = Tiporeceta::where('id', $this->tipoReceta)->first();
             if (!$tipoRecetaObj) {
                 throw new \Exception("Tipo de Receta no encontrado: " . $this->tipoReceta);
             }
@@ -325,7 +325,7 @@ protected function rules()
             Log::info('Transacción completada exitosamente');
 
             session()->flash('message', '¡Receta guardada exitosamente!');
-            return redirect()->route('recetas.index');
+            return redirect()->route('recipe.index');
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             DB::rollBack();
