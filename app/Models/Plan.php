@@ -47,6 +47,7 @@ class Plan extends Model
             }
         } catch (Exception $e) {
             DB::rollBack();
+            Log::debug($e);
             return false;
         }
     }
