@@ -63,11 +63,16 @@
                                 <img src="{{ Storage::url($imagenPrincipal) }}" class="mt-4 w-48 h-auto object-cover rounded shadow-md" alt="Imagen actual de la receta">
                             @endif
                         @endif
+                        {{-- Opción para eliminar la imagen principal si está presente y en modo edición --}}
+                        @if (is_string($imagenPrincipal) && $recetaId) {{-- Solo si es una imagen existente y estamos editando --}}
+                            <button type="button" wire:click="$set('imagenPrincipal', null)" class="mt-2 text-red-500 hover:text-red-700 text-sm">Eliminar Imagen Principal</button>
+                        @endif
                         {{-- FIN DE LA SECCIÓN CORREGIDA --}}
                     </div>
                 </div>
             </div>
         </div>
+                
         {{-- --- FIN DE NUEVA SECCIÓN --- --}}
 
         <div class="grid grid grid-cols-12 gap-2 mt-2"> {{-- Añadido mt-4 para espacio --}}
