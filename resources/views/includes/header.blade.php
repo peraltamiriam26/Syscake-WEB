@@ -96,6 +96,22 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <div>
+                                    <button id="nested-collapse-typeRecipe" class="collapse-toggle dropdown-item collapse-open:text-base-content collapse-open:bg-base-content/10 justify-between" data-collapse="#nested-collapse-content-typeRecipe">
+                                        <span class="flex items-center gap-x-3.5"> Tipos de receta </span>
+                                        <span class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4"></span>
+                                    </button>
+                                    <div class="collapse hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="nested-collapse-typeRecipe" id="nested-collapse-content-typeRecipe">
+                                        <ul class="py-3 ps-3">
+                                            <li>
+                                                <a class="dropdown-item" href="{{route('create-type-recipe')}}"> Crear </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item"  href="{{route('index-type-recipe')}}"> Ver listado </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

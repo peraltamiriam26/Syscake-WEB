@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Gate; // Agrega esta línea para usar Gate en Liv
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TipoComidaController;
 use App\Http\Controllers\TipoUnidadController;
+use App\Http\Controllers\TipoRecetaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/store-type-unity', [TipoUnidadController::class, 'store'])->name('store-type-unity');
     Route::get('/delete-type-unity/{id}', [TipoUnidadController::class, 'destroy'])->name('delete-type-unity');
     Route::get('/edit-type-unity/{id}', [TipoUnidadController::class, 'edit'])->name('edit-type-unity');
+
+    /** ABM DE TIPO DE UNIDAD */
+    Route::get('/create-type-recipe', [TipoRecetaController::class, 'create'])->name('create-type-recipe');
+    Route::get('/index-type-recipe', [TipoRecetaController::class, 'index'])->name('index-type-recipe');
+    Route::post('/store-type-recipe', [TipoRecetaController::class, 'store'])->name('store-type-recipe');
+    Route::get('/delete-type-recipe/{id}', [TipoRecetaController::class, 'destroy'])->name('delete-type-recipe');
+    Route::get('/edit-type-recipe/{id}', [TipoRecetaController::class, 'edit'])->name('edit-type-recipe');
 
 
     /** ABM DE RECETAS */
