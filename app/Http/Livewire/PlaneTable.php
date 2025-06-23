@@ -8,7 +8,6 @@ use App\Models\Plan;
 use App\Models\PlanHasReceta;
 use App\Models\Receta;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
 
 class PlaneTable extends Component
 {
@@ -33,8 +32,6 @@ class PlaneTable extends Component
         $this->startWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY); // o la fecha que quieras como base
         $this->endWeek =  Carbon::now()->endOfWeek(Carbon::SATURDAY);
         $this->generarPlanesOrdenados();
-
-
     }
 
     public function prevWeek()

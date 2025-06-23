@@ -67,10 +67,10 @@
                                     <div class="collapse hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="nested-collapse-typeFood" id="nested-collapse-content-typeFood">
                                         <ul class="py-3 ps-3">
                                             <li>
-                                                <a class="dropdown-item" href="{{route('create-ingredient')}}"> Crear </a>
+                                                <a class="dropdown-item" href="{{route('create-type-food')}}"> Crear </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item"  href="{{route('index-ingredients')}}"> Ver listado </a>
+                                                <a class="dropdown-item"  href="{{route('index-type-food')}}"> Ver listado </a>
                                             </li>
                                         </ul>
                                     </div>

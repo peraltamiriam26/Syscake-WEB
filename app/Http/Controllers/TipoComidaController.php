@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TipoComida;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TipoComidaController extends Controller
 {
@@ -14,7 +16,7 @@ class TipoComidaController extends Controller
      */
     public function index()
     {
-        //
+        return view('typeFood/index');
     }
 
     /**
@@ -24,7 +26,7 @@ class TipoComidaController extends Controller
      */
     public function create()
     {
-        //
+        return view('typeFood/form', ['typeFood' => new TipoComida()]);
     }
 
     /**
@@ -35,7 +37,24 @@ class TipoComidaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validación de entrada
+        $request->validate([
+            'descripcion' => 'required|unique:tipocomidas,descripcion,|string|max:255',
+        ]);
+
+        /** verificar si el TipoComida ya no existe */
+        if (isset($request->id)) {
+            $savedIngredient = TipoComida::modify($request);
+        }else{
+            $savedIngredient = TipoComida::create($request->descripcion);
+        }
+        // Creación del TipoComida
+        if ($savedIngredient) {
+            Alert::toast('Se creo el TipoComida con éxito.', 'success');
+            return redirect()->route('index-type-food');
+        }
+
+        return redirect()->route('create-type-food');
     }
 
     /**
@@ -55,9 +74,10 @@ class TipoComidaController extends Controller
      * @param  \App\Models\TipoComida  $tipoComida
      * @return \Illuminate\Http\Response
      */
-    public function edit(TipoComida $tipoComida)
+    public function edit($id)
     {
-        //
+        $typeFood = TipoComida::findModel($id);
+        return view('typeFood/form', ['typeFood' => $typeFood]);
     }
 
     /**
@@ -78,8 +98,15 @@ class TipoComidaController extends Controller
      * @param  \App\Models\TipoComida  $tipoComida
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipoComida $tipoComida)
+    public function destroy(Request $typeFood)
     {
-        //
+        
+        Log::debug($typeFood);
+        $model = new TipoComida();
+        if ($model->deleteTypeFood($typeFood['id'])){
+            return ['flag' => true, 'mensaje' => 'Se elimino el tipo de comida.', 'ruta' => 'index-type-food'];
+        }else{
+            return ['flag' => false, 'mensaje' => 'No se pudo eliminar el tipo de comida.'];
+        }
     }
 }

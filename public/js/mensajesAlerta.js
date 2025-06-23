@@ -1,4 +1,6 @@
 function alertDelete(url, title){    
+    console.log(url);
+    
     Swal.fire({
                 title: title,
                 // text: "You won't be able to revert this!",
@@ -19,6 +21,8 @@ function alertDelete(url, title){
                         contentType: 'application/json',
                         data: {},
                         success: function(response) {
+                            console.log(response);
+                            
                             if (response.flag) {
                                 Swal.fire({
                                         position: "center",
@@ -42,6 +46,7 @@ function alertDelete(url, title){
                         },
                         error: function(xhr, status, err) {
                             console.log(err);
+                            console.log(xhr);
                             
                             Swal.fire({
                                         position: "center",

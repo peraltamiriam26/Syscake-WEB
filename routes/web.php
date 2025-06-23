@@ -6,6 +6,7 @@ use App\Http\Controllers\IngredienteController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TipoComidaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +49,9 @@ Route::get('/delete-ingredient', [IngredienteController::class, 'destroy'])->nam
 
 
 /** PLAN */
-Route::get('/create', [PlanController::class, 'create'])->name('create-plan');
+Route::get('/create-plan', [PlanController::class, 'create'])->name('create-plan');
 Route::get('/index-plan', [PlanController::class, 'index'])->name('index-plan');
-Route::post('/store', [PlanController::class, 'store'])->name('store-plan');
+Route::post('/store-plan', [PlanController::class, 'store'])->name('store-plan');
 Route::get('/add-recipe', [PlanController::class, 'addRecipe'])->name('add-recipe');
 Route::get('/search-recipe', [PlanController::class, 'searchRecipe'])->name('search-recipe');
 Route::get('/edit-plan/{id}', [PlanController::class, 'edit'])->name('edit-plan');
@@ -59,8 +60,13 @@ Route::get('/delete-plan/{id}', [PlanController::class, 'destroy'])->name('delet
 Route::get('/view-modal/{id}/{id_recipe}', [PlanController::class, 'viewModal'])->name('view-modal');
 Route::get('/update-week/{startWeek}/{endWeek}', [PlanController::class, 'updateWeek']);
 
-
-
-
 /** ABM DE RECETAS */
 Route::view('/receta', 'recipe/createRecipe')->name('createRecipe');
+
+/** ABM DE TIPO DE COMIDA */
+Route::get('/create-type-food', [TipoComidaController::class, 'create'])->name('create-type-food');
+Route::get('/index-type-food', [TipoComidaController::class, 'index'])->name('index-type-food');
+Route::post('/store-type-food', [TipoComidaController::class, 'store'])->name('store-type-food');
+Route::get('/delete-type-food/{id}', [TipoComidaController::class, 'destroy'])->name('delete-type-food');
+Route::get('/edit-type-food/{id}', [TipoComidaController::class, 'edit'])->name('edit-type-food');
+
