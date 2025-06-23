@@ -20,12 +20,12 @@ class RecetasController extends Controller
     
     public function index()
     {
-        // Por ejemplo, para mostrar una lista de recetas
-        $recetas = Receta::with(['instrucciones.archivo', 'tipoReceta'])
-                            ->orderBy('created_at', 'desc')
-                            ->paginate(10); // Pagina 10 recetas por página
-        Log::debug($recetas);
-        return view('recipe.index', compact('recetas'));
+        // // Por ejemplo, para mostrar una lista de recetas
+        // $recetas = Receta::with(['instrucciones.archivo', 'tipoReceta'])
+        //                     ->orderBy('created_at', 'desc')
+        //                     ->paginate(10); // Pagina 10 recetas por página
+        // return view('recipe.index', compact('recetas'));
+        return view('recipe.index');
     }
 
     public function create()

@@ -41,7 +41,7 @@ class Receta extends Model
     // Relación con el usuario que creó la receta
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class, 'escritor_usuario_id'); // O 'user_id' si es lo que usas
+        return $this->belongsTo(Usuario::class, 'escritor_usuario_id'); // O 'user_id' si es lo que usas
     }
 
     // Si tu receta tiene una imagen de portada asociada a un modelo Archivo
@@ -57,6 +57,21 @@ class Receta extends Model
 
     public function planes(){
         return $this->belongsToMany(Plan::class, 'plan_has_recetas', 'receta_id', 'plan_id');
+    }
+
+    public static function searchAll($recipe = null){
+        if (!isset($recipe)) {
+            // Por ejemplo, para mostrar una lista de recetas
+            $recetas = Receta::with(['instrucciones.archivo', 'tipoReceta'])
+                                ->orderBy('created_at', 'desc')
+                                ->paginate(10); // Pagina 10 recetas por página        
+        }else{
+            $recetas = Receta::with(['instrucciones.archivo', 'tipoReceta'])
+                                ->where('nombre', 'like', '%' . $recipe . '%')
+                                ->orderBy('created_at', 'desc')
+                                ->paginate(10);
+        }
+        return $recetas;
     }
 
 }
