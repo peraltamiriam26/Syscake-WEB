@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+// use Illuminate\Support\Facades\DB; // No es necesario aquí
+// use Illuminate\Support\Facades\Log; // No es necesario aquí
 
 class Instruccion extends Model
 {
@@ -18,11 +17,16 @@ class Instruccion extends Model
         'receta_id',
         'orden',
         'descripcion',
-        'imagen_path',
+        'archivo_id', // <--- Cambiado a archivo_id si la imagen se guarda en el modelo Archivo
     ];
 
     public function receta()
     {
         return $this->belongsTo(Receta::class);
+    }
+
+    public function archivo() // Relación con el modelo Archivo
+    {
+        return $this->belongsTo(Archivo::class, 'archivo_id');
     }
 }

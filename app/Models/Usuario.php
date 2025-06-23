@@ -171,6 +171,11 @@ class Usuario extends Model
         return $flag;
     }
 
+    public function escritor()
+    {
+        return $this->hasOne(Escritor::class, 'usuario_id'); // 'usuario_id' es la FK en Escritor
+    }
+    
     public function saveReaderWriter($newType, $user_id){
         $flag = false;
         if ($newType === 'lector') {

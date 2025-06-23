@@ -18,25 +18,37 @@ class Receta extends Model
         'es_anonimo',
     ];
     
-    protected $hidden = [
-        'id',
-    ];
+    // protected $hidden = [
+    //     'id',
+    // ];
 
-    public function ingredientes()
+    public function ingredientes_receta() // Un nombre más descriptivo
     {
         return $this->hasMany(Ingrediente_has_receta::class);
     }
 
-    public function pasos()
+    // Relación con los pasos (Instrucciones)
+    public function instrucciones()
     {
-        return $this->hasMany(Instruccion::class)->orderBy('orden');
+        return $this->hasMany(Instruccion::class);
+    }
+    
+    // Relación con el tipo de comida
+    public function tipoReceta() // Relación con TipoReceta
+    {
+        return $this->belongsTo(Tiporeceta::class, 'tipoReceta_id', 'id');
+    }
+    
+    // Relación con el usuario que creó la receta
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'escritor_usuario_id'); // O 'user_id' si es lo que usas
     }
 
-    // Si tienes un modelo Ingrediente y Unidad, y tu tabla pivote es 'ingrediente_recetas'
-    // public function ingredientesRelacionados()
-    // {
-    //     return $this->belongsToMany(Ingrediente::class, 'ingrediente_recetas')
-    //                 ->withPivot('cantidad', 'unidad_id'); // Asegúrate de incluir los campos pivot que necesitas
-    // }
+    // Si tu receta tiene una imagen de portada asociada a un modelo Archivo
+    public function archivo()
+    {
+        return $this->belongsTo(Archivo::class, 'archivo_id');
+    }
 
 }
