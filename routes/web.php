@@ -87,8 +87,12 @@ Route::middleware(['auth'])->group(function () {
     })->name('recetas.create')->middleware('can:create-receta'); // <-- Nombre de ruta cambiado
 
     Route::get('/recetas/{receta}/edit', [RecetasController::class, 'edit'])->name('recetas.edit');
+    // Route::get('/recetas/{receta}/edit', function (Receta $receta) {
+    // return view('recetas.edit', compact('receta'));
+    // })->name('recetas.edit');
     Route::put('/recetas/{receta}', [RecetasController::class, 'update'])->name('recetas.update');
-    Route::delete('/recetas/{receta}', [RecetasController::class, 'destroy'])->name('recetas.destroy');
+    Route::get('/delete-recipe', [RecetasController::class, 'destroy'])->name('delete-recipe');
+    // Route::delete('/recetas/{receta}', [RecetasController::class, 'destroy'])->name('recetas.destroy');
     
     // **Ruta para guardar la receta (store-recipe):**
     // También debe estar protegida con el mismo middleware.

@@ -84,13 +84,9 @@ use Illuminate\Support\Facades\Log;
 
                                 {{-- Botón de Eliminar --}}
                                 {{-- Usaremos un formulario para DELETE request, es más seguro --}}
-                                <form action="{{ route('recetas.destroy', $receta->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta receta? Esta acción es irreversible.');">
-                                    @csrf
-                                    @method('DELETE') {{-- Método HTTP para eliminación --}}
-                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
-                                        Eliminar
-                                    </button>
-                                </form>
+                                <a id="btnDelete"  aria-label="Action button" onclick="alertDelete('delete-recipe?id={{$receta->id}}', '¿Desea eliminar el ingrediente {{$receta->nombre}}?');" class="btn btn-circle btn-text btn-sm" href="#">
+                                    <span class="icon-[tabler--trash] size-5 bg-error"></span>
+                                </a>
                             </div>
                         </td>
                     </tr>

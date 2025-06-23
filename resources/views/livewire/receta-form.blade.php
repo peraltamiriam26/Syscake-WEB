@@ -39,27 +39,29 @@
                 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700
                 hover:file:bg-blue-100">
                 @error('imagenPrincipal') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
-
-                {{-- INICIO DE LA SECCIÓN CORREGIDA --}}
                 @if ($imagenPrincipal)
                     {{-- Si $imagenPrincipal es un objeto TemporaryUploadedFile (cuando se acaba de subir) --}}
                     @if ($imagenPrincipal instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile)
                         <img src="{{ $imagenPrincipal->temporaryUrl() }}" class="mt-4 w-48 h-auto object-cover rounded shadow-md" alt="Vista previa de la nueva imagen">
-                        {{-- Si $imagenPrincipal es una cadena de texto (cuando se está editando una receta existente y ya tiene imagen) --}}
+                    {{-- Si $imagenPrincipal es una cadena de texto (cuando se está editando una receta existente y ya tiene imagen) --}}
                     @elseif (is_string($imagenPrincipal))
                         <img src="{{ Storage::url($imagenPrincipal) }}" class="mt-4 w-48 h-auto object-cover rounded shadow-md" alt="Imagen actual de la receta">
                     @endif
                 @endif
-                {{-- FIN DE LA SECCIÓN CORREGIDA --}}
+                {{-- Opción para eliminar la imagen principal si está presente y en modo edición --}}
+                @if (is_string($imagenPrincipal) && $recetaId) {{-- Solo si es una imagen existente y estamos editando --}}
+                    <button type="button" wire:click="$set('imagenPrincipal', null)" class="mt-2 text-red-500 hover:text-red-700 text-sm">Eliminar Imagen Principal</button>
+                @endif
             </div>
         </div>
+                
         {{-- --- FIN DE NUEVA SECCIÓN --- --}}
 
         <div class="grid grid-flow-col justify-items-left mt-4"> {{-- Añadido mt-4 para espacio --}}
             <div class="card card-body flex items-center">
                 <div class="grid grid-flow-col">
                     <h1>INGREDIENTES</h1>
-                    <button wire:click="openIngredientModal" class="btn btn-primary grid grid-flow-col justify-items-center items-center-safe rounded-full">
+                    <button type="button" wire:click="openIngredientModal" class="btn btn-primary grid grid-flow-col justify-items-center items-center-safe rounded-full">
                         Agregar
                     </button>
                 </div>
@@ -68,8 +70,8 @@
                         <thead>
                             <tr>
                                 <th class="border border-gray-300">Ingrediente</th>
-                                <th class="border border-gray-300">Unidad</th>
                                 <th class="border border-gray-300">Cantidad</th>
+                                <th class="border border-gray-300">Unidad</th>
                                 <th class="border border-gray-300">Borrar</th>
                             </tr>
                         </thead>
@@ -80,7 +82,7 @@
                                 <td class="py-2 px-4 border-b">{{ $ingrediente['cantidad'] }}</td>
                                 <td class="py-2 px-4 border-b">{{ $ingrediente['unidad_nombre'] }}</td>
                                 <td class="py-2 px-4 border-b">
-                                    <button wire:click="removeIngredient({{ $index }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">Eliminar</button>
+                                    <button type="button" wire:click="removeIngredient({{ $index }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">Eliminar</button>
                                 </td>
                             </tr>
                             @empty
@@ -98,7 +100,7 @@
             <div class="card card-body flex items-center">
                 <div class="grid grid-flow-col">
                     <h1>PASOS</h1>
-                    <button wire:click="openPasoModal" class="btn btn-primary grid grid-flow-col justify-items-center items-center-safe rounded-full">
+                    <button type="button" wire:click="openPasoModal" class="btn btn-primary grid grid-flow-col justify-items-center items-center-safe rounded-full">
                         Agregar
                     </button>
                 </div>
@@ -125,7 +127,7 @@
                                         @endif
                                     </td>
                                     <td class="py-2 px-4 border-b">
-                                        <button wire:click.stop="removePaso({{ $index }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">Eliminar</button>
+                                        <button type="button" wire:click.stop="removePaso({{ $index }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">Eliminar</button>
                                     </td>
                                 </tr>
                                 @if ($paso['expanded'])
