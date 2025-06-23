@@ -57,6 +57,7 @@ class PlanController extends Controller
             Alert::toast('success', "Se guardo correctamente.");
             return redirect()->route('home');
         }
+        Log::debug($save);
         return redirect()->route('create-plan');
     }
 

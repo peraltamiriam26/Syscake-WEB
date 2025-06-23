@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Gate; // Agrega esta línea para usar Gate en Livewire si es necesario
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TipoComidaController;
+use App\Http\Controllers\TipoUnidadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +83,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/delete-type-food/{id}', [TipoComidaController::class, 'destroy'])->name('delete-type-food');
     Route::get('/edit-type-food/{id}', [TipoComidaController::class, 'edit'])->name('edit-type-food');
 
+    /** ABM DE TIPO DE UNIDAD */
+    Route::get('/create-type-unity', [TipoUnidadController::class, 'create'])->name('create-type-unity');
+    Route::get('/index-type-unity', [TipoUnidadController::class, 'index'])->name('index-type-unity');
+    Route::post('/store-type-unity', [TipoUnidadController::class, 'store'])->name('store-type-unity');
+    Route::get('/delete-type-unity/{id}', [TipoUnidadController::class, 'destroy'])->name('delete-type-unity');
+    Route::get('/edit-type-unity/{id}', [TipoUnidadController::class, 'edit'])->name('edit-type-unity');
+
+
     /** ABM DE RECETAS */
 
     // **Ruta para ver el listado de recetas (recetas.index):**
@@ -113,3 +122,4 @@ Route::middleware(['auth'])->group(function () {
     // Sin embargo, si tienes una ruta POST explícita para enviar el formulario (a veces Livewire lo hace internamente),
     // asegúrate de protegerla aquí también.
 });
+
