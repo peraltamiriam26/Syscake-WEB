@@ -2,7 +2,7 @@
     <div class="mb-4">
         <input type="text"
                wire:model.debounce.300ms="search"
-               placeholder="Buscar tipo de comida..."
+               placeholder="Buscar tipo de receta..."
                class="input input-bordered w-full max-w-sm" />
     </div>
     <table class="table">
