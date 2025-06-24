@@ -7,9 +7,8 @@ use App\Http\Controllers\IngredienteController;
 use App\Http\Controllers\TipounidadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RecetasController extends Controller
 {
@@ -56,7 +55,6 @@ class RecetasController extends Controller
         }else{
             return ['flag' => false, 'mensaje' => 'No se pudo eliminar la receta.'];
         }
-        
     }
 
     /**
@@ -75,6 +73,19 @@ class RecetasController extends Controller
             'steps' => $steps,
             'ingredients' => $ingredients
         ]);
+    }
+
+    public function downloadInvoice($id){
+        $recipe = Receta::findOrFail($id);
+        $steps = $recipe->instrucciones()->orderBy('orden', 'asc')->get();
+        $ingredients = $recipe->ingredientes_receta()->get();
+        $pdf = Pdf::loadView('recipe/pdf-view', [
+            'recipe' => $recipe, 
+            'steps' => $steps,
+            'ingredients' => $ingredients
+        ]);
+
+        return $pdf->download('recipe_'.$recipe->nombre.'.pdf');
     }
 
 

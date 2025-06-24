@@ -120,7 +120,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/delete-recipe', [RecetasController::class, 'destroy'])->name('delete-recipe');
     Route::get('/show-recipe/{id}', [RecetasController::class, 'show'])->name('show-recipe');
     // Route::delete('/recetas/{receta}', [RecetasController::class, 'destroy'])->name('recetas.destroy');
-    
+    Route::get('/recipe/{id}/download', [RecetasController::class, 'downloadInvoice'])->name('factura.descargar');
     // **Ruta para guardar la receta (store-recipe):**
     // También debe estar protegida con el mismo middleware.
     // Si estás enviando el formulario a un método de un controlador, así:

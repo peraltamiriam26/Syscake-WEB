@@ -6,6 +6,9 @@
             <!-- TITULO -->
             <div class="col-span-12 pb-2">
                 <h5 class="card-title float-left">Receta: {{ $recipe->nombre }}</h5>
+                <a href="{{ route('factura.descargar', $recipe->id) }}" class="btn btn-circle btn-text btn-sm float-right">
+                    <span class="icon-[tabler--file-download] size-5"></span>
+                </a>
                 @can('delete-receta', $recipe)
                     <a id="btnDelete" class="btn btn-circle btn-text btn-sm float-right" aria-label="Action button" onclick="alertDelete('delete-recipe?id={{$recipe->id}}', '¿Desea eliminar el ingrediente {{$recipe->nombre}}?');"  href="#">
                         <span class="icon-[tabler--trash] size-5 bg-error"></span>
