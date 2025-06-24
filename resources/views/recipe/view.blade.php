@@ -1,6 +1,3 @@
-<?php
-use Illuminate\Support\Facades\Log;
-?>
 @extends('layouts.app')
 @section('content')
 <div class="card max-w-xl overflow-auto">
@@ -36,14 +33,14 @@ use Illuminate\Support\Facades\Log;
                 <h6 class="float-left"> Pasos </h6>
                 <div class="accordion divide-neutral/20 divide-y">
                     @foreach ($steps as $step)
-                    <div class="accordion-item" id="delivery-arrow-{{$step->id}}">
+                    <div class="accordion-item " id="delivery-arrow-{{$step->id}}">
                         <!-- AGREGAR LOS PASOS TRAÍDOS DE LA BASE DE DATOS -->
                         <button class="accordion-toggle inline-flex items-center gap-x-4 text-start" aria-controls="delivery-arrow-collapse-{{$step->id}}" aria-expanded="false">
                             <span class="icon-[tabler--chevron-right] accordion-item-active:rotate-90 size-5 shrink-0 transition-transform duration-300 rtl:rotate-180" ></span>
                             Paso {{$step->orden}}
                         </button>
-                        <div id="delivery-arrow-collapse-{{$step->id}}" class="accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="delivery-arrow-{{$step->id}}" role="region">
-                            <div class="px-5 pb-4">
+                        <div id="delivery-arrow-collapse-{{$step->id}}" class="accordion-content hidden max-h-40 overflow-auto transition-[height] duration-300" aria-labelledby="delivery-arrow-{{$step->id}}" role="region">
+                            <div class="max-h-40  px-5 pb-4">
                                 <p class="text-base-content/80 font-normal">
                                     {{ $step->descripcion }}
                                 </p>
