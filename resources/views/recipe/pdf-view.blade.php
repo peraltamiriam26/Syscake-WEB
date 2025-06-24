@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Factura</title>
+    <title>recipe</title>
 </head>
 <body>
     <h1>Receta: {{ $recipe->nombre }}</h1>
@@ -16,7 +16,7 @@
             <li class="mb-2"> {{$ingredient->nombre}} </li>
         @endforeach
     </ul>
-    <h2 class="float-left"> Pasos </h2>
+    <h2 class="float-left" style="list-style-type: none;"> Pasos </h2>
         @foreach ($steps as $step)
             Paso {{$step->orden}}
         <ul>

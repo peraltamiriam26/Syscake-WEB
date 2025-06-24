@@ -40,7 +40,7 @@ use App\Models\Plan;
                                 @php
                                     $dateCol = \Carbon\Carbon::parse($startWeek)->addDays($dayIndex)->toDateString();
                                 @endphp
-                                    <td class="{{($dateCol == $todayDate) ? 'bg-violet-200' : '' }}">                                        
+                                    <td class="{{($dateCol == $todayDate) ? 'bg-violet-200' : '' }} ">                                        
                                         @if (!empty($plansOrder[$dayIndex][$typeIndex]))
                                             @foreach ($plansOrder[$dayIndex][$typeIndex] as $plan)                                            
                                                 @if (isset($plan->id))
@@ -72,7 +72,7 @@ use App\Models\Plan;
                 @foreach ($recipes as $indexRecipe => $recipe)
                     <div class="carousel-slide shrink-0 w-50 p-3">
                         <div class="card sm:max-w-sm">
-                            <figure><img src="https://cdn.flyonui.com/fy-assets/components/card/image-9.png" alt="Watch" /></figure>
+                            <figure><img src="{{ asset('images/libroRecetas.png') }}" alt="{{$recipe->nombre}}"  class="w-50 h-36 object-cover" /></figure>
                             <div class="card-body items-center text-center">
                                 <h5 class="card-title"> {{$recipe->nombre}} </h5>
                                     <!-- Cambiar a un link cuando este el viewRecipe -->
@@ -117,11 +117,13 @@ use App\Models\Plan;
             contentType: 'application/json',
             data: {},
             success: function(response) {                 
-                $("#modalContent").html(response); // Inserta el formulario en el modal
+                // $("#modalContent").html(response); // Inserta el formulario en el modal
                 $("#form-modal").removeClass("hidden"); // Muestra el modal
                 const modal = document.getElementById('form-modal');
                // Mostrar el modal (manualmente)
                 $('#modalContent').html(response);
+                
+
                 document.getElementById("trigger-modal").click();
 
             },

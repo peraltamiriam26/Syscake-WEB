@@ -8,26 +8,26 @@
                placeholder="Buscar tipo de comida..."
                class="input input-bordered w-full max-w-sm" />
     </div>
-    <table class="table">
+    <table class="table overflow-auto table-fixed">
         <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Autor</th>
-            <th>Acciones</th>
-        </tr>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Autor</th>
+                <th>Acciones</th>
+            </tr>
         </thead>
         <tbody>
             @forelse ($recipes as $index => $recipe)
                 <tr>
-                    <td> {{ $recipe->nombre }} </td>
+                    <td class="break-normal whitespace-normal"> {{ $recipe->nombre }} </td>
                     <td> {{ $recipe->tipoReceta->nombre ?? 'N/A' }} {{-- Accede a la descripción del tipo de receta --}}</td>
                     @if ($recipe->es_anonimo)
                         <td> 
                             Anónimo
                         </td>
                     @else
-                        <td>
+                        <td class="break-normal whitespace-normal">
                             {{ $recipe->user->nombre }} {{$recipe->user->apellido}}
                         </td>
                     @endif
@@ -45,7 +45,7 @@
                                 <span class="icon-[tabler--trash] size-5 bg-error"></span>
                             </a>                            
                         @endcan
-                        <a href="{{ route('factura.descargar', $recipe->id) }}" class="btn btn-circle btn-text btn-sm float-right">
+                        <a class="btn btn-circle btn-text btn-sm" href="{{ route('recipe.descargar', $recipe->id) }}" >
                             <span class="icon-[tabler--file-download] size-5"></span>
                         </a>
                     </td>

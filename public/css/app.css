@@ -3557,6 +3557,9 @@
   .h-32 {
     height: calc(var(--spacing) * 32);
   }
+  .h-36 {
+    height: calc(var(--spacing) * 36);
+  }
   .h-auto {
     height: auto;
   }
@@ -3693,12 +3696,18 @@
   .basis-full {
     flex-basis: 100%;
   }
+  .table-auto {
+    table-layout: auto;
+  }
   .table-fixed {
     table-layout: fixed;
   }
   .-translate-y-1\/2 {
     --tw-translate-y: calc(calc(1/2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .rotate-90 {
+    rotate: 90deg;
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);

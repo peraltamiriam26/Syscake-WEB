@@ -139,9 +139,16 @@ class PlanController extends Controller
         $user_id = auth()->user()->id;
         $recipe = Receta::findModel($id_recipe);
         $plan = Plan::findModel($id, $user_id);
+        $steps = $recipe->instrucciones()->orderBy('orden', 'asc')->get();
+        $ingredients = $recipe->ingredientes_receta()->get();
+        $typeRecipe = $recipe->tipoReceta()->first();
+
         return view('plan/modal-recipe', [
             'recipe' => $recipe,
-            'plan' => $plan
+            'plan' => $plan,
+            'steps' => $steps,
+            'ingredients' => $ingredients,
+            'typeRecipe' => $typeRecipe,
         ]);
     }
 }

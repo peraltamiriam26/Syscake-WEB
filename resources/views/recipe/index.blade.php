@@ -6,7 +6,9 @@
             <!-- TITULO -->
             <div class="col-span-12">
                 <h5 class="card-title float-left">Recetas</h5>
-                <a class="float-right btn btn-success" href="{{ route('recetas.create') }}" title="Crear receta"> <span class="icon-[tabler--plus] size-5"></span> Nueva </a>
+                @can('es-escritor')
+                    <a class="float-right btn btn-success" href="{{ route('recetas.create') }}" title="Crear receta"> <span class="icon-[tabler--plus] size-5"></span> Nueva </a>
+                @endcan
             </div>
             @livewire('recipes-table')
         </div>
