@@ -68,10 +68,13 @@ class RecetasController extends Controller
         $recipe = Receta::findModel($id);
         $steps = $recipe->instrucciones()->orderBy('orden', 'asc')->get();
         $ingredients = $recipe->ingredientes_receta()->get();
+        $typeRecipe = $recipe->tipoReceta()->first();
         return view('/recipe/view', [
             'recipe' => $recipe, 
             'steps' => $steps,
-            'ingredients' => $ingredients
+            'ingredients' => $ingredients,
+            'typeRecipe' => $typeRecipe,
+
         ]);
     }
 

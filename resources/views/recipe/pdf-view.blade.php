@@ -7,7 +7,7 @@
 <body>
     <h1>Receta: {{ $recipe->nombre }}</h1>
     <h2 class="float-left">Ingredientes</h2>
-    <ul>
+    <ul class="columns-3">
         @foreach ($ingredients as $ingredient_has_recipe)
             @php
                 $ingredient = $ingredient_has_recipe->ingrediente()->first();

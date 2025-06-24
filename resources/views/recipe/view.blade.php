@@ -5,25 +5,29 @@
         <div class="card-body col-span-12">
             <!-- TITULO -->
             <div class="col-span-12 pb-2">
-                <h5 class="card-title float-left">Receta: {{ $recipe->nombre }}</h5>
+                <a href="{{ route('recipe.index') }}" class="btn btn-circle btn-text btn-sm float-left">
+                    <span class="icon-[tabler--arrow-narrow-left] size-8"></span>
+                </a>
                 <a href="{{ route('factura.descargar', $recipe->id) }}" class="btn btn-circle btn-text btn-sm float-right">
                     <span class="icon-[tabler--file-download] size-5"></span>
                 </a>
                 @can('delete-receta', $recipe)
-                    <a id="btnDelete" class="btn btn-circle btn-text btn-sm float-right" aria-label="Action button" onclick="alertDelete('delete-recipe?id={{$recipe->id}}', '¿Desea eliminar el ingrediente {{$recipe->nombre}}?');"  href="#">
-                        <span class="icon-[tabler--trash] size-5 bg-error"></span>
-                    </a>
+                <a id="btnDelete" class="btn btn-circle btn-text btn-sm float-right" aria-label="Action button" onclick="alertDelete('delete-recipe?id={{$recipe->id}}', '¿Desea eliminar el ingrediente {{$recipe->nombre}}?');"  href="#">
+                    <span class="icon-[tabler--trash] size-5 bg-error"></span>
+                </a>
                 @endcan
                 @can('update-receta', $recipe)
-                    <a class="btn btn-circle btn-text btn-sm float-right" aria-label="Action button" href="{{ route('recetas.edit', $recipe->id) }}">
-                        <span class="icon-[tabler--pencil] size-5 bg-info"></span>
-                    </a>
+                <a class="btn btn-circle btn-text btn-sm float-right" aria-label="Action button" href="{{ route('recetas.edit', $recipe->id) }}">
+                    <span class="icon-[tabler--pencil] size-5 bg-info"></span>
+                </a>
                 @endcan
             </div>
+            <h5 class="card-title float-left">Receta: {{ $recipe->nombre }}</h5>
+            <span class="badge badge-info badge-sm">{{ $typeRecipe->nombre }}</span>
             <div class="col-span-12 pb-2">
                 <h6 class="float-left">Ingredientes</h6><br>
                 <div>
-                    <ul class="list-inside list-disc marker:text-purple-500">
+                    <ul class="list-inside list-disc marker:text-purple-500 columns-3">
                         @foreach ($ingredients as $ingredient_has_recipe)
                             @php
                                 $ingredient = $ingredient_has_recipe->ingrediente()->first();
