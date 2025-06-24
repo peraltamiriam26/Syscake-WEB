@@ -86,7 +86,7 @@
                         </button>
                     </div>
                     <div class="col-span-6">
-                        <table class=" table">
+                        <table class="table w-full table-auto overflow-auto">
                             <thead>
                                 <tr>
                                     <th class="border border-gray-300">Ingrediente</th>
@@ -98,9 +98,9 @@
                             <tbody>
                                 @forelse($ingredientes as $index => $ingrediente)
                                 <tr>
-                                    <td class="py-2 px-4 border-b">{{ $ingrediente['ingrediente_nombre'] }}</td>
+                                    <td class="py-2 px-4 border-b break-normal whitespace-normal">{{ $ingrediente['ingrediente_nombre'] }}</td>
                                     <td class="py-2 px-4 border-b">{{ $ingrediente['cantidad'] }}</td>
-                                    <td class="py-2 px-4 border-b">{{ $ingrediente['unidad_nombre'] }}</td>
+                                    <td class="py-2 px-4 border-b break-normal whitespace-normal">{{ $ingrediente['unidad_nombre'] }}</td>
                                     <td class="py-2 px-4 border-b">
                                         <a type="button" wire:click="removeIngredient({{ $index }})" class="btn btn-circle btn-text btn-sm">
                                             <span class="icon-[tabler--trash] size-5 bg-error"></span>

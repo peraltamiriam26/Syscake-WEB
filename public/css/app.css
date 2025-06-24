@@ -4549,6 +4549,9 @@
   .ps-3 {
     padding-inline-start: calc(var(--spacing) * 3);
   }
+  .pe-1 {
+    padding-inline-end: calc(var(--spacing) * 1);
+  }
   .pe-2 {
     padding-inline-end: calc(var(--spacing) * 2);
   }

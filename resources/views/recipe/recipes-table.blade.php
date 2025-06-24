@@ -45,6 +45,9 @@
                                 <span class="icon-[tabler--trash] size-5 bg-error"></span>
                             </a>                            
                         @endcan
+                        <a href="{{ route('factura.descargar', $recipe->id) }}" class="btn btn-circle btn-text btn-sm float-right">
+                            <span class="icon-[tabler--file-download] size-5"></span>
+                        </a>
                     </td>
                 </tr>
                 @empty
