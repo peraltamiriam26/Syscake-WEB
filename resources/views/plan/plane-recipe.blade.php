@@ -76,7 +76,7 @@ use App\Models\Plan;
                             <div class="card-body items-center text-center">
                                 <h5 class="card-title"> {{$recipe->nombre}} </h5>
                                     <!-- Cambiar a un link cuando este el viewRecipe -->
-                                <button class="btn btn-primary" value="{{$recipe->id}}" >Ver</button>
+                                <a class="btn btn-primary" value="{{$recipe->id}}" href="{{ route('show-recipe', $recipe->id) }}" >Ver</a>
                             </div>
                         </div>
                     </div>            

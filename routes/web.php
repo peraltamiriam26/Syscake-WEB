@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/delete-type-unity/{id}', [TipoUnidadController::class, 'destroy'])->name('delete-type-unity');
     Route::get('/edit-type-unity/{id}', [TipoUnidadController::class, 'edit'])->name('edit-type-unity');
 
-    /** ABM DE TIPO DE UNIDAD */
+    /** ABM DE TIPO DE RECETA */
     Route::get('/create-type-recipe', [TipoRecetaController::class, 'create'])->name('create-type-recipe');
     Route::get('/index-type-recipe', [TipoRecetaController::class, 'index'])->name('index-type-recipe');
     Route::post('/store-type-recipe', [TipoRecetaController::class, 'store'])->name('store-type-recipe');
@@ -118,6 +118,7 @@ Route::middleware(['auth'])->group(function () {
     // })->name('recetas.edit');
     Route::put('/recetas/{receta}', [RecetasController::class, 'update'])->name('recetas.update');
     Route::get('/delete-recipe', [RecetasController::class, 'destroy'])->name('delete-recipe');
+    Route::get('/show-recipe/{id}', [RecetasController::class, 'show'])->name('show-recipe');
     // Route::delete('/recetas/{receta}', [RecetasController::class, 'destroy'])->name('recetas.destroy');
     
     // **Ruta para guardar la receta (store-recipe):**

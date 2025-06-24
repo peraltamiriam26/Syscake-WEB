@@ -121,7 +121,7 @@
                 @enderror
             </div>
             <!-- SEGUNDO CARD A LA DERECHA -->
-            <div class="card col-span-6">
+            <div class="card col-span-6 max-w-full overflow-auto">
                 <div class="card-body col-span-6">
                     <div class="col-span-6 mb-2">
                         <h1 class="card-title float-left"> Pasos </h1>
@@ -130,7 +130,7 @@
                         </button>
                     </div>
                     <div class="col-span-6 mb-2">
-                        <table class="table">
+                        <table class="table w-full table-fixed  overflow-auto">
                             <thead>
                                 <tr>
                                     <th class="border border-gray-300">Paso</th>
@@ -142,7 +142,7 @@
                                 @forelse($pasos as $index => $paso)
                                     <tr class="cursor-pointer hover:bg-gray-100" wire:click="togglePasoDetails({{ $index }})">
                                         <td class="py-2 px-4 border-b">
-                                            Paso {{ $index + 1 }}: {{ Str::limit($paso['descripcion'], 50) }}
+                                            Paso {{ $index + 1 }}: {{ Str::limit($paso['descripcion'], 10) }}
                                         </td>
                                         <td class="py-2 px-4 border-b">
                                             @if ($paso['imagen_path'])
@@ -159,9 +159,9 @@
                                     </tr>
                                     @if ($paso['expanded'])
                                         <tr>
-                                            <td colspan="3" class="py-2 px-4 border-b bg-gray-50">
+                                            <td colspan="3" class="py-2 px-4 border-b bg-gray-50 overflow-auto max-w-full">
                                                 <div class="flex items-start">
-                                                    <div class="mr-4">
+                                                    <div class="mr-4 break-normal whitespace-normal">
                                                         <strong>Detalle del Paso {{ $index + 1 }}:</strong>
                                                         <p>{{ $paso['descripcion'] }}</p>
                                                     </div>
@@ -198,7 +198,7 @@
                 <div class="card-body col-span-12">
                     <div class="grid grid grid-flow-row">
                         <div class="flex justify-end gap-2">
-                            <a href="{{ route('index-type-food') }}" class="btn btn-outline">
+                            <a href="{{ route('recipe.index') }}" class="btn btn-outline">
                                 Cancelar
                             </a>
                             {{-- El botón submit debe estar dentro del <form> y ser de type="submit" --}}

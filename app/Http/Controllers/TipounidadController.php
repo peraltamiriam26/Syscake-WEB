@@ -101,9 +101,9 @@ class TipoUnidadController extends Controller
     {
         $model = new TipoUnidad();
         if ($model->deletetypeUnity($typeUnity['id'])){
-            return ['flag' => true, 'mensaje' => 'Se elimino el tipo de comida.', 'ruta' => 'index-type-unity'];
+            return ['flag' => true, 'mensaje' => 'Se elimino el tipo de unidad.', 'ruta' => 'index-type-unity'];
         }else{
-            return ['flag' => false, 'mensaje' => 'No se pudo eliminar el tipo de comida.'];
+            return ['flag' => false, 'mensaje' => 'No se pudo eliminar el tipo de unidad.'];
         }
     }
 }

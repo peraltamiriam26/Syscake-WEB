@@ -101,9 +101,9 @@ class TipoRecetaController extends Controller
     {
         $model = new Tiporeceta();
         if ($model->deletetypeRecipe($typeRecipe['id'])){
-            return ['flag' => true, 'mensaje' => 'Se elimino el tipo de comida.', 'ruta' => 'index-type-recipe'];
+            return ['flag' => true, 'mensaje' => 'Se elimino el tipo de receta.', 'ruta' => 'index-type-recipe'];
         }else{
-            return ['flag' => false, 'mensaje' => 'No se pudo eliminar el tipo de comida.'];
+            return ['flag' => false, 'mensaje' => 'No se pudo eliminar el tipo de receta.'];
         }
     }
 }

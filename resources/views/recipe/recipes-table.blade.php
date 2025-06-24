@@ -1,3 +1,6 @@
+<?php
+  use Illuminate\Support\Facades\Auth;
+?>
 <div class="col-span-12">
     <div class="mb-4">
         <input type="text"
@@ -29,12 +32,19 @@
                         </td>
                     @endif
                     <td>
-                        <a class="btn btn-circle btn-text btn-sm" aria-label="Action button" href="{{ route('recetas.edit', $recipe->id) }}">
-                            <span class="icon-[tabler--pencil] size-5 bg-info"></span>
+                        <a class="btn btn-circle btn-text btn-sm" aria-label="Action button" href="{{ route('show-recipe', $recipe->id) }}">
+                            <span class="icon-[tabler--eye] size-5 bg-primary"></span>
                         </a>
-                        <a id="btnDelete"  aria-label="Action button" onclick="alertDelete('delete-recipe?id={{$recipe->id}}', '¿Desea eliminar el ingrediente {{$recipe->nombre}}?');" class="btn btn-circle btn-text btn-sm" href="#">
-                            <span class="icon-[tabler--trash] size-5 bg-error"></span>
-                        </a>
+                        @can('update-receta', $recipe)
+                            <a class="btn btn-circle btn-text btn-sm" aria-label="Action button" href="{{ route('recetas.edit', $recipe->id) }}">
+                                <span class="icon-[tabler--pencil] size-5 bg-info"></span>
+                            </a> 
+                        @endcan
+                        @can('delete-receta', $recipe)
+                            <a id="btnDelete"  aria-label="Action button" onclick="alertDelete('delete-recipe?id={{$recipe->id}}', '¿Desea eliminar la receta {{$recipe->nombre}}?');" class="btn btn-circle btn-text btn-sm" href="#">
+                                <span class="icon-[tabler--trash] size-5 bg-error"></span>
+                            </a>                            
+                        @endcan
                     </td>
                 </tr>
                 @empty

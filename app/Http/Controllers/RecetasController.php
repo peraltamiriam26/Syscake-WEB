@@ -52,12 +52,32 @@ class RecetasController extends Controller
         $model = new Receta();
         Log::debug($recipe['id']);
         if ($model->deleteRecipe($recipe['id'])){
-            return ['flag' => true, 'mensaje' => 'Se elimino el ingrediente.', 'ruta' => 'recetas'];
+            return ['flag' => true, 'mensaje' => 'Se elimino la receta.', 'ruta' => 'recetas'];
         }else{
-            return ['flag' => false, 'mensaje' => 'No se pudo eliminar el ingrediente.'];
+            return ['flag' => false, 'mensaje' => 'No se pudo eliminar la receta.'];
         }
         
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $recipe = Receta::findModel($id);
+        $steps = $recipe->instrucciones()->orderBy('orden', 'asc')->get();
+        $ingredients = $recipe->ingredientes_receta()->get();
+        return view('/recipe/view', [
+            'recipe' => $recipe, 
+            'steps' => $steps,
+            'ingredients' => $ingredients
+        ]);
+    }
+
+
     //     public function destroy(Receta $receta) // Usamos Route Model Binding
     // {
     //     // 1. Autorización: Muy importante para la seguridad.
