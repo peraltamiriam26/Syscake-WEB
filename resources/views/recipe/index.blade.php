@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section("content")
+<br>
 <div class="card">
     <div class="p-4 grid grid-cols-12 gap-12">
         <div class="card-body col-span-12">

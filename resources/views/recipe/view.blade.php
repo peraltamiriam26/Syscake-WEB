@@ -27,15 +27,16 @@
                 <span class="badge badge-info badge-sm">{{ $typeRecipe->nombre }}</span>                
             @endif
             <div class="col-span-12 pb-2">
-                <h6 class="float-left">Ingredientes</h6><br>
+                <h6 class="float-left font-bold">Ingredientes</h6><br>
                 @if ($ingredients->isNotEmpty())
                     <div>
                         <ul class="list-inside list-disc marker:text-purple-500 columns-3">
                             @foreach ($ingredients as $ingredient_has_recipe)
                                 @php
                                     $ingredient = $ingredient_has_recipe->ingrediente()->first();
+                                    $unity = $ingredient_has_recipe->tipoUnidad()->first();
                                 @endphp
-                                <li class="mb-2"> {{$ingredient->nombre}} </li>
+                                <li class="mb-2"> {{$ingredient_has_recipe->cantidad}} {{strtolower($unity->nombre)}} de {{$ingredient->nombre}} </li>
                             
                             @endforeach            
                         </ul>
@@ -45,7 +46,7 @@
                         <p class="text-base-content/80 font-normal"><i>No hay ingredientes registrados.</i></p>
                     </div>
                 @endif
-                <h6 class="float-left"> Pasos </h6>
+                <h6 class="float-left mt-2 font-bold"> Pasos </h6>
                 @if ($steps->isNotEmpty())
                     <div class="accordion divide-neutral/20 divide-y">
                         @foreach ($steps as $step)
