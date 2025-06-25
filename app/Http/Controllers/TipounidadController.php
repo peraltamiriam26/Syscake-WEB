@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TipoUnidadController extends Controller
-{ 
+{
      /**
      * Display a listing of the resource.
      *

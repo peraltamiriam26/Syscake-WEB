@@ -13,7 +13,7 @@ class TipoUnidad extends Model
     use HasFactory;
 
     protected $table = 'tipounidads';
- 
+
     /** $typeFood es un parámetro de búsqueda, si es null es porque quiero
      * todos los tipos de comida
      */
