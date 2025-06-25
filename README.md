@@ -8,6 +8,7 @@
 - npm install 
 - npm run dev
 - php artisan storage:link
+- utilizar php artisan serve para la visualización de imagenes.
 
 ## Contributing
 
