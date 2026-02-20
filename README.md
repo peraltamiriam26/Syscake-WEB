@@ -14,20 +14,19 @@ Sistema web para la gestión de comidas del día, desarrollado con Laravel. Perm
    ```bash
    git clone https://github.com/peraltamiriam26/Syscake-WEB.git
 
-1. Instala las dependencias de PHP:composer install
+1. Instala las dependencias de PHP: composer install
 
-2. Instala las dependencias de Node.js:npm install
+2. Instala las dependencias de Node.js: npm install
 
-3. Compila los assets:npm run dev
+3. Compila los assets: npm run dev
 
-4. Crea el enlace de almacenamiento:php artisan storage:link
+4. Crea el enlace de almacenamiento: php artisan storage:link
 
 5. Configura tu base de datos en el archivo .env.
-6. Ejecuta las migraciones y seeders si es necesario:php artisan migrate --seed
+6. Ejecuta las migraciones y seeders si es necesario: php artisan migrate --seed
 
-7. Inicia el servidor de desarrollo:php artisan serve
+7. Inicia el servidor de desarrollo: php artisan serve
 
-Utiliza este comando para la visualización de imágenes.
 ## Uso
 • Accede a la aplicación desde tu navegador en la ruta que indique el comando php artisan serve.
 
