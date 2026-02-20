@@ -1,6 +1,6 @@
 # Syscake-WEB
 
-Sistema web para la gestión de pastelerías, desarrollado con Laravel. Permite administrar recetas, ingredientes, planes y usuarios de manera eficiente y sencilla.
+Sistema web para la gestión de comidas del día, desarrollado con Laravel. Permite administrar recetas, ingredientes, planes y usuarios de manera eficiente y sencilla.
 
 ## Tecnologías y versiones
 
